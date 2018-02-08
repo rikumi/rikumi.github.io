@@ -1,0 +1,36 @@
+nick: rikumi
+sign: Ⅱ 型全干代码姬
+avatar: https://avatars3.githubusercontent.com/u/5051300
+github: https://github.com/rikumi
+
+nav:
+  -
+    title: 自述文档
+    links:
+      -
+        name: JavaScript
+        link: tech/js
+      -
+        name: Android
+        link: tech/android
+      -
+        name: iOS
+        link: tech/ios
+      -
+        name: Python
+        link: tech/python
+      -
+        name: NodeJS
+        link: tech/node
+      -
+        name: Electron
+        link: tech/electron
+      -
+        name: Adobe
+        link: tech/design
+  -
+    title: 手记
+    links:
+      -
+        name: Home
+        link: home
