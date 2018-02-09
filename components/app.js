@@ -44,6 +44,7 @@ stylr (`
     line-height 1.75em
     font-size 14px
     cursor default
+    -webkit-text-size-adjust 100%
 
   html, body
     margin 0
