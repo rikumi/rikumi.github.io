@@ -8,18 +8,18 @@ marked.setOptions({
 Vue.component('page', {
   template: `
     <div class='page'>
-      <div class='item' :class='"item-" + item.type' v-for='item in page'>
+      <div class='item' :class='"item-" + item.type' v-if='page' v-for='item in page'>
         <div v-if='item.type === "markdown"' v-html='item.content'></div>
         <music v-if='item.type === "music"' :id='item.id' :single='item.single' :auto='false'></music>
       </div>
       <div class='end'>
-        {{ page.length ? '到底了喵~' : '建设中喵~' }}
+        {{ page ? page.length ? '到底了喵~' : '建设中喵~' : '加载中喵~' }}
       </div>
     </div>`,
   props: ['route'],
   data () {
     return {
-      page: []
+      page: null
     }
   },
   created () {
@@ -138,6 +138,7 @@ stylr (`
     .end
       text-align center
       padding 30px 0
-      margin-bottom 25px
+      margin 0 15px 25px
+      border-top 1px solid #f0f0f0
       color #888
 `)

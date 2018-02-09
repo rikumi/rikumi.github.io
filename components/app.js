@@ -25,6 +25,7 @@ let app = new Vue ({
       if (window.location.hash !== hash) {
         window.location.hash = hash
       }
+      document.body.scrollTo(0, 0)
     }
   },
   methods: {
