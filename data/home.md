@@ -7,7 +7,7 @@
 3. 左侧栏直接使用 `YAML` 书写，不经过任何预编译，使用浏览器端 `axios` 获取，`js-yaml` 库动态解析；
 4. 右侧文章内容直接使用 `Markdown` 书写，不经过任何预编译，使用浏览器端 `axios` 获取，`marked.js` + `highlight.js` 库动态解析。
 
-根据[这个表格](https://kangax.github.io/compat-table/es6/)，ES6 目前已经被所有现代浏览器支持——这里的「现代浏览器」显然不包括 IE，所以顺手做了个拒绝 IE 的提示。
+根据[这个表格](https://kangax.github.io/compat-table/es6/)，ES6 目前已经被所有现代浏览器支持——这里的「现代浏览器」显然不包括 IE，所以顺手做了个拒绝 IE 的提示。[想看看吗？](javascript:noie%28%29)
 
 前端如果一直依赖 Babel，那么浏览器将停止进步。
 

@@ -53,7 +53,9 @@ stylr (`
 
   a, a:hover, a:active, a:visited
     color #555
-    text-decoration none
+    text-decoration underline
+    text-decoration-color #ccc
+    -webkit-text-decoration-color #ccc
     cursor pointer
 
     &:hover
