@@ -74,6 +74,7 @@ stylr (`
       padding 15px 0
 
     .item
+      border-top 1px solid transparent
       margin 0 15px
       transition .3s
       color #555
