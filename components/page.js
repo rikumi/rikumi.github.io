@@ -34,6 +34,7 @@ Vue.component('page', {
     load () {
       axios.get(`/data/${this.route}.md?${Math.random()}`)
         .then(res => {
+          console.log(res.data)
           this.page = res.data
             .replace(/(♪+\d+)/g, '\n\n---\n\n$1\n\n---\n\n')
             .split(/\s*\n\s*---\s*\n\s*/g)

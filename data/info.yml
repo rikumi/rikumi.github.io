@@ -23,9 +23,6 @@ nav:
         name: NodeJS
         link: tech/node
       -
-        name: Electron
-        link: tech/electron
-      -
         name: Adobe
         link: tech/design
   -
