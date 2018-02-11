@@ -137,6 +137,15 @@ stylr (`
           color #ccc
           margin-right 0.5em
 
+      del
+        background #555
+        color #555
+        border-radius 3px
+        transition .3s
+
+        &:active, &:hover
+          background transparent
+
     .end
       text-align center
       padding 30px 0
