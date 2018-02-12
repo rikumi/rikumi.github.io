@@ -142,6 +142,7 @@ stylr (`
         color #555
         border-radius 3px
         transition .3s
+        cursor pointer
 
         &:active, &:hover
           background transparent

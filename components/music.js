@@ -1,17 +1,22 @@
 Vue.component('music', {
   template: `
-    <div class="music-wrapper">
-      <div class="music" @mousemove="changeHint()" @mouseleave="hideHint()">
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" :src="'//music.163.com/outchain/player?type=' + (single ? 2 : 0) + '&id=' + id + '&auto=' + (auto ? 1 : 0) + '&height=32'"></iframe>
+    <div class='music-wrapper'>
+      <div class='music' @mousemove='changeHint()' @mouseleave='hideHint()'>
+        <iframe frameborder='no' border='0' marginwidth='0' marginheight='0' :src='url'></iframe>
       </div>
-      <div class="music-hint" :class="{ visible: hint1 }">真的不想听一下喵？</div>
-      <div class="music-hint" :class="{ visible: hint2 }">点击播放喵</div>
+      <div class='music-hint' :class='{ visible: hint1 }'>真的不想听一下喵？</div>
+      <div class='music-hint' :class='{ visible: hint2 }'>点击播放喵</div>
     </div>`,
   props: ['id', 'single', 'auto'],
   data () {
     return {
       hint1: true,
       hint2: false
+    }
+  },
+  computed: {
+    url () {
+      return `//music.163.com/outchain/player?type=${ single ? 2 : 0 }&id=${ id }&auto=${ auto ? 1 : 0 }&height=32`
     }
   },
   methods: {

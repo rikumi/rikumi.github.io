@@ -43,7 +43,7 @@ stylr (`
     padding 20px 0 0
     margin 25px 0
     border-radius 5px
-    box-shadow 0 2px 7px rgba(#000, .05)
+    box-shadow 0 5px 10px rgba(#000, .07)
     background #fff
     position sticky
     position -webkit-sticky
@@ -110,7 +110,7 @@ stylr (`
               background #333
 
     iframe[src^="https://buttons.github.io"]
-      filter contrast(1.3)
+      filter contrast(1.4)
 
     .theme
       padding 15px
