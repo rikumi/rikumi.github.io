@@ -47,3 +47,4 @@ IdentityFile ~/.ssh/deploy_key_myrepo
 ```
 git clone myrepo:/<用户名>/<仓库名>
 ```
+
