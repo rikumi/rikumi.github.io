@@ -37,26 +37,26 @@ let app = new Vue ({
 
 stylr (`
   :root
-    --theme-color #460c7f
+    --theme-color #8959a8
 
   *
-    font-family 'Avenir Next', 'Hiragino Sans', 'PingFang SC', 'Microsoft YaHei UI', sans-serif
+    font-family 'Avenir Next', 'PingFang SC', 'Microsoft YaHei UI', sans-serif
     line-height 1.75em
-    font-size 14px
-    cursor default
+    font-size 15px
     -webkit-text-size-adjust 100%
 
   html, body
     margin 0
     padding 0
-    background #fafafa
-    color #333
+    background #fff
+    color #000
+
+  ::selection
+    background rgba(#8959a8, 0.1)
 
   a, a:hover, a:active, a:visited
-    color #555
-    text-decoration underline
-    text-decoration-color #ccc
-    -webkit-text-decoration-color #ccc
+    color var(--theme-color)
+    text-decoration none
     cursor pointer
 
     &:hover

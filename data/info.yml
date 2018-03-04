@@ -5,6 +5,12 @@ github: https://github.com/rikumi
 
 nav:
   -
+    title: 手记
+    links:
+      -
+        name: Home
+        link: home
+  -
     title: 自述文档
     links:
       -
@@ -26,8 +32,8 @@ nav:
         name: Adobe
         link: tech/design
   -
-    title: 手记
+    title: 链接
     links:
       -
-        name: Home
-        link: home
+        name: ZeroNet
+        link: http://127.0.0.1:43110/1KszWEes3BvxiJyPGccxkB7At16mJ552dJ

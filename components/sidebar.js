@@ -4,6 +4,7 @@
       <img class='avatar' :src='info.avatar'>
       <p class='nick'>{{ info.nick }}</p>
       <p class='sign'>{{ info.sign }}</p>
+      <a class="github-button" href="https://github.com/rikumi" data-size="large" data-show-count="true">Follow</a>
       <div class='nav'>
         <div class='category' v-for='category in info.nav'>
           <p class='title'>{{ category.title }}</p>
@@ -12,8 +13,6 @@
           </div>
         </div>
       </div>
-      <a class="github-button" href="https://github.com/rikumi" data-size="large" data-show-count="true">Follow</a>
-      <p class="theme">Theme「寒霜」by rikumi</p>
     </div>`,
   props: ['route'],
   data () {
@@ -27,96 +26,78 @@
   },
   methods: {
     navigate (dest) {
-      this.$emit('routeChange', dest)
+      if (/\/\//.test(dest)) {
+        location.href = dest
+      } else {
+        this.$emit('routeChange', dest)
+      }
     }
   }
 })
 
 stylr (`
   .sidebar
-    width 240px
+    width 120px
     overflow hidden
     display flex
     flex-shrink 0
     flex-direction column
-    align-items center
-    padding 20px 0 0
-    margin 25px 0
-    border-radius 5px
-    box-shadow 0 5px 10px rgba(#000, .07)
-    background #fff
+    align-items flex-end
     position sticky
     position -webkit-sticky
-    top 25px
+    margin-top 70px
+    top 70px
 
     *
       cursor default
 
     .avatar
-      width 160px
-      height 160px
+      width 64px
+      height 64px
       border-radius 50%
       margin-bottom 10px
       background #f0f0f0
       pointer-events none
 
     .nick
-      font-size 18px
+      font-size 32px
+      font-weight bold
 
     .sign
-      color #888
+      color #aaa
+
+    a.github-button
+      display none
+
+    iframe[src^="https://buttons.github.io"]
+      margin 20px 0
+      filter contrast(1.4)
 
     .nav
-      padding 35px 25px
-      width 100%
       box-sizing border-box
+      border-top 1px solid #f0f0f0
+      margin-top 10px
 
       .title
-        margin 15px 0
-        color #555
-        text-align center
-
-        &::before
-          content ' / '
-
-        &::after
-          content ' / '
+        margin 25px 0 5px
+        color #aaa
+        text-align right
 
       .tags
         width 100%
         display flex
-        flex-direction row
-        align-items flex-start
-        flex-wrap wrap
-        justify-content center
+        flex-direction column
+        align-items flex-end
 
         .tag
-          background #fafafa
-          padding 2px 10px
-          border-radius 3px
-          margin 4px
-          color #555
+          font-size 13px
+          font-weight bold
+          margin 3px 0
+          color #000
           transition .2s
           cursor pointer
+          border-bottom 1px solid var(--theme-color)
 
-          &:hover
-            background #f0f0f0
-
-          &.selected
-            background #555
-            color #fff
-
-            &:hover
-              background #333
-
-    iframe[src^="https://buttons.github.io"]
-      filter contrast(1.4)
-
-    .theme
-      padding 15px
-      width 100%
-      background #fafafa
-      color #aaa
-      text-align center
-      margin-top 20px
+          &:hover, &.selected
+            color var(--theme-color)
 `)

@@ -66,7 +66,10 @@ stylr (`
 
   .page
     flex 1 1 0
-    margin 20px 0 25px 30px
+    margin 30px 0 25px 30px
+
+    *
+      font-size 17px
 
     .item-markdown + .item-markdown
       border-top 1px solid #f0f0f0
@@ -91,8 +94,7 @@ stylr (`
         position relative
 
       p
-        margin 0.5em 0
-        text-indent 1em
+        margin 1em 0
 
       pre, code
         font-family 'Fira Code', 'Source Code Pro', monospace
@@ -106,21 +108,27 @@ stylr (`
           font-size inherit
           line-height inherit
 
+      h1 code, h2 code, h3 code, h4 code, h5 code, h6 code
+        font-family inherit
+
+      ul
+        padding-left 1.5em
+
       code
         padding 2px 5px
-        background #f5f5f5
+        background #fafafa
         border-radius 5px
         margin 0
 
       pre
         padding 10px 15px
-        background #f5f5f5
+        background #fafafa
         border-radius 5px
         margin 1em 0
 
       blockquote
         padding 10px 15px
-        background #f5f5f5
+        background #fafafa
         border-radius 5px
         margin 1em 0
 
@@ -129,13 +137,10 @@ stylr (`
         margin 2px 0
 
       h1, h2, h3, h4, h5, h6
-        font-size 16px
-        font-weight normal
-
-        &::before
-          content '//'
-          color #ccc
-          margin-right 0.5em
+        font-weight bold
+        font-size 150%
+        color #000
+        text-align left
 
       del
         background #555
@@ -150,7 +155,6 @@ stylr (`
     .end
       text-align center
       padding 30px 0
-      margin 0 15px 25px
-      border-top 1px solid #f0f0f0
+      margin 10px 15px 25px
       color #888
 `)

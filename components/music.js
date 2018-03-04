@@ -16,7 +16,7 @@ Vue.component('music', {
   },
   computed: {
     url () {
-      return `//music.163.com/outchain/player?type=${ single ? 2 : 0 }&id=${ id }&auto=${ auto ? 1 : 0 }&height=32`
+      return `//music.163.com/outchain/player?type=${ this.single ? 2 : 0 }&id=${ this.id }&auto=${ this.auto ? 1 : 0 }&height=32`
     }
   },
   methods: {
@@ -44,7 +44,7 @@ stylr (`
       border-radius 5px
       background #fff
       position relative
-      filter brightness(0.96)
+      filter brightness(0.984)
 
       iframe
         width 340px
