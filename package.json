@@ -1,0 +1,11 @@
+{
+  "name": "rikumi.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "pub": "gwip; git push",
+    "deploy": "pubdir=\"/Users/rikumi/Library/Application Support/ZeroNet/data/1KszWEes3BvxiJyPGccxkB7At16mJ552dJ\"; rm -rf \"$pubdir\"; ln -s $(pwd) \"$pubdir\""
+  },
+  "repository": "https://github.com/rikumi/rikumi.github.io",
+  "author": "rikumi <riku.mi@outlook.com>"
+}

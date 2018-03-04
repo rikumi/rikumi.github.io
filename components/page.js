@@ -12,7 +12,7 @@ Vue.component('page', {
         <div v-if='item.type === "markdown"' v-html='item.content'></div>
         <music v-if='item.type === "music"' :id='item.id' :single='item.single' :auto='false'></music>
       </div>
-      <div class='end'>
+      <div class='item end'>
         {{ page ? page.length ? '到底了喵~' : '建设中喵~' : '加载中喵~' }}
       </div>
     </div>`,
@@ -32,10 +32,10 @@ Vue.component('page', {
   },
   methods: {
     load () {
-      axios.get(`/data/${this.route}.md?${Math.random()}`)
+      getFile(`/data/${this.route}.md`)
         .then(res => {
-          console.log(res.data)
-          this.page = res.data
+          console.log(res)
+          this.page = res
             .replace(/(♪+\d+)/g, '\n\n---\n\n$1\n\n---\n\n')
             .split(/\s*\n\s*---\s*\n\s*/g)
             .map(k => {
@@ -65,8 +65,12 @@ stylr (`
   .hljs-comment,.hljs-quote{color:#8e908c}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#c82829}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#f5871f}.hljs-attribute{color:#eab700}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#718c00}.hljs-title,.hljs-section{color:#4271ae}.hljs-keyword,.hljs-selector-tag{color:#8959a8}.hljs{display:block;overflow-x:auto;background:white;color:#4d4d4c;padding:0.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
 
   .page
-    flex 1 1 0
+    flex 1 1 auto
     margin 30px 0 25px 30px
+    overflow hidden
+
+    @media screen and (max-width: 600px)
+      margin 0 0 25px
 
     *
       font-size 17px
@@ -84,22 +88,23 @@ stylr (`
       color #555
       text-align justify
 
+      @media screen and (max-width: 600px)
+        margin 0 10px
+
       img
         display block
         max-width 100%
         max-height 500px
-        margin 10px 0
-        border-radius 5px
+        margin 10px auto
         filter brightness(0.98)
         position relative
 
       p
-        margin 1em 0
+        margin 1.5em 0
 
       pre, code
         font-family 'Fira Code', 'Source Code Pro', monospace
         font-size 95%
-        margin 0 5px
         letter-spacing -0.015em
         line-height 1.5em
 
@@ -117,19 +122,16 @@ stylr (`
       code
         padding 2px 5px
         background #fafafa
-        border-radius 5px
         margin 0
 
       pre
         padding 10px 15px
         background #fafafa
-        border-radius 5px
         margin 1em 0
 
       blockquote
         padding 10px 15px
         background #fafafa
-        border-radius 5px
         margin 1em 0
 
       blockquote p
@@ -145,16 +147,20 @@ stylr (`
       del
         background #555
         color #555
-        border-radius 3px
         transition .3s
-        cursor pointer
+        text-decoration-color #333
+        -webkit-text-decoration-color #333
 
         &:active, &:hover
-          background transparent
+          background #ccc
 
     .end
-      text-align center
-      padding 30px 0
-      margin 10px 15px 25px
+      padding 5px 10px
+      background #fafafa
+      display inline-block
+      margin-bottom 30px
       color #888
+
+      &:first-child
+        margin-top 45px
 `)

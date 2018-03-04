@@ -1,3 +1,21 @@
+> 本站已支持 Github Pages & ZeroNet 同步发布。
+
+## 你好，ZeroNet
+
+这里是 rikumi，一个默默无闻的蒟蒻，多听少言的观察者，还没有也不太打算女装的全干码姬，混乱中立的 ISTP-A，未名坐标 (1, 1.2, 0.8)。
+
+并没有太多的诉求，只要恰到好处的伙伴，兴趣爱好可以满足，偶尔的表达欲能得到宣泄就好。
+
+第二次尝试 ZeroNet，相比上一次，这个平台已经变成了一个更加活跃的世外桃源。在这里，有形形色色的人，形形色色的声音，也许不能全部理解和接受，但我誓死捍卫他们说话的权利。
+
+在这个不可思议的地方，rikumi 酱开始了它的新一段旅程。
+
+Hello again, ZeroNet.
+
+[进入 ZeroNet 版 rikumi](http://127.0.0.1:43110/1KszWEes3BvxiJyPGccxkB7At16mJ552dJ)丨[还未安装？](https://zeronet.io)
+
+---
+
 ## 笔记：在生产环境服务器使用 Deploy Key 进行部署
 
 服务端的 WS3 经常不小心产生更改，于是今天使用 Deploy Key 重新部署了一下，过程中踩了不少坑，在这里记下。[查看文档](#/tech/deploy-key)
@@ -70,7 +88,7 @@ exports.route = {
 
 ## 简单操作，为所欲为：记一次 macOS 全套图标替换
 
-![](http://static.myseu.cn/2017-12-08-QQ20171208-094343%402x.png)
+![](data/img/2017-12-08-QQ20171208-094343@2x.png)
 
 之前在小猴扛把子群里看到各位 Linux 用户晒出桌面截图，Numix 图标包已经越来越好看，心生羡慕，所以开始了这次图标替换的尝试。本次图标替换采用 [paper-icon-theme](https://github.com/snwh/paper-icon-theme) 图标包；另外，QQ、微信、Safari 浏览器、Xcode、WebStorm、PyCharm、Adobe 全套图标为自己手作。
 

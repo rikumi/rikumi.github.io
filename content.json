@@ -1,0 +1,20 @@
+{
+ "address": "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ",
+ "address_index": 15444948,
+ "background-color": "white",
+ "clone_root": "",
+ "cloneable": false,
+ "cloned_from": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8",
+ "default_page": "index.html",
+ "description": "II \u578b\u5168\u5e72\u4ee3\u7801\u59ec",
+ "inner_path": "content.json",
+ "modified": 1520156216,
+ "postmessage_nonce_security": true,
+ "signers_sign": "HGYRE+EMrE6fmGID3lL5BRJP9tyRETpduuWehnb1pcdYMPPA25glII6FvjvKcFVrBF+ClxpAPep62Q2xG4SUaCM=",
+ "signs": {
+  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "G86DlUD0W7Mt+29wrNUmaFhW314/MEhwyGp3q60+JpRwSKKWHgB0jo0e7DYL5FHgIB9TkBxb/Eb5BRpeBY/Thhs="
+ },
+ "signs_required": 1,
+ "title": "rikumi",
+ "zeronet_version": "0.6.2"
+}

@@ -1,10 +1,12 @@
  Vue.component('sidebar', {
   template: `
     <div class='sidebar'>
-      <img class='avatar' :src='info.avatar'>
-      <p class='nick'>{{ info.nick }}</p>
-      <p class='sign'>{{ info.sign }}</p>
-      <a class="github-button" href="https://github.com/rikumi" data-size="large" data-show-count="true">Follow</a>
+      <div class='header'>
+        <img class='avatar' :src='info.avatar'>
+        <p class='nick'>{{ info.nick }}</p>
+        <p class='sign'>{{ info.sign }}</p>
+        <a class="github-button" href="https://github.com/rikumi" data-size="large" data-show-count="true">Follow</a>
+      </div>
       <div class='nav'>
         <div class='category' v-for='category in info.nav'>
           <p class='title'>{{ category.title }}</p>
@@ -21,8 +23,8 @@
     }
   },
   created () {
-    axios.get('/data/info.yml')
-      .then(res => { this.info = jsyaml.load(res.data) })
+    getFile('/data/info.yml')
+      .then(res => { this.info = jsyaml.load(res) })
   },
   methods: {
     navigate (dest) {
@@ -45,38 +47,76 @@ stylr (`
     align-items flex-end
     position sticky
     position -webkit-sticky
-    margin-top 70px
+    margin 70px 0
     top 70px
+
+    @media screen and (max-width: 600px)
+      width 100%
+      align-items stretch
+      margin-top 0
+      top 0
+      background #fff
+      height 72px
+      overflow visible
 
     *
       cursor default
 
-    .avatar
-      width 64px
-      height 64px
-      border-radius 50%
-      margin-bottom 10px
-      background #f0f0f0
-      pointer-events none
+    .header
+      overflow hidden
+      display flex
+      flex-shrink 0
+      flex-direction column
+      align-items flex-end
 
-    .nick
-      font-size 32px
-      font-weight bold
+      @media screen and (max-width: 600px)
+        height 100%
+        flex-direction row
+        align-items center
+        padding 0 10px
 
-    .sign
-      color #aaa
+        * + *
+          margin-left 15px
 
-    a.github-button
-      display none
+      .avatar
+        width 64px
+        height 64px
+        border-radius 50%
+        margin-bottom 10px
+        background #f0f0f0
+        pointer-events none
 
-    iframe[src^="https://buttons.github.io"]
-      margin 20px 0
-      filter contrast(1.4)
+        @media screen and (max-width: 600px)
+          width 48px
+          height 48px
+          margin-bottom 0
+
+      .nick
+        font-size 32px
+        font-weight bold
+
+        @media screen and (max-width: 600px)
+          font-size 20px
+          font-weight normal
+
+      .sign
+        color #aaa
+
+      a.github-button
+        display none
+
+      iframe[src^="https://buttons.github.io"]
+        margin-top 20px
+        margin-bottom 20px
+        filter contrast(1.4) hue-rotate(45deg)
 
     .nav
       box-sizing border-box
       border-top 1px solid #f0f0f0
       margin-top 10px
+
+      @media screen and (max-width: 600px)
+        margin-top 0
 
       .title
         margin 25px 0 5px
@@ -97,6 +137,9 @@ stylr (`
           transition .2s
           cursor pointer
           border-bottom 1px solid var(--theme-color)
+
+          @media screen and (max-width: 600px)
+            background rgba(#fff, 0.9)
 
           &:hover, &.selected
             color var(--theme-color)
