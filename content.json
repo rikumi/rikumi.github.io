@@ -7,14 +7,121 @@
  "cloned_from": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8",
  "default_page": "index.html",
  "description": "II \u578b\u5168\u5e72\u4ee3\u7801\u59ec",
+ "files": {
+  "components/app.js": {
+   "sha512": "000a0a1c2a6b710b2bbd64f083ff475056aec92defa9d123deab3e3cbd16fa70",
+   "size": 1529
+  },
+  "components/music.js": {
+   "sha512": "2ababc77e83875764b80e7cda476e8a9bc7ad3b23ba4cd5e8e9d79d84d2967cd",
+   "size": 2116
+  },
+  "components/page.js": {
+   "sha512": "b6f9b1434447f11121e3862343f15d96b20e99bf47a35b0d6c0cd04e9b94ef5e",
+   "size": 4061
+  },
+  "components/sidebar.js": {
+   "sha512": "6dce5bfbad650eeb8df3531e72cfc93b6f353944d6f4068f74aae7f92aa52951",
+   "size": 3208
+  },
+  "data/home.md": {
+   "sha512": "4e59b40fdbca8fa409ddf71bc53b07a9acc28286fe33c65b8a48b2513fe68a91",
+   "size": 7468
+  },
+  "data/img/2017-12-08-QQ20171208-094343@2x.png": {
+   "sha512": "c4590595aaedb3a47b5849d4ea39cb7a41da22a63c10a6683f710b73aa0c94e7",
+   "size": 1244551
+  },
+  "data/img/2018-02-09-airplay3.png": {
+   "sha512": "e640afe186be3dfaff5fa490bdddd2546c16d55b23f59a2bceec66e4c814c34f",
+   "size": 19143
+  },
+  "data/img/2018-02-09-kuyu.png": {
+   "sha512": "47fe4f2a046f15a85be1eff0f7ddddf92fcdce6399130c7d189298cdcc8726b3",
+   "size": 53483
+  },
+  "data/img/2018-02-11-152235.jpg": {
+   "sha512": "20829d9e12fb0e9b71681afb28f94e9bae2d7491dcbbc6d207219a5b40eb42ff",
+   "size": 59650
+  },
+  "data/img/2018-02-11-391518358364_.pic_hd.jpg": {
+   "sha512": "1f858d6b74624926e7b1173b837b2d23dcc0273d9cefea7c44377d46b7000f18",
+   "size": 656226
+  },
+  "data/img/2018-02-11-401518358868_.pic_hd.jpg": {
+   "sha512": "173cc3f8aed46ad99da021b5d5cdd06c8fbdb5434e0ac3e35387c737ab83e5a1",
+   "size": 405969
+  },
+  "data/img/2018-02-11-421518359524_.pic_hd.jpg": {
+   "sha512": "d9b01edbafb1dfc4089d987e78ebf346b92f6cfad64bcaa789a39c14d28a6fd7",
+   "size": 569466
+  },
+  "data/img/2018-02-12-2.jpg": {
+   "sha512": "d792f07d243043c8763312d014fd7b00708cb57c759f59c376ef424e87c91c11",
+   "size": 713374
+  },
+  "data/img/2018-02-12-431518399407_.pic_hd.jpg": {
+   "sha512": "59f4281adbff63229d55547e265223d7af2410b2f12bd9c4ae8fa5107fc9cb6d",
+   "size": 598695
+  },
+  "data/img/2018-02-12-441518399584_.pic_hd.jpg": {
+   "sha512": "19b493a24bcc83140a7d56013762bc375d9f944e5d60de92e7f805d591e78cf9",
+   "size": 635644
+  },
+  "data/info.yml": {
+   "sha512": "91b29b06487c16e7056347388e8e58104961c14c59ab7a3b629e7c6142501add",
+   "size": 580
+  },
+  "data/tech/android.md": {
+   "sha512": "b5a673a58865ba5235219db0b5f7f3b74ac792856729ba31c5310493aa440b78",
+   "size": 18210
+  },
+  "data/tech/deploy-key.md": {
+   "sha512": "f58b77ec1f58c995dfbfa68c0e5cbe9cf750e7e02de96d4e8eb331e3de81e6d3",
+   "size": 1523
+  },
+  "data/tech/js.md": {
+   "sha512": "16997e10030d3e9a29a0ff866d89ce4f8ab484ae17e0fcd9fd8f326bc880b849",
+   "size": 8396
+  },
+  "favicon.png": {
+   "sha512": "5acfc75c4853680cec01047adcef33c2f18e3d826341d684b8f808b7b58da250",
+   "size": 23977
+  },
+  "index.html": {
+   "sha512": "6bb2568b8a1a1848c3093c8bb60e4d0c13c714147b455eb02f64de51b60919a9",
+   "size": 1190
+  },
+  "package.json": {
+   "sha512": "33c0d962debee11e922d2b697242ec09d884e352e11a7cbe10130c9a7f365d21",
+   "size": 392
+  },
+  "utils/noie.js": {
+   "sha512": "2e138b1e8de3313591d9944163d8822535a3e18917453896509332da0c4e19f8",
+   "size": 407
+  },
+  "utils/stylr.js": {
+   "sha512": "68c27fbb6dc4f614212fd73aff6aeb9b81a57c74c20be87c5906f26330600de6",
+   "size": 255
+  },
+  "utils/stylus.min.js": {
+   "sha512": "5df774b5797071f02636d8f4ed2f0d95cbff041b45c885f45ecfd80f21b01885",
+   "size": 179265
+  },
+  "utils/zeronet.js": {
+   "sha512": "a6443b0e5baca8d5b27f6b19a579dece1bfcc340386be92dec5d4445ff8735f8",
+   "size": 3602
+  }
+ },
+ "ignore": "\\.git/.*",
  "inner_path": "content.json",
- "modified": 1520156216,
+ "modified": 1520177771,
  "postmessage_nonce_security": true,
  "signers_sign": "HGYRE+EMrE6fmGID3lL5BRJP9tyRETpduuWehnb1pcdYMPPA25glII6FvjvKcFVrBF+ClxpAPep62Q2xG4SUaCM=",
  "signs": {
-  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "G86DlUD0W7Mt+29wrNUmaFhW314/MEhwyGp3q60+JpRwSKKWHgB0jo0e7DYL5FHgIB9TkBxb/Eb5BRpeBY/Thhs="
+  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "HB6PmDTZzbvrzmTIdCj6MudRzsnCmcOrM9GWkQE6W9SOZ5FEfrQBTLxrwaAOImmjas9T3/GXuYfdSWx5+9sNwBc="
  },
  "signs_required": 1,
- "title": "rikumi",
+ "title": "[ rikumi ]",
  "zeronet_version": "0.6.2"
 }
