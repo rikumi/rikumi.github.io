@@ -49,11 +49,12 @@ stylr (`
     position -webkit-sticky
     margin 70px 0
     top 70px
+    z-index 9999
 
     @media screen and (max-width: 600px)
       width 100%
       align-items stretch
-      margin-top 0
+      margin 0
       top 0
       background #fff
       height 72px
@@ -70,6 +71,7 @@ stylr (`
       align-items flex-end
 
       @media screen and (max-width: 600px)
+        width 100%
         height 100%
         flex-direction row
         align-items center
@@ -116,7 +118,9 @@ stylr (`
       margin-top 10px
 
       @media screen and (max-width: 600px)
+        width auto
         margin-top 0
+        pointer-events none
 
       .title
         margin 25px 0 5px
@@ -140,6 +144,7 @@ stylr (`
 
           @media screen and (max-width: 600px)
             background rgba(#fff, 0.9)
+            pointer-events all
 
           &:hover, &.selected
             color var(--theme-color)

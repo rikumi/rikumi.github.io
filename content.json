@@ -17,16 +17,20 @@
    "size": 2116
   },
   "components/page.js": {
-   "sha512": "b6f9b1434447f11121e3862343f15d96b20e99bf47a35b0d6c0cd04e9b94ef5e",
-   "size": 4061
+   "sha512": "221ba2ef05f00c46662ba7e1709f4ce75d8f4a555d36fb0997e4f57ef7d78271",
+   "size": 4288
   },
   "components/sidebar.js": {
-   "sha512": "6dce5bfbad650eeb8df3531e72cfc93b6f353944d6f4068f74aae7f92aa52951",
-   "size": 3208
+   "sha512": "53d0d581fa057581717269d90eca0371e35d5063bd51095ae9206a9a3ab626e2",
+   "size": 3318
+  },
+  "data/home-2017.md": {
+   "sha512": "c1af3cc42c0dbcd9c8b273a2174eaded072b320d6d13245e6ebba50bf5021242",
+   "size": 4570
   },
   "data/home.md": {
-   "sha512": "4e59b40fdbca8fa409ddf71bc53b07a9acc28286fe33c65b8a48b2513fe68a91",
-   "size": 7468
+   "sha512": "1eadc8d4d417429c02e4b6364cc44fe6dd86731cbe6b714ae4ee98de6e86c3f1",
+   "size": 2944
   },
   "data/img/2017-12-08-QQ20171208-094343@2x.png": {
    "sha512": "c4590595aaedb3a47b5849d4ea39cb7a41da22a63c10a6683f710b73aa0c94e7",
@@ -115,11 +119,11 @@
  },
  "ignore": "\\.git/.*",
  "inner_path": "content.json",
- "modified": 1520177771,
+ "modified": 1520219181,
  "postmessage_nonce_security": true,
  "signers_sign": "HGYRE+EMrE6fmGID3lL5BRJP9tyRETpduuWehnb1pcdYMPPA25glII6FvjvKcFVrBF+ClxpAPep62Q2xG4SUaCM=",
  "signs": {
-  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "HB6PmDTZzbvrzmTIdCj6MudRzsnCmcOrM9GWkQE6W9SOZ5FEfrQBTLxrwaAOImmjas9T3/GXuYfdSWx5+9sNwBc="
+  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "HBCGcIfRUehABFwrkSZz1/bMDj2pOiTRpXlu8yC96bxjMYBrtKJaHDr5o5qDPSLea6kUYTKXAOeAs7agGRHO+qs="
  },
  "signs_required": 1,
  "title": "[ rikumi ]",

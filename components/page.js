@@ -28,6 +28,9 @@ Vue.component('page', {
   watch: {
     route () {
       this.load()
+    },
+    page () {
+      window.scrollTo(0, 0)
     }
   },
   methods: {
@@ -86,7 +89,7 @@ stylr (`
       margin 0 15px
       transition .3s
       color #555
-      text-align justify
+      // text-align justify
 
       @media screen and (max-width: 600px)
         margin 0 10px
@@ -94,7 +97,7 @@ stylr (`
       img
         display block
         max-width 100%
-        max-height 500px
+        max-height 600px
         margin 10px auto
         filter brightness(0.98)
         position relative
@@ -140,9 +143,26 @@ stylr (`
 
       h1, h2, h3, h4, h5, h6
         font-weight bold
-        font-size 150%
         color #000
         text-align left
+
+      h1
+        font-size 32px
+
+      h2
+        font-size 28px
+
+      h3
+        font-size 26px
+
+      h4
+        font-size 24px
+
+      h5
+        font-size 22px
+
+      h6
+        font-size 20px
 
       del
         background #555
