@@ -1,7 +1,7 @@
 marked.setOptions({
   gfm: true, tables: true,
-  highlight (code) {
-    return hljs.highlightAuto(code).value
+  highlight (code, lang) {
+    return hljs.highlightAuto(code, [lang]).value
   }
 })
 
@@ -99,7 +99,6 @@ stylr (`
         max-width 100%
         max-height 600px
         margin 10px auto
-        filter brightness(0.98)
         position relative
 
       p
@@ -123,7 +122,6 @@ stylr (`
         padding-left 1.5em
 
       code
-        padding 2px 5px
         background #fafafa
         margin 0
 
@@ -173,6 +171,23 @@ stylr (`
 
         &:active, &:hover
           background #ccc
+
+      table
+        text-align justify
+        word-wrap break-word
+        word-break break-all
+        width 100%
+        overflow auto
+        border-collapse collapse
+
+      table th, table td
+        padding 5px 10px
+        border 1px solid #f0f0f0
+        border-collapse collapse
+
+      table tr
+        border-top 1px solid #f0f0f0
+        border-collapse collapse
 
     .end
       padding 5px 10px

@@ -71,7 +71,6 @@ stylr (`
       align-items flex-end
 
       @media screen and (max-width: 600px)
-        width 100%
         height 100%
         flex-direction row
         align-items center
@@ -103,6 +102,10 @@ stylr (`
 
       .sign
         color #aaa
+
+        @media screen and (max-width: 600px)
+          opacity 0
+          flex 1 1 0
 
       a.github-button
         display none
