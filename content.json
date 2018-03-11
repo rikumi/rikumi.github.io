@@ -72,9 +72,17 @@
    "sha512": "19b493a24bcc83140a7d56013762bc375d9f944e5d60de92e7f805d591e78cf9",
    "size": 635644
   },
+  "data/img/WX20180309-161813@2x.png": {
+   "sha512": "40e10c3f29fcd6971917df06b8127d784a490542f5b94a5e59d329b8bb685d78",
+   "size": 44611
+  },
   "data/info.yml": {
    "sha512": "91b29b06487c16e7056347388e8e58104961c14c59ab7a3b629e7c6142501add",
    "size": 580
+  },
+  "data/tech/2018-03-11-alloyteam-interview-1.md": {
+   "sha512": "b3156b8e140a85457dddca0ccbef6b226bff072f0d083db13801b4b2d85513c4",
+   "size": 9889
   },
   "data/tech/android.md": {
    "sha512": "b5a673a58865ba5235219db0b5f7f3b74ac792856729ba31c5310493aa440b78",
@@ -123,11 +131,11 @@
  },
  "ignore": "\\.git/.*",
  "inner_path": "content.json",
- "modified": 1520560352,
+ "modified": 1520755174,
  "postmessage_nonce_security": true,
  "signers_sign": "HGYRE+EMrE6fmGID3lL5BRJP9tyRETpduuWehnb1pcdYMPPA25glII6FvjvKcFVrBF+ClxpAPep62Q2xG4SUaCM=",
  "signs": {
-  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "G4XUgPWSTq4z+F5d96EO58IyfRV1PaMdhD5B//99nSztL8W4BoAQkJLMBF85GI6slzY4Ui7jQXUlGKC4zfR2gus="
+  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "G45nXyHV94T9BJn7b3uN8MmHLQAECuKRRaEFnsKt4HscXZcnIXZBl7ntAPJ/ZVPhdMuZeeU5qDzqey9BPSkJKyU="
  },
  "signs_required": 1,
  "title": "[ rikumi ]",
