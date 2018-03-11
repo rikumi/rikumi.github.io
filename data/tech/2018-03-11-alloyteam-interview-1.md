@@ -81,7 +81,7 @@ Vue 和 React 等前端框架使用了 DOM 复用。
 DOM 复用可将暂时不用的 DOM 节点回收保存，下次需要渲染相似结构时直接在原 DOM 上修改并重新挂载，节省垃圾回收和 DOM 重新构造的时间。
 
 ### DOM 操作性能低下的原因
-猜测是由于 DOM 操作会反映到 HTML 层的字符串操作，而大量的字符串操作会降低性能。
+当时猜测是由于 DOM 操作会反映到 HTML 层的字符串操作，而大量的字符串操作会降低性能。后来查了一下恰恰相反，DOM 操作性能差是因为 JS 层的 DOM 内部有很多属性、事件、方法需要构造；DOM 的性能低下也因此催生了 Virtual DOM 的技术。详见[如何理解虚拟DOM? - 戴嘉华的回答 - 知乎](https://www.zhihu.com/question/29504639/answer/73607810)
 
 ### 从输入 URL 到显示页面过程中浏览器的工作
 1. 将 URL 解析为 `protocol://host:port/route?search#hash`；

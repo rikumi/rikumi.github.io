@@ -81,8 +81,8 @@
    "size": 580
   },
   "data/tech/2018-03-11-alloyteam-interview-1.md": {
-   "sha512": "b3156b8e140a85457dddca0ccbef6b226bff072f0d083db13801b4b2d85513c4",
-   "size": 9889
+   "sha512": "fb691eeac06d11dc42d631c9a8e0ad7a9646ab01fca86c846e20183fc40a674d",
+   "size": 10204
   },
   "data/tech/android.md": {
    "sha512": "b5a673a58865ba5235219db0b5f7f3b74ac792856729ba31c5310493aa440b78",
@@ -131,11 +131,11 @@
  },
  "ignore": "\\.git/.*",
  "inner_path": "content.json",
- "modified": 1520755174,
+ "modified": 1520785199,
  "postmessage_nonce_security": true,
  "signers_sign": "HGYRE+EMrE6fmGID3lL5BRJP9tyRETpduuWehnb1pcdYMPPA25glII6FvjvKcFVrBF+ClxpAPep62Q2xG4SUaCM=",
  "signs": {
-  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "G45nXyHV94T9BJn7b3uN8MmHLQAECuKRRaEFnsKt4HscXZcnIXZBl7ntAPJ/ZVPhdMuZeeU5qDzqey9BPSkJKyU="
+  "1KszWEes3BvxiJyPGccxkB7At16mJ552dJ": "G6ek50GBr+e1mZ+QcddNbf2pFjBidILfyq74wAVYhnBxcX2juEn9aseGGTvHJ7U9bLS7+s0n11+OrguJacprs8c="
  },
  "signs_required": 1,
  "title": "[ rikumi ]",
