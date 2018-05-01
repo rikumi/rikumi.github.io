@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>window.getFile = (url) => axios.get(url + '?' + Math.random()).then(k => k.data)</script>
     <script src="utils/stylr.js"></script>
     <script src="components/sidebar.js"></script>
     <script src="components/music.js"></script>
