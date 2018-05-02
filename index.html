@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>[ rikumi ]</title>
-    <script src="utils/noie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.10.0/js-yaml.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
@@ -15,8 +14,9 @@
   </head>
   <body>
     <div id="app"></div>
-    <script>window.getFile = (url) => axios.get(url + '?' + Math.random()).then(k => k.data)</script>
+    <script src="utils/noie.js"></script>
     <script src="utils/stylr.js"></script>
+    <script>window.getFile = (url) => axios.get(url + '?' + Math.random()).then(k => k.data)</script>
     <script src="components/sidebar.js"></script>
     <script src="components/music.js"></script>
     <script src="components/page.js"></script>
