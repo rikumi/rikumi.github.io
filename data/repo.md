@@ -1,4 +1,4 @@
-# Rikumi Cydia 个人源
+# Cydia 个人源
 
 Hi! 这里是 Rikumi 的个人源，不做搬运，只提供原创插件和改写第三方插件。
 
