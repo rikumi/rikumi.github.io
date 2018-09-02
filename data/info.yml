@@ -5,29 +5,8 @@ github: https://github.com/rikumi
 
 nav:
   -
-    title: 手记
+    title: 快速导航
     links:
       -
         name: Home
         link: home
-  -
-    title: 自述文档
-    links:
-      -
-        name: JavaScript
-        link: tech/js
-      -
-        name: Android
-        link: tech/android
-      -
-        name: iOS
-        link: tech/ios
-      -
-        name: Python
-        link: tech/python
-      -
-        name: NodeJS
-        link: tech/node
-      -
-        name: Adobe
-        link: tech/design
