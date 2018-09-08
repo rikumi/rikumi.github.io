@@ -1,6 +1,6 @@
 nick: rikumi
 sign: Ⅱ 型全干代码姬
-avatar: https://avatars3.githubusercontent.com/u/5051300
+avatar: https://ws4.sinaimg.cn/large/006tNbRwgy1fv28twiztlj30dc0dc0tx.jpg
 github: https://github.com/rikumi
 
 nav:
@@ -10,3 +10,12 @@ nav:
       -
         name: Home
         link: ""
+  -
+    title: 自述说明 (deprecated)
+    links:
+      -
+        name: '&Web'
+        link: tech/js
+      -
+        name: '&Android'
+        link: tech/android

@@ -13,7 +13,7 @@ Vue.component('page', {
         <music v-if='item.type === "music"' :id='item.id' :single='item.single' :auto='false'></music>
       </div>
       <div class='item end'>
-        {{ page ? page.length ? '到底了喵~' : '建设中喵~' : '加载中喵~' }}
+        {{ page ? page.length ? 'EOF' : '404' : 'CONNECTING..' }}
       </div>
     </div>`,
   props: ['route'],
@@ -192,9 +192,10 @@ stylr (`
     .end
       padding 5px 10px
       background #fafafa
-      display inline-block
-      margin-bottom 30px
+      // display inline-block
+      margin 30px 15px
       color #888
+      display none
 
       &:first-child
         margin-top 45px

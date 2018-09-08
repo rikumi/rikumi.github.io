@@ -5,8 +5,8 @@ Vue.component('music', {
       <div class='music' @mousemove='changeHint()' @mouseleave='hideHint()'>
         <iframe frameborder='no' border='0' marginwidth='0' marginheight='0' :src='url'></iframe>
       </div>
-      <div class='music-hint' :class='{ visible: hint1 }'>真的不想听一下喵？</div>
-      <div class='music-hint' :class='{ visible: hint2 }'>点击播放喵</div>
+      <!-- <div class='music-hint' :class='{ visible: hint1 }'>戳这里</div> -->
+      <!-- <div class='music-hint' :class='{ visible: hint2 }'>戳这里</div> -->
     </div>`,
   props: ['id', 'single', 'auto'],
   data () {
@@ -38,37 +38,36 @@ stylr (`
     position relative
 
     .music
-      width 320px
+      width 280px
       max-width 100%
       height 30px
       overflow hidden
-      border 5px solid #fff
       background #fff
       position relative
-      filter brightness(0.984)
+      margin-left -5px
 
       iframe
         width 340px
         height 52px
         display block
-        filter contrast(1.2) grayscale()
+        filter contrast(1) grayscale()
         position absolute
         top -11px
-        left -10px
-        right -10px
+        left -45px
+        right -25px
         bottom -11px
 
     .music-hint
       position absolute
-      left 300px
+      left 260px
       top 0
-      height 40px
-      font-size 15px
-      line-height 41px
+      height 30px
+      font-size 14px
+      line-height 30px
       padding 0 10px
       background #fff
       color #333
-      box-shadow 0 2px 7px rgba(#000, .1)
+      box-shadow 0 2px 10px rgba(#000, .1)
       margin-left 5px
       transition .5s
       opacity 0
@@ -76,14 +75,14 @@ stylr (`
       white-space nowrap
 
       &.visible
-        left 340px
+        left 280px
         opacity 1
 
       &::before
         content ''
         position absolute
         left -5px
-        top 15px
+        top 10px
         border-top 5px solid transparent
         border-bottom 5px solid transparent
         border-right 5px solid #fff

@@ -41,7 +41,7 @@ stylr (`
 
   *
     font-family 'Avenir Next', 'PingFang SC', 'Microsoft YaHei UI', sans-serif
-    line-height 1.75em
+    line-height 1.5em
     font-size 15px
     -webkit-text-size-adjust 100%
     transition .3s

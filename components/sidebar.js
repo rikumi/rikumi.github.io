@@ -84,11 +84,9 @@ stylr (`
           margin-left 15px
 
       .avatar
-        width 64px
-        height 64px
-        border-radius 50%
+        width 96px
+        height 96px
         margin-bottom 10px
-        background #f0f0f0
         cursor pointer
 
         @media screen and (max-width: 600px)

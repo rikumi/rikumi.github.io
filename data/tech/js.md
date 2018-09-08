@@ -1,4 +1,4 @@
-# rikumi ❤ JavaScript
+# rikumi & Web
 
 rikumi 自述文档系列之一
 
