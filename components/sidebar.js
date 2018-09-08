@@ -5,7 +5,9 @@
         <img class='avatar' :src='info.avatar'>
         <p class='nick'>{{ info.nick }}</p>
         <p class='sign'>{{ info.sign }}</p>
-        <a class="github-button" href="https://github.com/rikumi" data-size="large" data-show-count="true">Follow</a>
+        <div class='github'>
+          <a class='github-button' href='https://github.com/rikumi' data-size='large' data-show-count='true'>Follow</a>
+        </div>
       </div>
       <div class='nav'>
         <div class='category' v-for='category in info.nav'>
@@ -110,7 +112,7 @@ stylr (`
       a.github-button
         display none
 
-      iframe[src^="https://buttons.github.io"]
+      .github
         margin-top 20px
         margin-bottom 20px
         filter contrast(1.4) hue-rotate(45deg)
