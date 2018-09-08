@@ -81,8 +81,8 @@ stylr (`
     .item-markdown + .item-markdown
       border-top 1px solid #f0f0f0
 
-    .item-markdown
-      padding 15px 0
+    // .item-markdown
+    //   padding 15px 0
 
     .item
       border-top 1px solid transparent

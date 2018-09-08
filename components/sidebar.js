@@ -1,8 +1,10 @@
  Vue.component('sidebar', {
   template: `
-    <div class='sidebar'>
+    <div class='sidebar' :data-route='route'>
       <div class='header'>
-        <img class='avatar' :src='info.avatar'>
+        <a class='avatar' href='#/'>
+          <img class='avatar' :src='info.avatar'>
+        </a>
         <p class='nick'>{{ info.nick }}</p>
         <p class='sign'>{{ info.sign }}</p>
         <div class='github'>
@@ -59,8 +61,8 @@ stylr (`
       margin 0
       top 0
       background #fff
-      height 72px
       overflow visible
+      position static
 
     *
       cursor default
@@ -73,7 +75,7 @@ stylr (`
       align-items flex-end
 
       @media screen and (max-width: 600px)
-        height 100%
+        height 72px
         flex-direction row
         align-items center
         padding 0 10px
@@ -87,7 +89,7 @@ stylr (`
         border-radius 50%
         margin-bottom 10px
         background #f0f0f0
-        pointer-events none
+        cursor pointer
 
         @media screen and (max-width: 600px)
           width 48px
@@ -117,6 +119,14 @@ stylr (`
         margin-bottom 10px
         filter contrast(1.4) hue-rotate(45deg)
 
+    @media screen and (max-width: 600px)
+      &:not([data-route="home"]) .nav
+        border-bottom-color transparent
+        padding 0
+
+        *
+          display none
+
     .nav
       box-sizing border-box
       border-top 1px solid #f0f0f0
@@ -126,17 +136,35 @@ stylr (`
         width auto
         margin-top 0
         pointer-events none
+        padding 10px 12px
+        border-bottom 1px solid #f0f0f0
 
       .title
         margin 25px 0 5px
         color #aaa
         text-align right
 
+        @media screen and (max-width: 600px)
+          display inline-block
+          vertical-align middle
+          margin 0
+
+          &::after
+            content '/'
+            margin 0 10px
+
       .tags
         width 100%
         display flex
         flex-direction column
         align-items flex-end
+
+        @media screen and (max-width: 600px)
+          width auto
+          display inline-flex
+          vertical-align middle
+          flex-direction row
+          flex-wrap wrap
 
         .tag
           font-size 13px
@@ -150,6 +178,7 @@ stylr (`
           @media screen and (max-width: 600px)
             background rgba(#fff, 0.9)
             pointer-events all
+            margin-right 10px
 
           &:hover, &.selected
             color var(--theme-color)

@@ -5,8 +5,8 @@ github: https://github.com/rikumi
 
 nav:
   -
-    title: 快速导航
+    title: 手记
     links:
       -
         name: Home
-        link: home
+        link: ""
