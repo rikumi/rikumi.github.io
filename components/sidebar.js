@@ -114,7 +114,7 @@ stylr (`
 
       .github
         margin-top 20px
-        margin-bottom 20px
+        margin-bottom 10px
         filter contrast(1.4) hue-rotate(45deg)
 
     .nav
