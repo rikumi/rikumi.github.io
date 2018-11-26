@@ -106,16 +106,6 @@ exports.route = {
 
 ---
 
-## 简单操作，为所欲为：记一次 macOS 全套图标替换
-
-![](data/img/2017-12-08-QQ20171208-094343@2x.png)
-
-之前在小猴扛把子群里看到各位 Linux 用户晒出桌面截图，Numix 图标包已经越来越好看，心生羡慕，所以开始了这次图标替换的尝试。本次图标替换采用 [paper-icon-theme](https://github.com/snwh/paper-icon-theme) 图标包；另外，QQ、微信、Safari 浏览器、Xcode、WebStorm、PyCharm、Adobe 全套图标为自己手作。
-
-替换前首先需要关闭 SIP；最初的做法是，每个图标用 [Icon Slate](https://itunes.apple.com/cn/app/icon-slate/id439697913?mt=12) 制作成`icns`图标，并拖动到`app`包的简介窗格中替换；后来在寻找替换全局文件夹图标方法的时候发现了 [LiteIcon](http://freemacsoft.net/liteicon/) 应用，可以直接用`PNG`格式批量替换系统全局文件夹、程序坞图标、设备和卷图标，以及应用程序图标。最后，使用 [Launchpad Manager](http://launchpadmanager.com) 去掉启动台中的多余图标。
-
----
-
 ## 微软兰亭系列 Noble Scarlet 中文字体，iOS/macOS 替换版
 
 微软在最新 Windows 10 17035 中新增了一款名为 Noble Scarlet 的中文字体，中文部分为微软雅黑的修改版，字面明显收窄，字间距非常舒服；英文为原版雅黑英文；标点符号也终于改成了标准的标点符号。
