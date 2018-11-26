@@ -21,6 +21,7 @@
    }, created() {
      getFile('data/info.yml').then((res) => {
        this.info = jsyaml.load(res);
+       document.title = this.info.title;
      });
    }, methods: { navigate(dest) {
        if (/\/\//.test(dest)) {
