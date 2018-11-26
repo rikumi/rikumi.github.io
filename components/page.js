@@ -35,7 +35,7 @@ Vue.component('page', {
   },
   methods: {
     load () {
-      getFile(`/data/${this.route}.md`)
+      getFile(`data/${this.route}.md`)
         .then(res => {
           console.log(res)
           this.page = res
@@ -64,7 +64,7 @@ Vue.component('page', {
   }
 })
 
-stylr (`
+stylr(`
   .hljs-comment,.hljs-quote{color:#8e908c}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#c82829}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#f5871f}.hljs-attribute{color:#eab700}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#718c00}.hljs-title,.hljs-section{color:#4271ae}.hljs-keyword,.hljs-selector-tag{color:#8959a8}.hljs{display:block;overflow-x:auto;background:white;color:#4d4d4c;padding:0.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
 
   .page
@@ -76,20 +76,15 @@ stylr (`
       margin 0 0 25px
 
     *
-      font-size 17px
-
-    .item-markdown + .item-markdown
-      border-top 1px solid #f0f0f0
-
-    // .item-markdown
-    //   padding 15px 0
+      font-size 16px
 
     .item
-      border-top 1px solid transparent
+      border-bottom 1px solid var(--divider-color)
+      padding 15px 0
       margin 0 15px
       transition .3s
-      color #555
-      // text-align justify
+      color #000
+      text-align justify
 
       @media screen and (max-width: 600px)
         margin 0 10px
@@ -140,7 +135,7 @@ stylr (`
         margin 2px 0
 
       h1, h2, h3, h4, h5, h6
-        font-weight bold
+        font-weight normal
         color #000
         text-align left
 
@@ -182,11 +177,11 @@ stylr (`
 
       table th, table td
         padding 5px 10px
-        border 1px solid #f0f0f0
+        border 1px solid var(--divider-color)
         border-collapse collapse
 
       table tr
-        border-top 1px solid #f0f0f0
+        border-top 1px solid var(--divider-color)
         border-collapse collapse
 
     .end

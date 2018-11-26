@@ -1,10 +1,7 @@
- Vue.component('sidebar', {
-  template: `
+ Vue.component('sidebar', { template: `
     <div class='sidebar' :data-route='route'>
       <div class='header'>
-        <a class='avatar' href='#/'>
-          <img class='avatar' :src='info.avatar'>
-        </a>
+        <p class='intro'>{{ info.intro }}</p>
         <p class='nick'>{{ info.nick }}</p>
         <p class='sign'>{{ info.sign }}</p>
         <div class='github'>
@@ -19,29 +16,21 @@
           </div>
         </div>
       </div>
-    </div>`,
-  props: ['route'],
-  data () {
-    return {
-      info: {}
-    }
-  },
-  created () {
-    getFile('/data/info.yml')
-      .then(res => { this.info = jsyaml.load(res) })
-  },
-  methods: {
-    navigate (dest) {
-      if (/\/\//.test(dest)) {
-        location.href = dest
-      } else {
-        this.$emit('routeChange', dest)
-      }
-    }
-  }
-})
+    </div>`, props: ['route'], data() {
+     return { info: {} };
+   }, created() {
+     getFile('data/info.yml').then((res) => {
+       this.info = jsyaml.load(res);
+     });
+   }, methods: { navigate(dest) {
+       if (/\/\//.test(dest)) {
+         location.href = dest;
+       } else {
+         this.$emit('routeChange', dest);
+       }
+     } } });
 
-stylr (`
+stylr(`
   .sidebar
     width 120px
     overflow hidden
@@ -51,15 +40,20 @@ stylr (`
     align-items flex-end
     position sticky
     position -webkit-sticky
-    margin 70px 0
-    top 70px
+    margin 60px 0
+    padding 21px 0
+    top 60px
     z-index 9999
+    padding-right 40px
+    border-right 2px solid var(--theme-color)
 
     @media screen and (max-width: 600px)
       width 100%
       align-items stretch
       margin 0
       top 0
+      padding-right 0
+      border-right 0 none
       background #fff
       overflow visible
       position static
@@ -68,7 +62,6 @@ stylr (`
       cursor default
 
     .header
-      overflow hidden
       display flex
       flex-shrink 0
       flex-direction column
@@ -94,13 +87,20 @@ stylr (`
           height 48px
           margin-bottom 0
 
+      .intro
+        color var(--theme-color)
+        line-height 1.5em
+        margin-top -1.5em
+
       .nick
         font-size 32px
-        font-weight bold
+        background var(--theme-color)
+        line-height 1.2em
+        margin-bottom 20px
+        color #fff
 
         @media screen and (max-width: 600px)
           font-size 20px
-          font-weight normal
 
       .sign
         color #aaa
@@ -127,7 +127,7 @@ stylr (`
 
     .nav
       box-sizing border-box
-      border-top 1px solid #f0f0f0
+      border-top 1px solid var(--divider-color)
       margin-top 10px
 
       @media screen and (max-width: 600px)
@@ -135,7 +135,7 @@ stylr (`
         margin-top 0
         pointer-events none
         padding 10px 12px
-        border-bottom 1px solid #f0f0f0
+        border-bottom 1px solid var(--theme-color)
 
       .title
         margin 25px 0 5px
@@ -166,7 +166,6 @@ stylr (`
 
         .tag
           font-size 13px
-          font-weight bold
           margin 3px 0
           color #000
           transition .2s
@@ -180,4 +179,4 @@ stylr (`
 
           &:hover, &.selected
             color var(--theme-color)
-`)
+`);

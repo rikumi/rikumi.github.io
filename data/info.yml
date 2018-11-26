@@ -1,3 +1,4 @@
+intro: this is
 nick: rikumi
 sign: Ⅱ 型全干代码姬
 avatar: https://ws4.sinaimg.cn/large/006tNbRwgy1fv28twiztlj30dc0dc0tx.jpg
@@ -19,3 +20,9 @@ nav:
       -
         name: '&Android'
         link: tech/android
+  -
+    title: 灵感来自
+    links:
+      -
+        name: Journal
+        link: https://github.com/SumiMakito/hexo-theme-journal/

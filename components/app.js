@@ -35,14 +35,15 @@ let app = new Vue ({
   }
 })
 
-stylr (`
+stylr(`
   :root
-    --theme-color #8842b6
+    --theme-color #925475
+    --divider-color #edebf0
 
   *
-    font-family 'Avenir Next', 'PingFang SC', 'Microsoft YaHei UI', sans-serif
-    line-height 1.5em
-    font-size 15px
+    font-family "Montserrat", "Roboto", "Source Sans Pro", "Helvetica", "Arial", "Lora", "source-han-sans-tc", sans-serif
+    line-height 1.75em
+    font-size 14px
     -webkit-text-size-adjust 100%
     transition .3s
 
@@ -53,7 +54,7 @@ stylr (`
     color #000
 
   ::selection
-    background rgba(#000, 0.05)
+    background rgba(#000, 0.1)
 
   a, a:hover, a:active, a:visited
     color var(--theme-color)
@@ -68,7 +69,7 @@ stylr (`
     margin-bottom 0
 
   #app
-    max-width 1000px
+    max-width 1200px
     margin 0 auto
     padding 0 25px
     display flex
@@ -78,4 +79,4 @@ stylr (`
     @media screen and (max-width: 600px)
       flex-direction column
       align-items stretch
-`)
+`);
