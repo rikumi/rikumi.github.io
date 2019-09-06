@@ -8,7 +8,7 @@
 
 感谢原作者的开源贡献，在这次技术分享前，我得以花了一周的时间，把 Marp 重构了。
 
-[进入 Marp+ 官网](https://rikumi.github.io/marp-plus)（官网可以在线体验）丨 [GitHub](https://github.com/marp-plus)
+[进入 Marp+ 官网](https://marp-plus.github.io/)（官网可以在线体验）丨 [GitHub](https://github.com/marp-plus)
 
 ---
 
