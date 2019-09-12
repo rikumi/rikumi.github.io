@@ -37,7 +37,7 @@ let app = new Vue({
 
 stylr(`
   :root
-    --theme-color #925475
+    --theme-color #025f7c
     --divider-color #edebf0
 
   *
