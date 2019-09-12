@@ -41,7 +41,7 @@ Vue.component('sidebar', {
 
 stylr(`
   .sidebar
-    width 128px
+    width 148px
     overflow hidden
     display flex
     flex-shrink 0
@@ -124,7 +124,7 @@ stylr(`
       .github
         margin-top 20px
         margin-bottom 10px
-        filter contrast(1.4) hue-rotate(45deg)
+        filter contrast(1.4) hue-rotate(-45deg)
 
     @media screen and (max-width: 600px)
       &:not([data-route="home"]) .nav

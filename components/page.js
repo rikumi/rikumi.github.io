@@ -40,10 +40,10 @@ Vue.component('page', {
         .then((res) => {
           console.log(res);
           this.page = res
-            .replace(/(♪+\d+)/g, '\n\n---\n\n$1\n\n---\n\n')
+            .replace(/(♪+\s*\d+)/g, '\n\n---\n\n$1\n\n---\n\n')
             .split(/\s*\n\s*---\s*\n\s*/g)
             .map((k) => {
-              if (/^(♪+)(\d+)$/.test(k)) {
+              if (/^(♪+)\s*(\d+)$/.test(k)) {
                 return {
                   type: 'music',
                   single: RegExp.$1.length === 1,
@@ -79,8 +79,10 @@ stylr(`
     *
       font-size 16px
 
+    .item.not(.item-music) + .item.not(.item-music)
+      border-top 1px solid var(--divider-color)
+
     .item
-      border-bottom 1px solid var(--divider-color)
       padding 15px 0
       margin 0 15px
       transition .3s
@@ -188,10 +190,10 @@ stylr(`
     .end
       padding 5px 10px
       background #fafafa
-      // display inline-block
+      display inline-block
       margin 30px 15px
       color #888
-      display none
+      // display none
 
       &:first-child
         margin-top 45px

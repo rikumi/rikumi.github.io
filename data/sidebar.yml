@@ -1,22 +1,30 @@
 title: '[ rikumi ]'
 intro: this is
 nick: rikumi
-sign: Ⅱ 型全干代码姬
-avatar: https://ws4.sinaimg.cn/large/006tNbRwgy1fv28twiztlj30dc0dc0tx.jpg
+sign: 且聽，且看，且思考
+avatar: https://avatars3.githubusercontent.com/u/5051300?s=460&v=4
 github: https://github.com/rikumi
 
 nav:
-  - title: 手记
+  - title: 導航
     links:
-      - name: Home
+      - name: 首頁
         link: ''
   - title: 作品
     links:
       - name: Marp+
         link: https://marp-plus.github.io/
       - name: LoveKit
-        link: /lovekit
-  - title: 灵感来自
+        link: https://rikumi.github.io/lovekit
+  - title: 跟隨我
+    links:
+      - name: Twitter
+        link: https://t.co/rikumichan
+      - name: Instagram
+        link: https://instagram.com/rikumichan
+      - name: Telegram
+        link: https://t.me/rikumi
+  - title: 靈感來自
     links:
       - name: Journal
         link: https://github.com/SumiMakito/hexo-theme-journal/

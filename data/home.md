@@ -1,6 +1,8 @@
-## Reset
+# 重設：Reset
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KQHgcSt44fw?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+你現在所看見的 [ rikumi ] 建立於 2018 年初，於 2019 年 9 月進行了一次資料清除。
 
 > 這是 ⋯⋯ 過了多久了 ⋯⋯？
 >
@@ -11,3 +13,5 @@
 > 不過在回去之前 ⋯⋯ 有件事我得先做。
 >
 > —— Ivy@Main_Log_699_12_23
+
+<!-- [關於這一次 Reset >](#/2019/09-12-reset) -->
