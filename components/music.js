@@ -1,6 +1,5 @@
 Vue.component('music', {
   template: `
-    <pre v-if='isZeroNet'>由于 API 限制，ZeroNet 中无法加载网易云插件。</pre>
     <div v-else class='music-wrapper'>
       <div class='music' @mousemove='changeHint()' @mouseleave='hideHint()'>
         <iframe frameborder='no' border='0' marginwidth='0' marginheight='0' :src='url'></iframe>
@@ -12,8 +11,7 @@ Vue.component('music', {
   data() {
     return {
       hint1: true,
-      hint2: false,
-      isZeroNet: window !== window.top
+      hint2: false
     };
   },
   computed: {

@@ -23,7 +23,7 @@ Vue.component('sidebar', {
     return { info: {} };
   },
   created() {
-    getFile('data/info.yml').then((res) => {
+    getFile('data/sidebar.yml').then((res) => {
       this.info = jsyaml.load(res);
       document.title = this.info.title;
     });
