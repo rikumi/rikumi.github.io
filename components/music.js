@@ -9,31 +9,33 @@ Vue.component('music', {
       <!-- <div class='music-hint' :class='{ visible: hint2 }'>戳这里</div> -->
     </div>`,
   props: ['id', 'single', 'auto'],
-  data () {
+  data() {
     return {
       hint1: true,
       hint2: false,
       isZeroNet: window !== window.top
-    }
+    };
   },
   computed: {
-    url () {
-      return `//music.163.com/outchain/player?type=${ this.single ? 2 : 0 }&id=${ this.id }&auto=${ this.auto ? 1 : 0 }&height=32`
+    url() {
+      return `//music.163.com/outchain/player?type=${this.single ? 2 : 0}&id=${
+        this.id
+      }&auto=${this.auto ? 1 : 0}&height=32`;
     }
   },
   methods: {
     changeHint() {
-      this.hint1 = false
-      this.hint2 = true
+      this.hint1 = false;
+      this.hint2 = true;
     },
     hideHint() {
-      this.hint1 = false
-      this.hint2 = false
+      this.hint1 = false;
+      this.hint2 = false;
     }
   }
-})
+});
 
-stylr (`
+stylr(`
   .music-wrapper
     position relative
 
@@ -86,4 +88,4 @@ stylr (`
         border-top 5px solid transparent
         border-bottom 5px solid transparent
         border-right 5px solid #fff
-`)
+`);

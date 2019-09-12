@@ -1,9 +1,10 @@
 marked.setOptions({
-  gfm: true, tables: true,
-  highlight (code, lang) {
-    return hljs.highlightAuto(code, [lang]).value
+  gfm: true,
+  tables: true,
+  highlight(code, lang) {
+    return hljs.highlightAuto(code, [lang]).value;
   }
-})
+});
 
 Vue.component('page', {
   template: `
@@ -17,52 +18,52 @@ Vue.component('page', {
       </div>
     </div>`,
   props: ['route'],
-  data () {
+  data() {
     return {
       page: null
-    }
+    };
   },
-  created () {
-    this.load()
+  created() {
+    this.load();
   },
   watch: {
-    route () {
-      this.load()
+    route() {
+      this.load();
     },
-    page () {
-      window.scrollTo(0, 0)
+    page() {
+      window.scrollTo(0, 0);
     }
   },
   methods: {
-    load () {
+    load() {
       getFile(`data/${this.route}.md`)
-        .then(res => {
-          console.log(res)
+        .then((res) => {
+          console.log(res);
           this.page = res
             .replace(/(♪+\d+)/g, '\n\n---\n\n$1\n\n---\n\n')
             .split(/\s*\n\s*---\s*\n\s*/g)
-            .map(k => {
+            .map((k) => {
               if (/^(♪+)(\d+)$/.test(k)) {
                 return {
                   type: 'music',
                   single: RegExp.$1.length === 1,
                   id: RegExp.$2
-                }
+                };
               } else {
                 return {
                   type: 'markdown',
                   content: marked(k)
-                }
+                };
               }
-            })
+            });
         })
-        .catch(e => this.page = [])
+        .catch((e) => (this.page = []));
     },
-    navigate (dest) {
-      this.$emit('routeChange', dest)
+    navigate(dest) {
+      this.$emit('routeChange', dest);
     }
   }
-})
+});
 
 stylr(`
   .hljs-comment,.hljs-quote{color:#8e908c}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#c82829}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#f5871f}.hljs-attribute{color:#eab700}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#718c00}.hljs-title,.hljs-section{color:#4271ae}.hljs-keyword,.hljs-selector-tag{color:#8959a8}.hljs{display:block;overflow-x:auto;background:white;color:#4d4d4c;padding:0.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
@@ -194,4 +195,4 @@ stylr(`
 
       &:first-child
         margin-top 45px
-`)
+`);

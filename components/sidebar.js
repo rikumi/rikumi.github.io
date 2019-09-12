@@ -1,4 +1,5 @@
- Vue.component('sidebar', { template: `
+Vue.component('sidebar', {
+  template: `
     <div class='sidebar' :data-route='route'>
       <div class='header'>
         <p class='intro'>{{ info.intro }}</p>
@@ -16,24 +17,31 @@
           </div>
         </div>
       </div>
-    </div>`, props: ['route'], data() {
-     return { info: {} };
-   }, created() {
-     getFile('data/info.yml').then((res) => {
-       this.info = jsyaml.load(res);
-       document.title = this.info.title;
-     });
-   }, methods: { navigate(dest) {
-       if (/\/\//.test(dest)) {
-         location.href = dest;
-       } else {
-         this.$emit('routeChange', dest);
-       }
-     } } });
+    </div>`,
+  props: ['route'],
+  data() {
+    return { info: {} };
+  },
+  created() {
+    getFile('data/info.yml').then((res) => {
+      this.info = jsyaml.load(res);
+      document.title = this.info.title;
+    });
+  },
+  methods: {
+    navigate(dest) {
+      if (/\/\//.test(dest)) {
+        location.href = dest;
+      } else {
+        this.$emit('routeChange', dest);
+      }
+    }
+  }
+});
 
 stylr(`
   .sidebar
-    width 120px
+    width 128px
     overflow hidden
     display flex
     flex-shrink 0

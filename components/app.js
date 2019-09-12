@@ -1,39 +1,39 @@
-let app = new Vue ({
+let app = new Vue({
   el: '#app',
   template: `
     <div id='app'>
       <sidebar @routeChange='routeChange' :route='route || "home"'></sidebar>
       <page @routeChange='routeChange' :route='route || "home"'></page>
     </div>`,
-  data () {
+  data() {
     return {
       route: ''
-    }
+    };
   },
-  created () {
+  created() {
     window.onhashchange = () => {
-      let route = /^(#\/)?(.*)$/.exec(window.location.hash)[2]
+      let route = /^(#\/)?(.*)$/.exec(window.location.hash)[2];
       if (this.route !== route) {
-        this.route = route
+        this.route = route;
       }
-    }
-    window.onhashchange()
+    };
+    window.onhashchange();
   },
   watch: {
-    route () {
-      let hash = '#/' + this.route
+    route() {
+      let hash = '#/' + this.route;
       if (window.location.hash !== hash) {
-        window.location.hash = hash
+        window.location.hash = hash;
       }
-      document.body.scrollTo(0, 0)
+      document.body.scrollTo(0, 0);
     }
   },
   methods: {
     routeChange(route) {
-      this.route = route
+      this.route = route;
     }
   }
-})
+});
 
 stylr(`
   :root
