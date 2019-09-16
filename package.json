@@ -2,6 +2,9 @@
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "pub": "hexo generate; hexo deploy; git add .; git commit -m 'Updated via script'; git push"
+  },
   "hexo": {
     "version": "3.9.0"
   },
