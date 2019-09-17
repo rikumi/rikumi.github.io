@@ -23,9 +23,20 @@ permalink: works
 
 ![](https://img.shields.io/npm/v/fresh-shell) ![](https://img.shields.io/github/last-commit/rikumi/fresh-shell)
 
-ƒ 是一个使用 JavaScript 创造命令外壳（Shell）的尝试。与其它一些成熟的 Shell（例如 Zsh、Fish、Xonsh）不同，它利用自动补全的模板语法，把如何解析 Bash 命令的难题仍然交给 Bash，用 JavaScript 作为帮助处理输出的帮手。这有效避免了 Bash 语法与 JavaScript 语法的冲突。
+ƒ 是一个使用 JavaScript 创造命令外壳（Shell）的尝试。与其它一些成熟的 Shell（例如 Zsh、Fish、Xonsh）不同，它利用自动补全的模板语法，把如何解析 Bash 命令的难题仍然交给 Bash，用 JavaScript 作为帮助处理输出的帮手。这有效避免了 Bash 语法与 JavaScript 语法的冲突，像这样：
 
-当然，ƒ 这样的尝试也有很多问题，例如我们难以解析带有 `cd` 的命令所导致的工作目录变化，而是只能通过静态分析的方式将纯 `cd` 语句转化为 JavaScript 操作；对于显式执行和隐式执行的区分难以做到百分百准确，导致有的命令会出现穿帮等等。
+```javascript
+ƒ`git config --global user.name`
+rikumi
+
+ƒ`git config --global user.name`.trim().split('').join('|')
+r|i|k|u|m|i
+
+// 开头的 'ƒ`' 和结尾的 '`' 会自动添加
+ƒ`_
+```
+
+当然，ƒ 这样的尝试也有很多问题，例如我们难以解析带有 `cd` 的命令所导致的工作目录变化，而是只能通过静态分析的方式将纯 `cd` 语句转化为 JavaScript 操作；对于交互式执行和隐式执行的区分难以做到百分百准确，导致有的命令会出现穿帮等等。
 
 在放弃这个项目之后，rkm 转投 [xonsh](https://xon.sh) 的怀抱。作为一个基于 Python 的自定义命令外壳，xonsh 没能避开语法冲突的问题，在两种语法环境的探测和转换上花了很多工夫；但作为给学不会 Bash 语法的开发者日常使用的 Shell，xonsh 完全可以胜任。
 
