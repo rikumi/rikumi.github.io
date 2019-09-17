@@ -1,5 +1,6 @@
 ---
 title: 系统重置：Reset
+featured_image: https://i.ytimg.com/vi/KQHgcSt44fw/maxresdefault.jpg
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KQHgcSt44fw?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%; margin-bottom: 15px"></iframe>
