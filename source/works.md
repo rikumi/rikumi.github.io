@@ -19,6 +19,16 @@ permalink: works
 
 ---
 
+## [Marp+](https://marp-plus.github.io)： 前端开发者的生动一课
+
+![](https://img.shields.io/github/last-commit/marp-plus/marp-plus)
+
+这是一款基于 Electron 并被移植到纯 Web 版本的 Markdown 幻灯片制作工具，它在 Marp 的基础上支持了全屏播放，并增加了为幻灯片快速设置 CSS 样式的特性，同时支持 Mermaid 图，支持单页幻灯片内垂直滚动；Web 版本除架构上不分离外，与 Electron 版本没有功能区别，可以日常使用。直接点击[链接](https://marp-plus.github.io)即可在线使用。
+
+Marp+ 在开发一段时间后，进行了一次样式更新，借鉴了参与开发的腾讯文档界面风格。后来，腾讯文档新增了幻灯片支持，如果你是一个不希望安装 Office 套件的「现代人」，且在墙内网络条件不好，或者和我一样厌倦了 Google 和微软的复杂体验，却需要编辑文档/表格/幻灯片的话，[腾讯文档](https://docs.qq.com/desktop/)是一个不错的选择。
+
+---
+
 ## [ƒresh shell](https://github.com/rikumi/fresh-shell)： 用 JavaScript REPL 打造的命令外壳
 
 ![](https://img.shields.io/npm/v/fresh-shell) ![](https://img.shields.io/github/last-commit/rikumi/fresh-shell)
