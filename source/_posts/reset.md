@@ -1,5 +1,5 @@
 ---
-title: 系统重置：Reset
+title: 重置：Reset
 featured_image: https://i.ytimg.com/vi/KQHgcSt44fw/maxresdefault.jpg
 ---
 
