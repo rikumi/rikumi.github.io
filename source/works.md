@@ -1,7 +1,6 @@
 ---
 title: 作品
 permalink: works
-featured_image: https://source.unsplash.com/P1qyEf1g0HU/1200x400
 ---
 
 因为时间和精力投入的局限，rkm 的作品主要是对一些新奇想法的探索，对「你的东西很好，可为什么不换一种角度设计呢」的实践。它们也许有很多很多 Bug，不值得你日常使用，但对你日常所使用的那些工具多一些思考，多问几个为什么，总是有意义的。
@@ -12,7 +11,7 @@ featured_image: https://source.unsplash.com/P1qyEf1g0HU/1200x400
 
 ![](https://img.shields.io/npm/v/vanessa) ![](https://img.shields.io/github/last-commit/rikumi/vanessa)
 
-我厂的前端开发应该大部分都知道 [Whistle](https://github.com/avwo/whistle)，一款正在活跃维护的中间人代理调试工具。在前端开发中，Whistle 替代了老旧难用、只有 Map Remote/Map Local 两个功能、还不能直接粘贴 URL 的 Charles，成为前端开发者必备的开发工具。但在实际使用中，Whistle 融入了很多开发者自己设下的规则，所有的配置都需要你去读它的[文档](http://wproxy.org/whistle/rules/)（左边栏向下滚动，看看它制造了多少规则），导致很多人即使从 Charles 转投 Whistle 的怀抱，却仍然只会用那两个功能：换 IP 和换文件。**用户不会用，就是设计的失败。**
+我厂的前端开发应该大部分都知道 [Whistle](https://github.com/avwo/whistle)，一款正在活跃维护的中间人代理调试工具。在前端开发中，Whistle 替代了老旧难用、只有 Map Remote/Map Local 两个功能、还要求你把 URL 拆成好几段输入的工业垃圾 Charles，成为前端开发者必备的开发工具。但在实际使用中，Whistle 融入了很多开发者自己设下的规则，所有的配置都需要你去读它的[文档](http://wproxy.org/whistle/rules/)（左边栏向下滚动，看看它制造了多少规则），导致很多人即使从 Charles 转投 Whistle 的怀抱，却仍然只会用那两个功能：换 IP 和换文件。**用户不会用，就是设计的失败。**
 
 拥抱 Koa 中间件语法，拥抱动态运行时，是作为面向开发者的调试工具的一个理想化的设计方向。经过对中间人代理框架 [http-mitm-proxy](https://npmjs.com/http-mitm-proxy) 进行仔细剖析后，在 Koa 基础上进行的重新实现，做出了这份毕业设计作品 Vanessa。Vanessa 实现了对 HTTP/HTTPS 流量进行拦截，经过一系列可自由编写的 Koa 中间件，对请求和响应进行任何修改。
 
