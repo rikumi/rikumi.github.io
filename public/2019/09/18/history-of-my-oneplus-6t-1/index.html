@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <title>小记 OnePlus 6T 折腾史（上） - [ RKM ]</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Rikumi">
+<meta name="description" content="
+题图使用黑莓史上最垃圾手机——渣 CPU、软趴趴键盘、万年 6.0、APK 装一天的 BlackBerry Priv 拍摄。
+当初贪图 Android ...">
+<meta name="keywords" content>
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?62092416">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://rikumi.github.io">
+                首頁
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/works.html">
+                作品
+            </a>
+            
+
+            
+            <a class="a-block drawer-menu-item" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            [ RKM ]
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead" v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">[ RKM ]</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            [ RKM ]
+        </div>
+        <div class="nav-subtitle">
+            あの日のままで
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/works.html">
+            作品
+        </a>
+        
+
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2019 <a href="https://rikumi.github.io">[ RKM ]</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper" style="background-image: url('https://user-images.githubusercontent.com/5051300/65166528-76c18900-da73-11e9-9cd6-fb517744cccf.png')">
+                <div class="post-title">
+                    小记 OnePlus 6T 折腾史（上）
+                    <div class="post-meta">
+                        <time datetime="2019-09-18T15:55:13.864Z" itemprop="datePublished">
+                            2019-09-18 23:55
+                        </time>&nbsp;
+                        
+    
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <blockquote>
+<p>题图使用黑莓史上最垃圾手机——渣 CPU、软趴趴键盘、万年 6.0、APK 装一天的 BlackBerry Priv 拍摄。</p>
+<p>当初贪图 Android 没买 Passport 的我真的是蠢哭了。</p>
+</blockquote>
+<p>再过两天就是 9 月 20 日，在这一天，你将与你身边的伙伴们拉开差距——他们买的 iPhone 11 和 iPhone 11 Pro 到货了。</p>
+<p>去年的这个时候恰巧相反。rkm 厌倦了非全面屏的 iPhone 6s 和反定制化的 iOS，就像一年后的今天反而开始怀念那颗把大拇指放进去就会爽到不行的 Home 键一样。rkm 想要买一台不一样的安卓机。</p>
+<p>彼时，还没搞出聊天宝、没被字节跳蛋收购的锤科，正处在它一生中的巅峰。尽管 TNT 工作站门可罗雀，却反而造就了<strong>坚果 R1</strong> 这款工业设计在线、情怀依旧、性能高端、价格亲民的手机。这是锤科第一部不膨胀的手机。<strong>后来我们知道，这同时也是锤科最后一部手机。</strong></p>
+<p>在结束了对 R1 的新鲜感后，「手泥收集器」细红线、十分不优雅的非居中无线充电线圈、放在指纹传感器里让你感觉每天按指纹都在「按个锤子」的奇葩 Logo、要装一个圆角插件把下面设置成 18dp 才会对称的「天圆地方」屏、无法换图标迅速审美疲劳的 Smartisan SystemUI、以及没啥卵用还会导致上班摸鱼的 TNT Mode，让我很快就把这台机器挂到了闲鱼上。卖出去的价钱正好还清了剩下的分期，让我有了一种租了一个月手机的奇妙错觉。</p>
+<p>卖出去才知道，对面是做倒买倒卖的深藏不露的中介。</p>
+<h2 id="入手"><a href="#入手" class="headerlink" title="入手"></a>入手</h2><p>11 月，我收到了我的第二部全面屏手机，人生中第十部手机，OnePlus 6T 砂岩黑版本。</p>
+<blockquote>
+<p>Rkm 人生中的手机：</p>
+<p>Nokia 3230 &gt; E63 &gt; C5-03 &gt; Meizu M9 &gt; MX4 Pro &gt; MX5 &gt; iPhone 6 &gt; 6S &gt; Smartisan R1 &gt; OnePlus 6T</p>
+</blockquote>
+<p>刚刚买这一部 6T 的时候，对一加的设计风格情有独钟，真信了氢 OS 早期所谓的「设计语言与 Material Design 一脉相承」，结果买回来用了一阵子发现，不管哪里的 Material Design 都不是你这样的。</p>
+<p>当然，更客观地讲，也可以说是 Google 和 OnePlus 设计师都从早期的 Material Design 1 出发，各自走上了不同的路。至于孰优孰劣，当你看到与 OnePlus 师出同门的 Oppo 用上了同样思路只是更加激进的所谓「无边界设计」，却搞出一个用起来丑出天际的应用商店，想想这可能就是氢 OS 的未来，大概心里也就有 B-树了。</p>
+<p>再加上氢 OS 逐渐国产化，预装了越来越多奇奇怪怪不想用的软件：抖音，头条，微博，支付宝…… 一咬牙，刷了氧 OS。</p>
+<p>巧就巧在，正好赶上了氢氧同源化。刷完氧一看，还是原来的桌面，还是熟悉的味道，只是预装软件没了而已。作为一个开发者和轻度精神洁癖，我十分清楚这所谓的氧 OS 下面跑着的代码是怎么样的一坨。</p>
+<p><strong>所以喜欢用 OnePlus 的外国友人们大多是怎样的人呢？</strong>当时的 rkm 对此还没什么概念；后来有个有趣的事件，马上会讲到。</p>
+<h2 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h2><p>今年年初，一向很懒得解锁刷机（也是快四年没有玩过安卓刷机）的 rkm，还是开始跟着宁静之雨的教程开始解锁刷机。看着这个有了 A/B 分区的神奇设备，rkm 不禁想起上一次刷机还是在 Android 5.1 的时代；再上一次，是在 Android 4.0.3 的时代。</p>
+<p>如果没记错的话，第一个刷入的系统，是标有 Official 的 Pixel Experience。这是一个绝妙的 ROM，有着严格等同于 Pixel 设备的绝妙体验。无论是完整的 Google 应用生态，锁屏 AOD，深色通知，增加了自动略过锁屏的 Google 可信面部解锁，Now Playing，体验感都非常棒。（图片来自网络）</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/65172538-b7270400-da7f-11e9-95cb-db002cbc7237.png" alt></p>
+<p>很可惜，<a href="https://forum.xda-developers.com/oneplus-6t/development/rom-pixel-experience-t3875179" target="_blank" rel="noopener">这个 ROM（Pixel Experience for OnePlus 6T）</a>消失了。它当时的维护者 Saksham 由于收到社区的严重排挤和辱骂，删掉了 Pixel Experience 官网上的针对 OnePlus 6T 的官方 ROM。至于为什么骂他，当时坊间的说法是「他连如何刷自己的手机都不会」。显然这种说辞很令人怀疑，一个不会刷机的开发者，是怎么可能把即使是现成的一整套 ROM 编译和适配起来的呢？</p>
+<p>后来，一次偶然的机会，我在这些对 Saksham 颇有微词的人们的讨论群中看到了一份安利，他们认为 Bootleggers ROM 是最好的 ROM。</p>
+<p>这个被大家如此热烈追捧的 ROM 我当然要试一下了。让我万万没想到的是，刷上之后是这样的（图片来自网络）：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/65171708-13892400-da7e-11e9-8cc6-28abdd10d947.png" alt></p>
+<p>Excuse me? 这么亮瞎我眼睛的启动动画是几个意思？「家」是什么玩意？你们老外看不懂汉字就觉得一个黑体字很牛逼是吗？更不用说它 ROM 里面奇怪的启动器、奇怪的默认壁纸、把奇怪的设置一股脑放在一个地方的定制化选项，以及残缺不全的多语言支持。</p>
+<p>所以上一节我抛出的问题，喜欢用这些非常容易定制的 Android 机型、觉得自己「很会刷机」，觉得别人维护一个十分克制的 ROM 就是「不会刷机」的外国友人，大多是什么样的货色，我觉得大家心里也能有那么一点 B-树了。</p>
+<p><strong>这样的网络暴力不是偶然。</strong>几个月之后，新的维护者 prudhvi_99 以 Unofficial 的身份接手了这个项目，用几乎没变的代码重新发布了<a href="https://forum.xda-developers.com/oneplus-6t/development/rom-pixel-experience-t3944873" target="_blank" rel="noopener">新的版本</a>，结果又一次在大约一个月后主动删除。作为一个自认为比较敏锐的用户，我没有看到这个 ROM 中有任何值得你们去攻击谩骂的问题，而你们所推崇的那些充满盲目无知的汉字崇拜的电子垃圾，正在无形中消磨着这些专业开发者继续维护下去的毅力。</p>
+<h2 id="回归与再尝试"><a href="#回归与再尝试" class="headerlink" title="回归与再尝试"></a>回归与再尝试</h2><p>与国内的各类毒瘤爬虫下载站、随意搜索转发保存的百度网盘不同，国外的这些软件无论有多少转发和传播，最终都会回流到原始开发者提供的那几个下载渠道。这也就意味着，当开发者自己不再打算维护下去、并决定删除作品的时候，这份成品也许就会一瞬间在整个互联网上消失。</p>
+<p>至少 rkm 已经找不到那两份 ROM 包了；即使能找到，他们也已经不再被维护，带着很久前的安全更新和设备适配代码，等着被人们遗忘。</p>
+<p>无奈之下，暂时回了氧 OS。当你习惯了 Google 的应用生态后，你会发现第三方系统内置的应用与 Google 应用的体验完全是割裂的，没有云服务，没有一致的交互体验，没有深色模式或自适应图标，没有云端硬盘备份，一无所有。</p>
+<p>OnePlus 在不明白这一点的情况下，再怎么「优化」你的内置应用，真正希望得到良好体验的用户都不会买账的。虽然第三方厂商并没有 Google 最全套内置应用的授权，但至少在体验上做成差不多的交互，给我尽可能多的 Google 原生应用，比任何优化都好。OnePlus 不懂得这一点，甚至还会把 Android 原生的 DocumentsUI 魔改一下 Manifest，改成「下载」，这种操作我也是第一次见；全面屏手势做的倒是像模像样，一上手就穿帮：「这根本不是你想要模仿的 iOS 多任务交互，只是东施效颦罢了。」</p>
+<p>为了完整的 Google 体验，我通常会删除氧 OS 的绝大多数内置应用，装上了或原版或移植版的 Google Stock Apps，包括电话、信息、通讯录、时钟、日历、相机、相册、云端硬盘、Gmail、Gboard。唯一不能改的是「设置」，但 OnePlus 自带的「设置」在设计上也算说得过去，只是跟其它应用不那么搭配罢了；至于系统体验，我更期待 Android 10，至少手势交互上，OnePlus 不用再把自己那一套「拙劣的仿制品」搬到台上表演了。</p>
+<p>不过令我没想到的是，Android 10 并没能在 OnePlus 6T 的氢氧 OS 中如期而至。这一次，我刷上了 LineageOS 17。</p>
+<p>「未完待续」</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/09/16/reset/">
+        下一篇<br>重置：Reset
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2019 <a href="https://rikumi.github.io">[ RKM ]</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js" integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?43326151"></script>
+
+
+<script>
+    var disqus_shortname = 'rikumi';
+    var disqus_config = function () {
+        this.page.url = 'https://rikumi.github.io/2019/09/18/history-of-my-oneplus-6t-1/';
+        this.page.identifier = '/2019/09/18/history-of-my-oneplus-6t-1/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>
