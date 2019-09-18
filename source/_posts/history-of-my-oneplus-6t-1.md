@@ -37,13 +37,13 @@ featured_image: https://user-images.githubusercontent.com/5051300/65166528-76c18
 
 ## 刷机
 
-今年年初，一向很懒得解锁刷机（也是快四年没有玩过安卓刷机）的 rkm，还是开始跟着宁静之雨的教程开始解锁刷机。看着这个有了 A/B 分区的神奇设备，rkm 不禁想起上一次刷机还是在 Android 5.1 的时代；再上一次，是在 Android 4.0.3 的时代。
+今年年初，一向很懒得解锁刷机（也是快四年没有玩过安卓刷机）的 rkm，还是跟着宁静之雨的教程开始解锁刷机。看着这个有了 A/B 分区的神奇设备，rkm 不禁想起上一次刷机还是在 Android 5.1 的时代；再上一次，是在 Android 4.0.3 的时代。
 
 如果没记错的话，第一个刷入的系统，是标有 Official 的 Pixel Experience。这是一个绝妙的 ROM，有着严格等同于 Pixel 设备的绝妙体验。无论是完整的 Google 应用生态，锁屏 AOD，深色通知，增加了自动略过锁屏的 Google 可信面部解锁，Now Playing，体验感都非常棒。（图片来自网络）
 
 ![](https://user-images.githubusercontent.com/5051300/65172538-b7270400-da7f-11e9-95cb-db002cbc7237.png)
 
-很可惜，[这个 ROM（Pixel Experience for OnePlus 6T）](https://forum.xda-developers.com/oneplus-6t/development/rom-pixel-experience-t3875179)消失了。它当时的维护者 Saksham 由于收到社区的严重排挤和辱骂，删掉了 Pixel Experience 官网上的针对 OnePlus 6T 的官方 ROM。至于为什么骂他，当时坊间的说法是「他连如何刷自己的手机都不会」。显然这种说辞很令人怀疑，一个不会刷机的开发者，是怎么可能把即使是现成的一整套 ROM 编译和适配起来的呢？
+很可惜，[这个 ROM（Pixel Experience for OnePlus 6T）](https://forum.xda-developers.com/oneplus-6t/development/rom-pixel-experience-t3875179)消失了。它当时的维护者 Saksham 由于受到社区的严重排挤和辱骂，删掉了 Pixel Experience 官网上的针对 OnePlus 6T 的官方 ROM。至于为什么骂他，当时坊间的说法是「他连如何刷自己的手机都不会」。显然这种说辞很令人怀疑，一个不会刷机的开发者，是怎么可能把即使是现成的一整套 ROM 编译和适配起来的呢？
 
 后来，一次偶然的机会，我在这些对 Saksham 颇有微词的人们的讨论群中看到了一份安利，他们认为 Bootleggers ROM 是最好的 ROM。
 
