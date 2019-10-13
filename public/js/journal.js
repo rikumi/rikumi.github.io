@@ -17,19 +17,6 @@ app = new Vue({
                 return k * (x - t);
             }
         },
-        handleScroll() {
-            this.scrollY = window.scrollY;
-            this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
-            const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
-
-            if (this.navOpacity >= 1) {
-                navBackground.style.opacity = 1;
-                navTitle.style.opacity = 1;
-            } else {
-                navBackground.style.opacity = 0;
-                navTitle.style.opacity = 0;
-            }
-        },
         handleResize() {
             const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
             extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
@@ -46,7 +33,6 @@ app = new Vue({
         },
     },
     created() {
-        window.addEventListener('scroll', this.handleScroll);
         window.addEventListener('resize', this.handleResize);
         window._nonDesktop = function () {
             let check = false;
@@ -57,12 +43,10 @@ app = new Vue({
         };
     },
     mounted() {
-        this.handleScroll();
         this.handleResize();
         this.mounted = true;
     },
     destroyed() {
-        window.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener('resize', this.handleResize);
     }
 });

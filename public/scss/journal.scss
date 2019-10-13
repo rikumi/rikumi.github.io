@@ -216,6 +216,7 @@ a {
   @media screen and (max-width: $single-column-max-width) {
     display: block !important;
     padding: 0;
+    z-index: 1;
     * {
       font-family: $sans-preferred-font-list;
       transition: opacity 0.5s ease-in-out;
@@ -229,7 +230,6 @@ a {
       max-width: unset !important;
     }
     .navbar-brand {
-      opacity: 0;
       text-align: left;
       padding-left: 24px !important;
     }
@@ -280,22 +280,6 @@ a {
 
 .single-column-header-container {
   display: none !important;
-  @media screen and (max-width: $single-column-max-width) {
-    display: block !important;
-    padding: 50px 20px 80px 20px;
-    transition: padding 0.5s ease-in-out, margin 0.5s ease-in-out;
-    text-align: center;
-    * {
-      font-family: $sans-preferred-font-list;
-      color: $deep-dark-accent;
-    }
-    .single-column-header-title {
-      font-size: $single-column-nav-title-size;
-    }
-    .single-column-header-subtitle {
-      font-size: $single-column-nav-subtitle-size;
-    }
-  }
 }
 
 .single-column-drawer-container {
@@ -710,7 +694,6 @@ a {
   .post {
     padding: 0 0 20px 0;
     .post-head-wrapper {
-      margin-top: -20px;
       background: no-repeat center;
       background-size: cover;
       position: relative;
@@ -953,4 +936,10 @@ a {
       padding: 40px 20px 40px 20px;
     }
   }
+}
+
+.emoji {
+  width: 1em;
+  height: 1em;
+  margin-bottom: 0.2em;
 }
