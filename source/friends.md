@@ -10,7 +10,7 @@ permalink: friends
 
 ---
 
-## [🐦 蓝橙@咕咕咕](https://twitter.com/PL2mDFZ6Z)
+## [🕊️ 蓝橙@咕咕咕](https://twitter.com/PL2mDFZ6Z)
 不愧是我，App 还没开发完，开发者账号先到期了
 
 ---

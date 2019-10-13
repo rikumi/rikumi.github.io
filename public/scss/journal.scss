@@ -72,7 +72,7 @@ body {
 
 * {
   color: $deep-dark-accent;
-  line-height: 1.5em;
+  line-height: 1.75em;
   word-wrap: break-word;
 }
 
@@ -798,10 +798,11 @@ a {
       .post-body {
         font-size: $post-body-size;
         line-height: 1.5em;
+        text-align: justify;
         * {
           word-wrap: break-word;
         }
-        img {
+        img:not(.emoji), iframe {
           max-width: 100%;
           border-radius: 5px;
           overflow: hidden;
