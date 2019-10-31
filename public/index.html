@@ -22,7 +22,7 @@
     <link rel="icon" href="/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?14902068">
+<link rel="stylesheet" href="/css/journal.css?35351829">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -56,6 +56,10 @@
 <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
 </noscript>
+<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body));
+</script>
 </head>
 <body>
 <div id="top"></div>
@@ -70,12 +74,12 @@
 
             
             
-            <a class="a-block drawer-menu-item false" href="/about.html">
-                关于
-            </a>
-            
             <a class="a-block drawer-menu-item false" href="/friends.html">
                 朋友们
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/about.html">
+                关于
             </a>
             
             <a class="a-block drawer-menu-item false" href="/works.html">
@@ -94,7 +98,7 @@
 <transition name="fade">
     <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
 </transition>
-<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+<nav ref="navBar" class="navbar navbar-light single-column-nav-container">
     <div ref="navBackground" class="nav-background"></div>
     <div class="container container-narrow nav-content">
         <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
@@ -128,12 +132,12 @@
 
         
         
-        <a class="a-block nav-link-item false" href="/about.html">
-            关于
-        </a>
-        
         <a class="a-block nav-link-item false" href="/friends.html">
             朋友们
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/about.html">
+            关于
         </a>
         
         <a class="a-block nav-link-item false" href="/works.html">
@@ -175,10 +179,12 @@
     </div>
 </div>
 
+
+
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-no-background">
         
-        <a href="/2019/10/31/mi-bind-4-one-week-report/" class="a-block">
+        <a href="/2019/10/13/mi-bind-4-one-week-report/" class="a-block">
             <div class="post-item-wrapper">
                 <div class="post-item post-item-no-divider">
                     <div class="post-item-info-wrapper">
@@ -194,45 +200,19 @@
 从很久以前...
                         </div>
                         <div class="post-item-meta">
-                            2019-10-31
+                            2019-10-13
                         </div>
                     </div>
                     
                     <div class="post-item-image-wrapper">
-                        <div class="post-item-image" style="background-image: url('/2019/10/31/mi-bind-4-one-week-report/https://user-images.githubusercontent.com/5051300/66715720-241c8800-edf9-11e9-8f0c-862f627240cd.jpeg')"></div>
+                        <div class="post-item-image" style="background-image: url('https://user-images.githubusercontent.com/5051300/66715720-241c8800-edf9-11e9-8f0c-862f627240cd.jpeg')"></div>
                     </div>
                     
                 </div>
             </div>
         </a>
         
-        <a href="/2019/09/27/reset/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-divider">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            重置：Reset
-                        </div>
-                        <div class="post-item-summary">
-                            
-
-你现在所看到的 [ RKM ] 原名 [ rikumi ]，建立于 2018 年初。
-当时，rkm 曾在回家过年的不愉快中，每天躲在卧室里写下一些自述，试图寻找属于自己的一片净土；后来，这个年最终也没能正常过完，rkm 提早回到学校，在大门紧锁的宿舍之外找到了临时的住所...
-                        </div>
-                        <div class="post-item-meta">
-                            2019-09-27
-                        </div>
-                    </div>
-                    
-                    <div class="post-item-image-wrapper">
-                        <div class="post-item-image" style="background-image: url('/2019/09/27/reset/https://i.ytimg.com/vi/KQHgcSt44fw/maxresdefault.jpg')"></div>
-                    </div>
-                    
-                </div>
-            </div>
-        </a>
-        
-        <a href="/2019/09/27/history-of-my-oneplus-6t-1/" class="a-block">
+        <a href="/2019/09/18/history-of-my-oneplus-6t-1/" class="a-block">
             <div class="post-item-wrapper">
                 <div class="post-item post-item-no-divider">
                     <div class="post-item-info-wrapper">
@@ -247,12 +227,38 @@
 再过两天就是 9 月 20 日，在这一天，你将与你身边的伙伴们拉开差距——...
                         </div>
                         <div class="post-item-meta">
-                            2019-09-27
+                            2019-09-18
                         </div>
                     </div>
                     
                     <div class="post-item-image-wrapper">
-                        <div class="post-item-image" style="background-image: url('/2019/09/27/history-of-my-oneplus-6t-1/https://user-images.githubusercontent.com/5051300/65166528-76c18900-da73-11e9-9cd6-fb517744cccf.png')"></div>
+                        <div class="post-item-image" style="background-image: url('https://user-images.githubusercontent.com/5051300/65166528-76c18900-da73-11e9-9cd6-fb517744cccf.png')"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </a>
+        
+        <a href="/2019/09/16/reset/" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-divider">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            重置：Reset
+                        </div>
+                        <div class="post-item-summary">
+                            
+
+你现在所看到的 [ RKM ] 原名 [ rikumi ]，建立于 2018 年初。
+当时，rkm 曾在回家过年的不愉快中，每天躲在卧室里写下一些自述，试图寻找属于自己的一片净土；后来，这个年最终也没能正常过完，rkm 提早回到学校，在大门紧锁的宿舍之外找到了临时的住所...
+                        </div>
+                        <div class="post-item-meta">
+                            2019-09-16
+                        </div>
+                    </div>
+                    
+                    <div class="post-item-image-wrapper">
+                        <div class="post-item-image" style="background-image: url('https://i.ytimg.com/vi/KQHgcSt44fw/maxresdefault.jpg')"></div>
                     </div>
                     
                 </div>
@@ -277,6 +283,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?13664493"></script>
+<script src="/js/journal.js?2327807"></script>
 </body>
 </html>
