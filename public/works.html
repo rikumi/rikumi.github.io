@@ -10,7 +10,7 @@
 <meta name="author" content="Rikumi">
 <meta name="description" content="因为时间和精力投入的局限，rkm 的作品主要是对一些新奇想法的探索，对「你的东西很好，可为什么不换一种角度设计呢」的实践。它们也许有很多很多 Bug，不值得你日常使用，但对你日常所使用的那些工具多一些思考，多问几个为什么，总是有意义的。
 
-Vanessa - 基于 Koa ...">
+deasync-ipc - 一个基...">
 <meta name="keywords" content>
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -24,7 +24,7 @@ Vanessa - 基于 Koa ...">
     <link rel="icon" href="/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?38060855">
+<link rel="stylesheet" href="/css/journal.css?69558017">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body)
 
             
             
-            <a class="a-block drawer-menu-item false" href="/friends.html">
-                朋友们
-            </a>
-            
             <a class="a-block drawer-menu-item false" href="/about.html">
                 关于
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friends.html">
+                朋友们
             </a>
             
             <a class="a-block drawer-menu-item active" href="/works.html">
@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body)
 
         
         
-        <a class="a-block nav-link-item false" href="/friends.html">
-            朋友们
-        </a>
-        
         <a class="a-block nav-link-item false" href="/about.html">
             关于
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friends.html">
+            朋友们
         </a>
         
         <a class="a-block nav-link-item active" href="/works.html">
@@ -190,6 +190,11 @@ document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body)
             <div class="post-body-wrapper">
                 <div class="post-body">
                     <p>因为时间和精力投入的局限，rkm 的作品主要是对一些新奇想法的探索，对「你的东西很好，可为什么不换一种角度设计呢」的实践。它们也许有很多很多 Bug，不值得你日常使用，但对你日常所使用的那些工具多一些思考，多问几个为什么，总是有意义的。</p>
+<hr>
+<h2 id="deasync-ipc-一个基于文件系统的-Node-js-同步-IPC"><a href="#deasync-ipc-一个基于文件系统的-Node-js-同步-IPC" class="headerlink" title="deasync-ipc - 一个基于文件系统的 Node.js 同步 IPC"></a><a href="https://github.com/rikumi/deasync-ipc" target="_blank" rel="noopener">deasync-ipc</a> - 一个基于文件系统的 Node.js 同步 IPC</h2><p><img src="https://img.shields.io/npm/v/deasync-ipc" alt> <img src="https://img.shields.io/github/last-commit/rikumi/deasync-ipc" alt></p>
+<p>在某个框架级项目迁移 NW.js 到 Electron 的过程中，项目中 WebView 内部由于一些不可抗拒原因使用了 <code>alert()</code>、<code>prompt()</code> 作为 WebView 内部与外部原生代码进行同步调用的桥梁，而 Electron 作为先进的 Web 混合开发框架，对于这些老旧的同步 API 都已经停止支持，例如出现了宿主文档中不再触发 <code>dialog</code> 事件、<code>prompt()</code> 函数空实现等问题。</p>
+<p>同步 IPC 的确是糟糕的设计，但有些时候作为框架的开发者，我们无力改变这些设计问题，只能想办法实现它。因此，利用 Node 的同步文件系统 API，实现了一个简单的同步 IPC，支持在 Client 侧以同步的方式无缝调用 Server 侧的同步/异步 API。</p>
+<p>这个项目存在的意义，一个是为了支持上文中提到的很有意义的框架级项目，另一个是希望它的源码能抛砖引玉，给你带来一些有关进程间同步问题的启发。</p>
 <hr>
 <h2 id="Vanessa-基于-Koa-中间件的中间人代理调试工具"><a href="#Vanessa-基于-Koa-中间件的中间人代理调试工具" class="headerlink" title="Vanessa - 基于 Koa 中间件的中间人代理调试工具"></a><a href="https://github.com/rikumi/vanessa" target="_blank" rel="noopener">Vanessa</a> - 基于 Koa 中间件的中间人代理调试工具</h2><p><img src="https://img.shields.io/npm/v/vanessa" alt> <img src="https://img.shields.io/github/last-commit/rikumi/vanessa" alt></p>
 <p>我厂的前端开发应该大部分都知道 <a href="https://github.com/avwo/whistle" target="_blank" rel="noopener">Whistle</a>，一款正在活跃维护的中间人代理调试工具。在前端开发中，Whistle 替代了老旧难用、只有 Map Remote/Map Local 两个功能、还要求你把 URL 拆成好几段输入的工业垃圾 Charles，成为前端开发者必备的开发工具。但在实际使用中，Whistle 融入了很多开发者自己设下的规则，所有的配置都需要你去读它的<a href="http://wproxy.org/whistle/rules/" target="_blank" rel="noopener">文档</a>（左边栏向下滚动，看看它制造了多少规则），导致很多人即使从 Charles 转投 Whistle 的怀抱，却仍然只会用那两个功能：换 IP 和换文件。<strong>用户不会用，就是设计的失败。</strong></p>
@@ -244,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body)
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?47855713"></script>
+<script src="/js/journal.js?96551701"></script>
 
 
 <script>
