@@ -7,6 +7,18 @@ permalink: works
 
 ---
 
+## [deasync-ipc](https://github.com/rikumi/deasync-ipc) - 一个基于文件系统的 Node.js 同步 IPC
+
+![](https://img.shields.io/npm/v/deasync-ipc) ![](https://img.shields.io/github/last-commit/rikumi/deasync-ipc)
+
+在某个框架级项目迁移 NW.js 到 Electron 的过程中，项目中 WebView 内部由于一些不可抗拒原因使用了 `alert()`、`prompt()` 作为 WebView 内部与外部原生代码进行同步调用的桥梁，而 Electron 作为先进的 Web 混合开发框架，对于这些老旧的同步 API 都已经停止支持，例如出现了宿主文档中不再触发 `dialog` 事件、`prompt()` 函数空实现等问题。
+
+同步 IPC 的确是糟糕的设计，但有些时候作为框架的开发者，我们无力改变这些设计问题，只能想办法实现它。因此，利用 Node 的同步文件系统 API，实现了一个简单的同步 IPC，支持在 Client 侧以同步的方式无缝调用 Server 侧的同步/异步 API。
+
+这个项目存在的意义，一个是为了支持上文中提到的很有意义的框架级项目，另一个是希望它的源码能抛砖引玉，给你带来一些有关进程间同步问题的启发。
+
+---
+
 ## [Vanessa](https://github.com/rikumi/vanessa) - 基于 Koa 中间件的中间人代理调试工具
 
 ![](https://img.shields.io/npm/v/vanessa) ![](https://img.shields.io/github/last-commit/rikumi/vanessa)
