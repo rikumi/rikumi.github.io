@@ -4,7 +4,7 @@
 
 # Site
 title: '[ RKM ]'
-subtitle: あの日のままで
+subtitle: アクアテラリウム
 description:
 keywords:
 author: Rikumi
@@ -40,6 +40,8 @@ relative_link: false
 future: false
 highlight:
   enable: true
+  line_number: false
+  hljs: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

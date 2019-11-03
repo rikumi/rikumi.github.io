@@ -1,6 +1,10 @@
 ---
 title: 小记 OnePlus 6T 折腾史（上）
 featured_image: https://user-images.githubusercontent.com/5051300/65166528-76c18900-da73-11e9-9cd6-fb517744cccf.png
+tags:
+- 生活
+- 数码
+- 玩机
 ---
 
 > 题图使用黑莓史上最垃圾手机——渣 CPU、软趴趴键盘、万年 6.0、APK 装一天的 BlackBerry Priv 拍摄。
