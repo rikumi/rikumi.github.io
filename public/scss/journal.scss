@@ -944,3 +944,12 @@ a {
   height: 1em;
   margin-bottom: 0.2em;
 }
+
+figure.highlight {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  .gutter {
+    display: none;
+  }
+}
