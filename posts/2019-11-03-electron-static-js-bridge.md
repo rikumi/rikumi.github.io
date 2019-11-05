@@ -1,9 +1,6 @@
 ---
 title: 利用 TypeScript 装饰器实现 Electron JSBridge
-tags:
-- 踩坑
-- Node.js
-- Electron
+date: 2019-11-03
 ---
 
 ## 背景

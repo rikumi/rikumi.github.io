@@ -1,21 +1,33 @@
 module.exports = {
+  locales: {
+    '/': {
+      lang: 'zh', // For disqus compatibility
+    },
+  },
   title: '[ RKM ]',
   description: 'アクアテラリウム',
-  theme: '@vuepress/theme-blog',
+  theme: 'journal',
   themeConfig: {
+    nav: [
+      {
+        text: '关于',
+        link: '/about/',
+      },
+      {
+        text: '朋友们',
+        link: '/friends/',
+      },
+      {
+        text: '作品',
+        link: '/works/',
+      },
+    ],
     modifyBlogPluginOptions(opts) {
       return {
         ...opts,
-        directories: [
-          {
-            id: 'post',
-            dirname: 'posts',
-            path: '/'
-          }
-        ],
         comment: {
           service: 'disqus',
-          shortname: 'rikumi'
+          shortname: 'rikumi',
         }
       };
     }
