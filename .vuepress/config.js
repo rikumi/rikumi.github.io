@@ -6,6 +6,9 @@ module.exports = {
   },
   title: '[ RKM ]',
   description: 'アクアテラリウム',
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.png', type: 'image/x-icon' }]
+  ],
   theme: 'journal',
   themeConfig: {
     nav: [
