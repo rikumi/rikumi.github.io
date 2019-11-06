@@ -7895,10 +7895,10 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   dependencies:
     smoothscroll-polyfill "^0.4.3"
 
-vuepress-theme-journal@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-journal/-/vuepress-theme-journal-1.0.1.tgz#c6af90d727285288ac9ba6238434b908d56c7238"
-  integrity sha512-Ec1iyRRefnzhg9ncNmhXGrWQ+eRTySLQpkZAvjFFeLhTJSS8OJKSlQtTNblCXt7/UVYBZA7N6/swQFn83JGgWQ==
+vuepress-theme-journal@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vuepress-theme-journal/-/vuepress-theme-journal-1.0.2.tgz#e9c0fc23e6a50383fb945b6c24fe51e2a793f364"
+  integrity sha512-J7DqhEmTF8Jy3GVw5pN3bu3yZqWCqmwxFjVnS7G/s7bNXqaE3GJNSZfnnth+kBLEEYEZJ5ZvEduB83vohBIRGQ==
   dependencies:
     "@vuepress/plugin-blog" "^1.5.1"
     "@vuepress/plugin-medium-zoom" "1.0.0"
