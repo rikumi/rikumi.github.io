@@ -7,6 +7,14 @@ permalink: works
 
 ---
 
+## [vuepress-theme-journal](https://github.com/rikumi/vuepress-theme-journal) - 适用于 VuePress 的 Journal 主题
+
+![](https://img.shields.io/npm/v/vuepress-theme-journal) ![](https://img.shields.io/github/last-commit/rikumi/vuepress-theme-journal)
+
+这是「[Journal.](https://github.com/SumiMakito/hexo-theme-journal)」主题的 VuePress 移植版，主要保留框架结构的样式，部分细节问题例如 Tag 页面暂时没有实现；Markdown 的样式主要保留了 vuepress-theme-blog 的样式。
+
+---
+
 ## [deasync-ipc](https://github.com/rikumi/deasync-ipc) - 一个基于文件系统的 Node.js 同步 IPC
 
 ![](https://img.shields.io/npm/v/deasync-ipc) ![](https://img.shields.io/github/last-commit/rikumi/deasync-ipc)
