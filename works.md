@@ -7,6 +7,16 @@ permalink: works
 
 ---
 
+## [kbone-svg](https://github.com/rikumi/kbone-svg/) - 让小程序 kbone 环境支持 SVG 渲染
+
+![](https://img.shields.io/npm/v/kbone-svg) ![](https://img.shields.io/github/last-commit/rikumi/kbone-svg)
+
+在一些大型 web-view 项目迁移到 kbone 的过程中，常常会遇到 HTML inline SVG（在 HTML 中直接插入 SVG 标签）这种情况；有的页面还会异步加载一个含有很多小图标（`<symbol>`）的大 SVG、在页面上用 `<use xlink:href="#symbol-id">` 的方式，实现 SVG 的 Sprite 化。
+
+本文针对单个页面上出现大量 HTML inline SVG 的实战场景，通过识别并转换成 `background-image`，来实现小程序 kbone 对 SVG 的支持。[阅读文章 >](/2019/11/27/kbone-svg/)
+
+---
+
 ## [vuepress-theme-journal](https://github.com/rikumi/vuepress-theme-journal) - 适用于 VuePress 的 Journal 主题
 
 ![](https://img.shields.io/npm/v/vuepress-theme-journal) ![](https://img.shields.io/github/last-commit/rikumi/vuepress-theme-journal)
