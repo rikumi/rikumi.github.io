@@ -118,4 +118,33 @@ Array(1000000).fill().map(randomResult).filter(k => k).length / 1000000
 // -> 0.499731
 ```
 
-可以肯定，原题中的事件成立的概率为 50%，大于 1/4，与我们的分析相符，但是如果能分析的再接近一些就好了。
+可以肯定，原题中的事件成立的概率为 50% 即 1/2，大于 1/4，与我们的分析相符，但是如果能分析的再接近一些就好了。
+
+## 如果是五只鸭子？或者六只？
+
+上面的结果 1/2 适用于四只鸭子的情况，可以说非常巧合。如果是五只鸭子，是不是会降下来呢？或者如果是三只鸭子，结果又如何？我们可以做更加普遍性的测试：
+
+```js
+// count 只鸭子单次试验的结果
+const randomDucksOnce = (count = 4) => isInSameSemicircle.apply(null, Array(count).fill().map(randomAngle))
+
+// count 只鸭子的 times 次试验的频率
+const randomDucks = (count = 4, times = 1000000) => 
+  Array(times).fill().map(() => randomDucksOnce(count)).filter(k => k).length / times
+
+randomDucks(2)  // -> 1                 (2/2)
+randomDucks(3)  // -> 非常接近 0.75       (3/4)
+randomDucks(4)  // -> 非常接近 0.5        (4/8)
+randomDucks(5)  // -> 非常接近 0.3125     (5/16)
+randomDucks(6)  // -> 非常接近 0.1875     (6/32)
+randomDucks(7)  // -> 非常接近 0.109375   (7/64)
+randomDucks(8)  // -> 非常接近 0.0625     (8/128)
+randomDucks(9)  // -> 非常接近 0.03515625 (9/256)
+randomDucks(10) // -> 非常接近 0.01953125 (10/512)
+```
+
+可以写出这个数列的通项公式：
+
+> randomDucks(n) = n / 2^(n-1)
+
+通过观察可以猜测，n 只鸭子随机出现在圆形水池中的任意一点，落在同一个半圆面内的概率为 `n / 2^(n-1)`。
