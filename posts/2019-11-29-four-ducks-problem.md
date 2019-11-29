@@ -126,7 +126,8 @@ Array(1000000).fill().map(randomResult).filter(k => k).length / 1000000
 
 ```js
 // count 只鸭子单次试验的结果
-const randomDucksOnce = (count = 4) => isInSameSemicircle.apply(null, Array(count).fill().map(randomAngle))
+const randomDucksOnce = (count = 4) =>
+  isInSameSemicircle.apply(null, Array(count).fill().map(randomAngle))
 
 // count 只鸭子的 times 次试验的频率
 const randomDucks = (count = 4, times = 1000000) => 
