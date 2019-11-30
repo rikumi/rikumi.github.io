@@ -9,6 +9,7 @@ module.exports = {
   head: [['link', { rel: 'icon', href: '/favicon.png', type: 'image/x-icon' }]],
   theme: 'journal',
   themeConfig: {
+    summaryLength: 120,
     nav: [
       {
         text: '关于',

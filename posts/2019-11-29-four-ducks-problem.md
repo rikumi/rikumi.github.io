@@ -2,8 +2,8 @@
 title: 四鸭子问题：几何概型的理论分析与程序模拟测试
 date: 2019-11-29
 featured_image: https://images.unsplash.com/photo-1465247431621-ae634a2477be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000q=80
+summary: 四只小鸭子在一个大的圆形水池中，分别随机出现在圆中的任意一点。四只鸭子出现在同一个半圆内的概率是多少？
 ---
-
 
 ## 问题
 
@@ -51,14 +51,15 @@ featured_image: https://images.unsplash.com/photo-1465247431621-ae634a2477be?ixl
 
 回到几何问题上，如果从 0° 到 90° 是顺时针，那么从 270° 到 0° 是不是顺时针？角度的循环性给我们带来一个巨大的困惑：**当我们比较角度时，我们到底在比较什么？**
 
-当时经过长时间的思考，我发现：从角a 到角b 成「顺时针」，其实是指角b 落在角a 与角(a+180°) 之间；如果没有落在这半周，我们就称角a 到角b 成「逆时针」。
+当时经过长时间的思考，我发现：从角 a 到角 b 成「顺时针」，其实是指角 b 落在角 a 与角(a+180°) 之间；如果没有落在这半周，我们就称角 a 到角 b 成「逆时针」。
 
 换句话说，由于圆周角的循环性，我们对「顺/逆时针」的理解是不严谨的，在思考问题时，要尽可能回归到三个角度之间的三元关系来思考。在上面弦网络的实现代码中，我引入了一个函数 `is_clockwise(id1, id2, id3)`，用于比较所谓的「顺/逆时针」，其实是三个角度之间的顺序关系。
 
 回到我们的鸭子问题，为了判断两个鸭子是否在同一个半周，我们也需要引入这样一个函数：
 
 ```js
-const isClockwise = (a, b, c) => [a<b, b<c, c<a].filter(k => k).length === 2
+const isClockwise = (a, b, c) =>
+  [a < b, b < c, c < a].filter((k) => k).length === 2;
 ```
 
 > 处于 0~360° 圆周内的三个角度 (a, b, c) 成「顺时针」，当且仅当 `a<b`、`b<c`、`c<a` 三个表达式有且仅有两个成立。
@@ -66,13 +67,15 @@ const isClockwise = (a, b, c) => [a<b, b<c, c<a].filter(k => k).length === 2
 接下来，我们就可以利用这个关系，定义「多个角度在同一个半周内」的函数：
 
 ```js
-const isInSameSemicircle = (...o) => o
-  .find((a, i) => 
-    [...o.slice(0, i), ...o.slice(i + 1)]
-      .map(b => isClockwise(a, b, (a + 180) % 360))
-      .filter(k => k)
-      .length % (o.length - 1) === 0
-  ) != null
+const isInSameSemicircle = (...o) =>
+  o.find(
+    (a, i) =>
+      [...o.slice(0, i), ...o.slice(i + 1)]
+        .map((b) => isClockwise(a, b, (a + 180) % 360))
+        .filter((k) => k).length %
+        (o.length - 1) ===
+      0
+  ) != null;
 ```
 
 > 多个角 o 都在同一个半周内，当且仅当在 o 中存在一个角 a，使得：
@@ -86,33 +89,43 @@ const isInSameSemicircle = (...o) => o
 接下来，我们可以对这两个判定函数进行一些简单的测试：
 
 ```js
-isClockwise(-10, 60, 120)        // -> true
-isClockwise(0, 120, 60)        // -> false
-isInSameSemicircle(0, 80, 120) // -> true
-isInSameSemicircle(0, 80, 240) // -> false
+isClockwise(-10, 60, 120); // -> true
+isClockwise(0, 120, 60); // -> false
+isInSameSemicircle(0, 80, 120); // -> true
+isInSameSemicircle(0, 80, 240); // -> false
 ```
 
 正合我意。现在，我们来定义随机生成角度和随机进行试验的函数：
 
 ```js
-const randomAngle = () => Math.random() * 360
+const randomAngle = () => Math.random() * 360;
 
-const randomResult = () => isInSameSemicircle(
-  randomAngle(),
-  randomAngle(),
-  randomAngle(),
-  randomAngle()
-)
+const randomResult = () =>
+  isInSameSemicircle(
+    randomAngle(),
+    randomAngle(),
+    randomAngle(),
+    randomAngle()
+  );
 ```
 
 下面，让我们来进行三批试验，每批试验 1000000 次，看一下「四只鸭子均出现在同一个半圆内」出现的频率吧：
 
 ```js
-Array(1000000).fill().map(randomResult).filter(k => k).length / 1000000
+Array(1000000)
+  .fill()
+  .map(randomResult)
+  .filter((k) => k).length / 1000000;
 // -> 0.500323
-Array(1000000).fill().map(randomResult).filter(k => k).length / 1000000
+Array(1000000)
+  .fill()
+  .map(randomResult)
+  .filter((k) => k).length / 1000000;
 // -> 0.49939
-Array(1000000).fill().map(randomResult).filter(k => k).length / 1000000
+Array(1000000)
+  .fill()
+  .map(randomResult)
+  .filter((k) => k).length / 1000000;
 // -> 0.499731
 ```
 
@@ -125,21 +138,29 @@ Array(1000000).fill().map(randomResult).filter(k => k).length / 1000000
 ```js
 // count 只鸭子单次试验的结果
 const randomDucksOnce = (count = 4) =>
-  isInSameSemicircle.apply(null, Array(count).fill().map(randomAngle))
+  isInSameSemicircle.apply(
+    null,
+    Array(count)
+      .fill()
+      .map(randomAngle)
+  );
 
 // count 只鸭子的 times 次试验的频率
-const randomDucks = (count = 4, times = 1000000) => 
-  Array(times).fill().map(() => randomDucksOnce(count)).filter(k => k).length / times
+const randomDucks = (count = 4, times = 1000000) =>
+  Array(times)
+    .fill()
+    .map(() => randomDucksOnce(count))
+    .filter((k) => k).length / times;
 
-randomDucks(2)  // -> 1                 (2/2)
-randomDucks(3)  // -> 非常接近 0.75       (3/4)
-randomDucks(4)  // -> 非常接近 0.5        (4/8)
-randomDucks(5)  // -> 非常接近 0.3125     (5/16)
-randomDucks(6)  // -> 非常接近 0.1875     (6/32)
-randomDucks(7)  // -> 非常接近 0.109375   (7/64)
-randomDucks(8)  // -> 非常接近 0.0625     (8/128)
-randomDucks(9)  // -> 非常接近 0.03515625 (9/256)
-randomDucks(10) // -> 非常接近 0.01953125 (10/512)
+randomDucks(2); // -> 1                 (2/2)
+randomDucks(3); // -> 非常接近 0.75       (3/4)
+randomDucks(4); // -> 非常接近 0.5        (4/8)
+randomDucks(5); // -> 非常接近 0.3125     (5/16)
+randomDucks(6); // -> 非常接近 0.1875     (6/32)
+randomDucks(7); // -> 非常接近 0.109375   (7/64)
+randomDucks(8); // -> 非常接近 0.0625     (8/128)
+randomDucks(9); // -> 非常接近 0.03515625 (9/256)
+randomDucks(10); // -> 非常接近 0.01953125 (10/512)
 ```
 
 可以写出这个数列的通项公式：

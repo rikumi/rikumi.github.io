@@ -7,10 +7,10 @@
     "build": "npx vuepress build .",
     "pub": "sh -c .vuepress/deploy.sh"
   },
-  "dependencies": {
+  "devDependencies": {
     "@vuepress/plugin-blog": "^1.5.1",
     "@vuepress/theme-blog": "^1.3.2",
     "vuepress": "^1.2.0",
-    "vuepress-theme-journal": "^1.0.3"
+    "vuepress-theme-journal": "^1.0.4"
   }
 }

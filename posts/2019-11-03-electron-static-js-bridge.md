@@ -1,6 +1,7 @@
 ---
 title: 利用 TypeScript 装饰器实现 Electron JSBridge
 date: 2019-11-03
+summary: 对于前端开发者来说，声明和实现分离显然并不是一种友好的办法，但我们可以利用装饰器语法，将声明和实现「自动」分离。
 ---
 
 ## 背景
@@ -160,12 +161,19 @@ const overrideFn = (target, name, descriptor, value) => {
  * 装饰器，用于定义 Native 端提供的服务函数，被装饰的函数不需要实现。
  */
 const nativeService = (target, name, descriptor) => {
-  if (process.type === 'browser') { // 主进程
+  if (process.type === 'browser') {
+    // 主进程
     const serviceFunction = callNativeFunctionFromMain.bind(null, name);
     exposeMainFunctionToRenderer(name, serviceFunction);
     overrideFn(target, name, descriptor, serviceFunction);
-  } else { // 渲染进程
-    overrideFn(target, name, descriptor, callMainFunctionFromRenderer.bind(null, name));
+  } else {
+    // 渲染进程
+    overrideFn(
+      target,
+      name,
+      descriptor,
+      callMainFunctionFromRenderer.bind(null, name)
+    );
   }
 };
 
@@ -175,11 +183,18 @@ const nativeService = (target, name, descriptor) => {
 const electronService = (target, name, descriptor) => {
   let serviceFunction = descriptor ? descriptor.value : target[name];
 
-  if (process.type === 'browser') { // 主进程
+  if (process.type === 'browser') {
+    // 主进程
     exposeMainFunctionToRenderer(name, serviceFunction);
     exposeMainFunctionToNative(name, serviceFunction);
-  } else { // 渲染进程
-    overrideFn(target, name, descriptor, callMainFunctionFromRenderer.bind(null, name));
+  } else {
+    // 渲染进程
+    overrideFn(
+      target,
+      name,
+      descriptor,
+      callMainFunctionFromRenderer.bind(null, name)
+    );
   }
 };
 
@@ -189,11 +204,13 @@ const electronService = (target, name, descriptor) => {
 const pageService = (target, name, descriptor) => {
   let serviceFunction = descriptor ? descriptor.value : target[name];
 
-  if (process.type === 'browser') { // 主进程
+  if (process.type === 'browser') {
+    // 主进程
     let localFunction = callRendererFunctionFromMain.bind(null, name);
     exposeMainFunctionToNative(name, localFunction);
     overrideFn(target, name, descriptor, localFunction);
-  } else { // 渲染进程
+  } else {
+    // 渲染进程
     exposeRendererFunctionToMain(name, serviceFunction);
   }
 };
@@ -205,12 +222,16 @@ export { nativeService, electronService, pageService };
 
 ```js
 import { shell } from 'electron';
-import { nativeService, electronService, pageService } from '@/path/to/decorators';
+import {
+  nativeService,
+  electronService,
+  pageService
+} from '@/path/to/decorators';
 
 class JSBridge {
   @nativeService
   async openPhotoViewer(params) {}
-  
+
   @electronService
   async openFile(filePath) {
     return shell.openItem(filePath);

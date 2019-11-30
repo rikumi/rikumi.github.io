@@ -2,6 +2,7 @@
 title: 小米手环 4 NFC 版一周体验报告
 date: 2019-10-13
 featured_image: https://user-images.githubusercontent.com/5051300/66715720-241c8800-edf9-11e9-8f0c-862f627240cd.jpeg
+summary: 一个够用、实用但又不太好用的智能手环。
 ---
 
 > 本期 BGM 来自 Rewrite，是神户小鸟的专属曲，名字 ニリンソウ = 二轮草，鹅掌草，花语是「ずっと離れない」。
