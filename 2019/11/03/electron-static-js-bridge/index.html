@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>利用 TypeScript 装饰器实现 Electron JSBridge - [ RKM ]</title>
+    <meta name="description" content="アクアテラリウム">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    
+    <link rel="preload" href="/assets/css/0.styles.d582559d.css" as="style"><link rel="preload" href="/assets/js/app.4d7d7766.js" as="script"><link rel="preload" href="/assets/js/3.b7b63e28.js" as="script"><link rel="preload" href="/assets/js/14.2ea42e86.js" as="script"><link rel="prefetch" href="/assets/js/10.d322a274.js"><link rel="prefetch" href="/assets/js/11.ff493115.js"><link rel="prefetch" href="/assets/js/12.a0e6706e.js"><link rel="prefetch" href="/assets/js/13.f0072b0c.js"><link rel="prefetch" href="/assets/js/15.c6142a5c.js"><link rel="prefetch" href="/assets/js/16.059aee76.js"><link rel="prefetch" href="/assets/js/17.7dba229f.js"><link rel="prefetch" href="/assets/js/18.27d1590e.js"><link rel="prefetch" href="/assets/js/19.fdafc777.js"><link rel="prefetch" href="/assets/js/20.423f5ebb.js"><link rel="prefetch" href="/assets/js/4.d08ed974.js"><link rel="prefetch" href="/assets/js/5.9bde743d.js"><link rel="prefetch" href="/assets/js/6.b87e5a4e.js"><link rel="prefetch" href="/assets/js/7.a4c1d324.js"><link rel="prefetch" href="/assets/js/8.0f0d82d7.js"><link rel="prefetch" href="/assets/js/9.43010a02.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.332d6338.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d582559d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="global-layout"><section class="side-container"><header><a href="/" class="a-block nav-head"><div class="nav-title">[ RKM ]</div> <div class="nav-subtitle">アクアテラリウム</div></a> <ul class="nav-link-list"><a href="/about/" class="a-block nav-link-item">关于</a><a href="/friends/" class="a-block nav-link-item">朋友们</a><a href="/works/" class="a-block nav-link-item">作品</a></ul></header> <footer class="nav-footer">
+    Proudly published with VuePress
+    <br>Theme
+    <a href="https://github.com/rikumi/vuepress-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by
+    <a href="https://github.com/rikumi/" target="_blank" rel="noreferrer noopener">Rikumi</a> <br>Designed by
+    <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a> <br>
+    © 2019
+    <a href="/">[ RKM ]</a></footer></section> <div class="mobile-header"><div class="single-column-drawer-container"><div class="drawer-content"><div class="drawer-menu"><a href="/about/" class="a-block drawer-menu-item">
+          关于
+        </a><a href="/friends/" class="a-block drawer-menu-item">
+          朋友们
+        </a><a href="/works/" class="a-block drawer-menu-item">
+          作品
+        </a></div></div></div> <div class="navbar navbar-light single-column-nav-container"><div class="nav-background"></div> <div class="container container-narrow nav-content"><button id="nav_dropdown_btn" type="button" class="nav-dropdown-toggle"><i class="material-icons">menu</i></button> <a href="/" class="navbar-brand">[ RKM ]
+      </a></div></div> <!----></div> <div class="stream-container"><div class="post-list-container post-list-container-shadow"><div class="post"><div class="post-head-wrapper-text-only" style="background-image:none;"><div class="post-title">
+            利用 TypeScript 装饰器实现 Electron JSBridge
+            <div class="post-meta"><time>2019-11-03</time> <!----> </div></div></div> <div class="post-body-wrapper"><div class="post-body"><div class="content__default"><h2 id="背景"><a href="#背景" class="header-anchor">#</a> 背景</h2> <p>最近参与的某 PC 端项目中，团队决定使用 Electron 作为新增业务的 Native 支持层，同时与老业务的 Win32 应用程序无缝共存。熟悉 Electron 的同学可能知道这意味着什么。</p> <p>Electron 作为 NW.js 的继任者，最大的改动就是将 NW.js 的融合环境（以 HTML 为入口，同时支持前端和 Node 技术的环境）一分为二，变成了一个<strong>纯 Node.js 的主进程（Main process）<strong>加上</strong>一系列默认关闭 Node 支持的前端渲染进程（Renderer process）</strong>。</p> <p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8l3aj6x7qj30yq0agmxs.jpg" alt=""></p> <p>如果从 NW.js 和 Electron 同源于 Chromium 的角度来看，NW.js 相当于一个嵌入了 Node.js 支持的单窗口浏览器，每开一个进程就相当于打开了一个新的浏览器窗口；而 Electron 则相当于一个支持多标签页的浏览器，主进程是那个独立于所有标签页之外的那个「看不见的」框架层，渲染进程则相当于在这个浏览器中打开的一个个「看得见的」Tab。</p> <p>这样的架构设计，可能是为了迫使开发者更多地从逻辑/视图分离的角度来思考，开发出鲁棒性更强的应用程序；因此，脱胎于 Atom 的 Electron 造就了 VS Code、<a href="https://hyper.is/" target="_blank" rel="noopener noreferrer">Hyper<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>、Discord 等优秀的新一代跨平台桌面应用程序，同时也经常受到开发者的诟病。</p> <p>诟病的主要原因在于，主进程和渲染进程是两个「进程」，它们之间不存在任何语言层面的资源共享，两者之间的任何交互都必须通过消息来实现。也就是说，只要一个应用程序基于 Electron，里面就至少要有两个进程和一个消息通道。</p> <p>于是到了上文提到的需求中，我们就有了 <strong>Win32</strong>、<strong>Electron 主进程</strong>、<strong>Electron 渲染进程（Preload 脚本）</strong>、<strong>Electron 渲染进程（页面 JS）</strong> 四个环境，其中最后两个环境属于同一个进程，一共有三个进程，这三个进程<strong>两两之间</strong>都有<strong>相互调用</strong>的需求场景。最极端的情况是，Win32 进程甚至需要调用页面上 JS 提供的某个函数。</p> <p>Electron 为我们提供了 ipc 库，与 Win32 之间的通信也定好了具体的协议收发方式，但同一个函数的同一个定义可能需要被三个环境当中的任何一个调用，每一种调用方式在调用方和被调用方都需要写一次逻辑，一共就是 6 套不同的处理逻辑。每次增加这样的一个函数，需要浪费在这上面的工作量是惊人的。所以，我希望把这六种逻辑统一封装起来，实现定义一次、处处使用。</p> <h2 id="灵感"><a href="#灵感" class="header-anchor">#</a> 灵感</h2> <p>这一次的灵感来源于当时经常接触到的 PC 端的 C++ 代码。在 C++ 中，每次实现一个函数都需要先在头文件里写一次声明、在源文件里写一次实现，遇到这样的困难咬咬牙就挺过去了，可是，为什么要这样设计呢？</p> <p>头文件作为一个「模块」的接口声明，其实承担了两个完全不同的任务：一方面，它被接口的实现方（被调用方）引入，用于准确地实现这些接口；另一方面，它也被接口的依赖方（调用方）引入，用于准确地使用这些接口。**调用方只需要有声明，不需要有实现；被调用方既需要有声明，又需要有实现。**于是，声明和实现顺势分离成两个文件，让调用方只编译头文件，被调用方编译源文件及其头文件即可，这是头文件存在的最主要原因。</p> <p>我们在项目中使用的是 TypeScript，对于前端开发者来说，声明和实现分离显然并不是一种友好的办法，但我们可以利用装饰器语法，将声明和实现「自动」分离。</p> <p>我们只需要定义一些装饰器，用于表示某个函数需要在哪个环境执行；用这一套装饰器来修饰一些函数的实现，然后将这些实现在每一个环境中都引入一次；在装饰器中判断当前的环境，如果该函数恰好在当前环境执行，就保留原本的函数体实现；否则，将函数体实现替换为对对应远程函数的调用。</p> <p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8l50fj32sj317w0go413.jpg" alt=""></p> <p>这样一来，我们就可以让接口函数定义一次、处处使用。下面一节中，让我们看一下具体的实现代码；同时这样做也带来了一些问题，我们将会在本文末尾展开讨论。</p> <h2 id="实现"><a href="#实现" class="header-anchor">#</a> 实现</h2> <p>注：代码仅作为实现思路演示，有适当删改。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> ipcMain<span class="token punctuation">,</span> ipcRenderer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'electron'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> localCallbackSeq <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 将主进程函数暴露给渲染进程
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">exposeMainFunctionToRenderer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> asyncFn</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  ipcMain<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'call'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event<span class="token punctuation">,</span> seq<span class="token punctuation">,</span> method<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>method <span class="token operator">===</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token function">asyncFn</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">result</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          event<span class="token punctuation">.</span><span class="token function">reply</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> seq<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> <span class="token punctuation">{</span> message<span class="token punctuation">,</span> code <span class="token punctuation">}</span> <span class="token operator">=</span> error<span class="token punctuation">;</span>
+          event<span class="token punctuation">.</span><span class="token function">reply</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> seq<span class="token punctuation">,</span> <span class="token punctuation">{</span> message<span class="token punctuation">,</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 在渲染进程调用主进程暴露的函数
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">callMainFunctionFromRenderer</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> localSeq <span class="token operator">=</span> <span class="token operator">++</span>localCallbackSeq<span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token function-variable function">invokeResultHandler</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">event<span class="token punctuation">,</span> seq<span class="token punctuation">,</span> error<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>seq <span class="token operator">===</span> localSeq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ipcRenderer<span class="token punctuation">.</span><span class="token function">removeListener</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> invokeResultHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> <span class="token punctuation">{</span> code<span class="token punctuation">,</span> message <span class="token punctuation">}</span> <span class="token operator">=</span> error<span class="token punctuation">;</span>
+          error <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          error<span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+          <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token function">resolve</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    ipcRenderer<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> invokeResultHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ipcRenderer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'call'</span><span class="token punctuation">,</span> localSeq<span class="token punctuation">,</span> name<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 将渲染进程函数暴露给主进程
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">exposeRendererFunctionToMain</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> asyncFn</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  ipcRenderer<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'call'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event<span class="token punctuation">,</span> seq<span class="token punctuation">,</span> method<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>method <span class="token operator">===</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token function">asyncFn</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">result</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          ipcRenderer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> seq<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> <span class="token punctuation">{</span> message<span class="token punctuation">,</span> code <span class="token punctuation">}</span> <span class="token operator">=</span> error<span class="token punctuation">;</span>
+          ipcRenderer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> seq<span class="token punctuation">,</span> <span class="token punctuation">{</span> message<span class="token punctuation">,</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 在主进程调用渲染进程暴露的函数
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">callRendererFunctionFromMain</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> localSeq <span class="token operator">=</span> <span class="token operator">++</span>localCallbackSeq<span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token function-variable function">invokeResultHandler</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">seq<span class="token punctuation">,</span> error<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>seq <span class="token operator">===</span> localSeq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ipcMain<span class="token punctuation">.</span><span class="token function">removeListener</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> invokeResultHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> <span class="token punctuation">{</span> code<span class="token punctuation">,</span> message <span class="token punctuation">}</span> <span class="token operator">=</span> error<span class="token punctuation">;</span>
+          error <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          error<span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+          <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token function">resolve</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    ipcMain<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'callback'</span><span class="token punctuation">,</span> invokeResultHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mainWindow<span class="token punctuation">.</span>webContents<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'call'</span><span class="token punctuation">,</span> localSeq<span class="token punctuation">,</span> name<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 将主进程的函数暴露给 Native 端
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">exposeMainFunctionToNative</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> asyncFn</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 根据 Native 端的通信协议，进行类似的监听</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 在主进程调用 Native 端提供的函数
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">callNativeFunctionFromMain</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 根据 Native 端的通信协议，进行类似的调用</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">overrideFn</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> name<span class="token punctuation">,</span> descriptor<span class="token punctuation">,</span> value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>descriptor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    descriptor<span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    target<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 装饰器，用于定义 Native 端提供的服务函数，被装饰的函数不需要实现。
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">nativeService</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> name<span class="token punctuation">,</span> descriptor</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'browser'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 主进程</span>
+    <span class="token keyword">const</span> serviceFunction <span class="token operator">=</span> <span class="token function">callNativeFunctionFromMain</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">exposeMainFunctionToRenderer</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> serviceFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">overrideFn</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> name<span class="token punctuation">,</span> descriptor<span class="token punctuation">,</span> serviceFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 渲染进程</span>
+    <span class="token function">overrideFn</span><span class="token punctuation">(</span>
+      target<span class="token punctuation">,</span>
+      name<span class="token punctuation">,</span>
+      descriptor<span class="token punctuation">,</span>
+      <span class="token function">callMainFunctionFromRenderer</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 装饰器，用于定义主进程提供的服务函数。
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">electronService</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> name<span class="token punctuation">,</span> descriptor</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> serviceFunction <span class="token operator">=</span> descriptor <span class="token operator">?</span> descriptor<span class="token punctuation">.</span>value <span class="token punctuation">:</span> target<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'browser'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 主进程</span>
+    <span class="token function">exposeMainFunctionToRenderer</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> serviceFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">exposeMainFunctionToNative</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> serviceFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 渲染进程</span>
+    <span class="token function">overrideFn</span><span class="token punctuation">(</span>
+      target<span class="token punctuation">,</span>
+      name<span class="token punctuation">,</span>
+      descriptor<span class="token punctuation">,</span>
+      <span class="token function">callMainFunctionFromRenderer</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 装饰器，用于定义渲染进程提供的服务函数。
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">pageService</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> name<span class="token punctuation">,</span> descriptor</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> serviceFunction <span class="token operator">=</span> descriptor <span class="token operator">?</span> descriptor<span class="token punctuation">.</span>value <span class="token punctuation">:</span> target<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'browser'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 主进程</span>
+    <span class="token keyword">let</span> localFunction <span class="token operator">=</span> <span class="token function">callRendererFunctionFromMain</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">exposeMainFunctionToNative</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> localFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">overrideFn</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> name<span class="token punctuation">,</span> descriptor<span class="token punctuation">,</span> localFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 渲染进程</span>
+    <span class="token function">exposeRendererFunctionToMain</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> serviceFunction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token punctuation">{</span> nativeService<span class="token punctuation">,</span> electronService<span class="token punctuation">,</span> pageService <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>在实现了上述这些装饰器之后，我们就可以利用这些装饰器来声明一个 JSBridge。这个 JSBridge 模块只需要被各个不同进程引入，就可以抹平进程间的差异，让对应的函数只在对应的进程内执行，跨进程则自动封装为异步的远程调用。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> shell <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'electron'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  nativeService<span class="token punctuation">,</span>
+  electronService<span class="token punctuation">,</span>
+  pageService
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/path/to/decorators'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">JSBridge</span> <span class="token punctuation">{</span>
+  @nativeService
+  <span class="token keyword">async</span> <span class="token function">openPhotoViewer</span><span class="token punctuation">(</span><span class="token parameter">params</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  @electronService
+  <span class="token keyword">async</span> <span class="token function">openFile</span><span class="token punctuation">(</span><span class="token parameter">filePath</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> shell<span class="token punctuation">.</span><span class="token function">openItem</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">JSBridge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="讨论与思考"><a href="#讨论与思考" class="header-anchor">#</a> 讨论与思考</h2> <p>在上面的代码中，我们首先分别实现了在几种不同情况下远程函数的暴露和调用过程，然后分别定义了用于声明 Native 端、主进程、渲染进程所提供的服务函数的装饰器，根据调用端和被调用端的环境差异，执行必要的转发。在这样的设计和实现思路中，你是否发现了以下一些可能存在的问题？</p> <ol><li>每个函数的暴露都会执行一次 <code>on()</code> 监听，同一个事件被监听 11 次以上，会触发 Node.js 的监听器内存泄漏告警，即使监听器的数量仍然是有限的，并不构成内存泄漏，但最好可以将监听统一到一处；</li> <li>装饰器的执行时机是在运行时的模块加载过程中，并非在编译期就执行。因此让所有进程都引入 JSBridge 定义文件，可能导致依赖被同时带到两个进程里。</li></ol> <p>对于第二个问题，折中的方法是在主进程利用动态的 <code>require()</code>。主进程 import 到的依赖主要是外部的原生模块，并不会被 Webpack 打包，且在运行时会被转换成顶层的 <code>require()</code>，我们尽可能将这些主进程用到的 import 改为写在函数体内部的 <code>require()</code>，即可避免被渲染进程误加载。</p> <p>更深层次地讲，这个问题最终极的解决办法仍然需要将声明和实现分离，用一个文件去写声明，用另一个文件写实现，或者允许业务逻辑中给函数动态挂载实现。</p></div></div></div> <div class="post-comment-wrapper"><!----></div></div></div></div> <div class="extra-container"><!----></div></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4d7d7766.js" defer></script><script src="/assets/js/3.b7b63e28.js" defer></script><script src="/assets/js/14.2ea42e86.js" defer></script>
+  </body>
+</html>
