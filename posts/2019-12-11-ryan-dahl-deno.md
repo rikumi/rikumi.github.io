@@ -85,7 +85,7 @@ That's a very good question. I would like to show you guys a feature that I did 
 
 My point is that this is a fairly complicated code base with this, and it's actually a separate project. It's called demo website 2; this website is written in Node currently. The problem is that we have kind of a chicken and egg sort of problem. So, we're kind of trying to build this system, but we also need the server at the same time. So, making a dependency on Deno is too difficult for us right now. So, this part is written in Node. Actually, I would very much like to have this ported over to Deno and then put in as kind of a standard module so that people can run their own Deno land. But. It's going to take a while before we can actually run this code base.
 
-> Q7: When do you think is a good time with you to really put this into production use, or maybe it's just some internal project?
+> Q7: When do you think is time you to really put this into production use, maybe just for some internal projects?
 
 I think when we hit 1.0, that's it. That's basically going to mean like we'll make some stability guarantees about APIs. Currently we're changing APIs without any notice. So, once 1.0 comes out, which as I said, Yes.
 
