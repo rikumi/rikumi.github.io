@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npx vuepress dev .",
-    "build": "npx vuepress build .",
-    "pub": "sh -c .vuepress/deploy.sh"
+    "build": "npx vuepress build ."
   },
   "devDependencies": {
     "@vuepress/plugin-blog": "^1.5.1",
