@@ -1,0 +1,21 @@
+name: CI
+
+on: 
+  push:
+    branches:
+      - src
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Install depencendies
+      run: npm install
+    - name: Publish
+      run: npm run pub
