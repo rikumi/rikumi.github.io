@@ -147,8 +147,8 @@ declare global {
 import * as React from 'react';
 
 interface VisualViewportComponentProps {
-    className: string;
-    style: React.CSSProperties;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 interface VisualViewportComponentState {
@@ -178,7 +178,7 @@ export default class VisualViewportComponent extends React.Component<{}, VisualV
     }
 
     render() {
-        return <div className={'visual-viewport ' + this.props.className} style={this.getStyles()}>
+        return <div className={'visual-viewport ' + this.props.className || ''} style={this.getStyles()}>
             {this.props.children}
         </div>;
     }
@@ -237,7 +237,7 @@ export default class VisualViewportComponent extends React.Component<{}, VisualV
         const styles: React.CSSProperties = {
             position: 'fixed',
             transform: 'translateZ(0)',
-            ...this.props.style
+            ...this.props.style || {}
         };
 
         // 支持 VisualViewport API 情况下直接计算
