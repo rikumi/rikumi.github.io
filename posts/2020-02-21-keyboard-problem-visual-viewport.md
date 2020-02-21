@@ -178,7 +178,7 @@ export default class VisualViewportComponent extends React.Component<{}, VisualV
     }
 
     render() {
-        return <div className={'visual-viewport ' + this.props.className || ''} style={this.getStyles()}>
+        return <div className={'visual-viewport ' + (this.props.className || '')} style={this.getStyles()}>
             {this.props.children}
         </div>;
     }
