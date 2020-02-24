@@ -4,8 +4,8 @@ module.exports = {
       lang: 'zh' // For disqus compatibility
     }
   },
-  title: '[ RKM ]',
-  description: 'アクアテラリウム',
+  title: '/rkm/',
+  description: 'Can you hear me?',
   head: [['link', { rel: 'icon', href: '/favicon.png', type: 'image/x-icon' }]],
   theme: 'journal',
   themeConfig: {
@@ -14,6 +14,10 @@ module.exports = {
       {
         text: '关于',
         link: '/about/'
+      },
+      {
+        text: 'GitHub',
+        link: 'https://github.com/rikumi'
       },
       {
         text: '朋友们',

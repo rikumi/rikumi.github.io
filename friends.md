@@ -17,7 +17,7 @@ zjyl1994，专职 Golang 程序员 & 业余游戏制作人。
 
 ---
 
-## [🕊️ QPomelo 咕咕咕](https://discuss.qpomelo.app/)
+## [🕊️ QPomelo 咕咕咕](https://www.qpomelo.app/)
 
 不愧是我，App 还没开发完，开发者账号先到期了
 

@@ -10,6 +10,6 @@
     "@vuepress/plugin-blog": "^1.5.1",
     "@vuepress/theme-blog": "^1.3.2",
     "vuepress": "^1.2.0",
-    "vuepress-theme-journal": "^1.0.4"
+    "vuepress-theme-journal": "^1.0.9"
   }
 }

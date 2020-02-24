@@ -3,13 +3,11 @@ title: 关于
 permalink: about
 ---
 
-> **声明**：rkm 遵循按虚拟砖墙结构划分身份的原则，不向任何单侧不受信访问者透露另一侧的信息。考虑到本站访问者的多元性，[ RKM ] 站内并不透露任何一侧的详细个人信息，只保留两侧均可接受的内容。
-
-<iframe width="1000" height="400" src="https://www.youtube.com/embed/tYcQ6BTvVQw?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%; margin-bottom: 15px"></iframe>
+<iframe width="1000" height="400" src="https://www.youtube.com/embed/pWWP1MWI52Y?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%; margin-bottom: 15px"></iframe>
 
 ## 身份特征
 
-**腾讯普通员工**，前端开发者。rkm 任何言论均为个人观点，请勿与雇主相关联。
+**鹅厂普通员工**，前端开发者。rkm 任何言论均为个人观点，请勿与雇主相关联。
 
 **东南大学本科毕业生**，东南大学小猴偷米工作室前站长。有 Android/iOS/NodeJS/小程序独立开发经验。
 
@@ -34,8 +32,6 @@ permalink: about
 **善于推翻问题本身**，而不急着解决问题，这是曾经作为既能做需求、又能提需求、又能因为做不了而自己改需求的准独立开发者的一大收获。高度重视开发体验，能从简的地方尽可能不写复杂，例如能使用 Parcel 绝不用 Webpack。容易陷入追求代码本身优雅和美的泥潭中。
 
 ## 兴趣爱好
-
-<iframe width="1000" height="400" src="https://www.youtube.com/embed/JaBmR8tC1oU?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%; margin-bottom: 15px"></iframe>
 
 **音乐兴趣**：注重编曲，对编曲清脆华丽、有未来感的快歌情有独钟，例如日语的「アシンメトリー」「\[A]ddiction」「mede:mede」，中文的《恋爱语音导航》，英文的 _Tokyo_ (Owl City)、_Infinite Love_ (Young London) 等等。另外也听一些完整专辑例如「(un)sentimental spica」，一些抒情慢歌例如「恋文」「ONE's hope」，动画原曲例如「アクアテラリウム」「春擬き」。不太喜欢日剧等三次元歌曲，尤其不喜欢一些大众脸、抖音风的快餐英文歌。完整歌单[点这里](https://y.qq.com/n/yqq/playlist/1365975375.html)。
 
