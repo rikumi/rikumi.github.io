@@ -2,6 +2,7 @@
 title: 回到 Apple 阵营：我们存在的意义
 date: 2020-02-25
 featured_image: https://user-images.githubusercontent.com/5051300/74851324-0c8c7780-5376-11ea-8fa1-ff90aa2554bf.JPG
+summary: 我存在的意义并不在于我产生过的数据，而在于我「现在」正在进行的思考。
 ---
 
 > **本期 BGM「花蕾（からい）」来自原作走心、动画要命的 Key 社作品「Rewrite」。**
