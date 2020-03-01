@@ -1,6 +1,8 @@
 ---
 title: 'Ryan Dahl: Deno, a new way to JavaScript'
 date: 2019-12-11
+featured_image: https://user-images.githubusercontent.com/5051300/75620937-54f33300-5bc9-11ea-9ab2-391f327f73a1.jpg
+summary: 12 月 11 日，Node.js 原作者 Ryan Dahl 来到腾讯滨海大厦，亲自介绍他的新作品 Deno，这是一个全新开发的 JavaScript 和 TypeScript 运行时。
 ---
 
 # 提要
