@@ -6,7 +6,16 @@ module.exports = {
   },
   title: '/rkm/',
   description: 'Can you hear me?',
-  head: [['link', { rel: 'icon', href: '/favicon.png', type: 'image/x-icon' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.png', type: 'image/x-icon' }],
+    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=UA-148373443-1' }],
+    ['script', {}, `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-148373443-1');
+    `]
+  ],
   theme: 'journal',
   themeConfig: {
     summaryLength: 120,
