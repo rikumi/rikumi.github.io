@@ -7,6 +7,27 @@ permalink: works
 
 ---
 
+## [Fresh Shell](https://github.com/rikumi/fresh-shell/) - 用 JavaScript REPL 打造的命令外壳
+
+![](https://img.shields.io/npm/v/fresh-shell) ![](https://img.shields.io/github/last-commit/rikumi/fresh-shell)
+
+ƒ 是一个使用 JavaScript 创造命令外壳（Shell）的尝试。与其它一些成熟的 Shell（例如 Zsh、Fish、Xonsh）不同，它利用自动补全的模板语法，把如何解析 Bash 命令的难题仍然交给 Bash，用 JavaScript 作为帮助处理输出的帮手。这有效避免了 Bash 语法与 JavaScript 语法的冲突，像这样：
+
+```javascript
+ƒ`git config --global user.name`
+rikumi
+
+ƒ`git config --global user.name`.trim().split('').join('|')
+> 'r|i|k|u|m|i'
+
+// 开头的 'ƒ`' 和结尾的 '`' 会自动添加
+ƒ`|
+```
+
+[阅读文章 >](/2020/03/06/fresh-shell-3/)
+
+---
+
 ## [kbone-svg](https://github.com/rikumi/kbone-svg/) - 让小程序 kbone 环境支持 SVG 渲染
 
 ![](https://img.shields.io/npm/v/kbone-svg) ![](https://img.shields.io/github/last-commit/rikumi/kbone-svg)
@@ -56,29 +77,6 @@ permalink: works
 这是一款基于 Electron 并被移植到纯 Web 版本的 Markdown 幻灯片制作工具，它在 Marp 的基础上支持了全屏播放，并增加了为幻灯片快速设置 CSS 样式的特性，同时支持 Mermaid 图，支持单页幻灯片内垂直滚动；Web 版本除架构上不分离外，与 Electron 版本没有功能区别，可以日常使用。直接点击[链接](https://marp-plus.github.io)即可在线使用。
 
 Marp+ 在开发一段时间后，进行了一次样式更新，借鉴了参与开发的腾讯文档界面风格。后来，腾讯文档新增了幻灯片支持，如果你是一个不希望安装 Office 套件的「现代人」，且在墙内网络条件不好，或者和我一样厌倦了 Google 和微软的复杂体验，却需要编辑文档/表格/幻灯片的话，[腾讯文档](https://docs.qq.com/desktop/)是一个不错的选择。
-
----
-
-## [ƒresh shell](https://github.com/rikumi/fresh-shell) - 用 JavaScript REPL 打造的命令外壳
-
-![](https://img.shields.io/npm/v/fresh-shell) ![](https://img.shields.io/github/last-commit/rikumi/fresh-shell)
-
-ƒ 是一个使用 JavaScript 创造命令外壳（Shell）的尝试。与其它一些成熟的 Shell（例如 Zsh、Fish、Xonsh）不同，它利用自动补全的模板语法，把如何解析 Bash 命令的难题仍然交给 Bash，用 JavaScript 作为帮助处理输出的帮手。这有效避免了 Bash 语法与 JavaScript 语法的冲突，像这样：
-
-```javascript
-ƒ`git config --global user.name`
-rikumi
-
-ƒ`git config --global user.name`.trim().split('').join('|')
-r|i|k|u|m|i
-
-// 开头的 'ƒ`' 和结尾的 '`' 会自动添加
-ƒ`_
-```
-
-当然，ƒ 这样的尝试也有很多问题，例如我们难以解析带有 `cd` 的命令所导致的工作目录变化，而是只能通过静态分析的方式将纯 `cd` 语句转化为 JavaScript 操作；对于交互式执行和隐式执行的区分难以做到百分百准确，导致有的命令会出现穿帮等等。
-
-在放弃这个项目之后，rkm 转投 [xonsh](https://xon.sh) 的怀抱。作为一个基于 Python 的自定义命令外壳，xonsh 没能避开语法冲突的问题，在两种语法环境的探测和转换上花了很多工夫；但作为给学不会 Bash 语法的开发者日常使用的 Shell，xonsh 完全可以胜任。
 
 ---
 
