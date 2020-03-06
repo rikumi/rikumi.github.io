@@ -5,7 +5,7 @@ featured_image: https://user-images.githubusercontent.com/5051300/76057979-0e7d4
 summary: Fresh 是一个构造极简的 JavaScript Unix Shell。它能在不破坏语法的前提下，让 JavaScript 语法和任意一种标准 Shell 的语法融合，并同时满足你基于 Shell 语法的日常使用和基于 JavaScript 的 Hacking。
 ---
 
-项目主页：https://github.com/rikumi/fresh-shell
+项目主页：[https://github.com/rikumi/fresh-shell](https://github.com/rikumi/fresh-shell)
 
 ## 背景
 
