@@ -11,18 +11,7 @@ permalink: works
 
 ![](https://img.shields.io/npm/v/fresh-shell) ![](https://img.shields.io/github/last-commit/rikumi/fresh-shell)
 
-ƒ 是一个使用 JavaScript 创造命令外壳（Shell）的尝试。与其它一些成熟的 Shell（例如 Zsh、Fish、Xonsh）不同，它利用自动补全的模板语法，把如何解析 Bash 命令的难题仍然交给 Bash，用 JavaScript 作为帮助处理输出的帮手。这有效避免了 Bash 语法与 JavaScript 语法的冲突，像这样：
-
-```javascript
-ƒ`git config --global user.name`
-rikumi
-
-ƒ`git config --global user.name`.trim().split('').join('|')
-> 'r|i|k|u|m|i'
-
-// 开头的 'ƒ`' 和结尾的 '`' 会自动添加
-ƒ`|
-```
+Fresh 是一个构造极简的 JavaScript Unix Shell。它能在不破坏语法的前提下，让 JavaScript 语法和任意一种标准 Shell 的语法融合，并同时满足你基于 Shell 语法的日常使用和基于 JavaScript 的 Hacking。
 
 [阅读文章 >](/2020/03/06/fresh-shell-3/)
 
