@@ -19,6 +19,7 @@ module.exports = {
     ['script', {}, `window.addEventListener('DOMContentLoaded', () => IMouse.default.init({
       defaultBackgroundColor: 'rgba(1, 80, 111, .15)',
       activeBackgroundColor: 'rgba(1, 80, 111, .25)',
+      transitionDuration: 100,
     }))`]
   ],
   theme: 'journal',
