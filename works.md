@@ -7,6 +7,20 @@ permalink: works
 
 ---
 
+## [IMouse](https://github.com/rikumi/imouse/) - iPad Pro 的鼠标指针，用了又用
+
+![](https://img.shields.io/npm/v/imouse) ![](https://img.shields.io/github/last-commit/rikumi/imouse)
+
+PC（含 Mac）GUI 的世界中，几十年没有改变的设计有两个：一个是窗口，另一个是鼠标指针。传统的鼠标指针设计固然高效，但它经常引起我们的无端思考：为什么是一个箭头？为什么链接的指针是一个手？为什么箭头往左歪？
+
+新 iPad Pro 的触摸板体验（参见[这篇文章](https://sspai.com/post/59569)）让我们眼前一亮，其中就包含了对鼠标指针的重新思考。也许这不是比传统鼠标指针更好的设计，但至少是推翻它的一次大胆尝试。
+
+IMouse 是一个 Web 前端小插件，只需动动手指，就能在你的页面上引入这样的鼠标效果。
+
+[阅读文章 >](/2020/03/21/imouse/)
+
+---
+
 ## [Fresh Shell](https://github.com/rikumi/fresh-shell/) - 用 JavaScript REPL 打造的命令外壳
 
 ![](https://img.shields.io/npm/v/fresh-shell) ![](https://img.shields.io/github/last-commit/rikumi/fresh-shell)
