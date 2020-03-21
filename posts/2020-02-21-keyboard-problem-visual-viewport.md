@@ -2,6 +2,7 @@
 title: iOS 键盘难题与可见视口（VisualViewport）API
 date: 2020-02-21
 featured_image: https://images.unsplash.com/photo-1526045612212-70caf35c14df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60
+summary: 2015 年三月，iOS 发布了 8.2 版本。这在当时看来也许只是这个现代的操作系统的一次小更新，但在 Web 开发者眼里，有些微妙的问题产生了。
 ---
 
 > 本文已于 2020/2/25 发表在 [AlloyTeam 团队博客](http://www.alloyteam.com/2020/02/14265/?newui=true)，2020/3/1 发表在 [SegmentFault](https://segmentfault.com/a/1190000021874101)，2020/3/21 转载至 [AlloyTeam 公众号](https://mp.weixin.qq.com/s/ZtXB23YV0UkK9roIv8qsJA) 及 [前端早读课公众号](https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw)。感谢团队和上述平台的支持。
