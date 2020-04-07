@@ -55,7 +55,7 @@ module.exports = {
       },
       {
         text: 'RSS',
-        link: '/rss.xml'
+        link: 'https://blog.rikumi.dev/rss.xml'
       }
     ],
     modifyBlogPluginOptions(opts) {
