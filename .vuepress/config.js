@@ -7,6 +7,7 @@ module.exports = {
   title: '/rkm/',
   description: 'Can you hear me?',
   head: [
+    ['link', { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml', title: '/rkm/' }],
     ['link', { rel: 'icon', href: '/favicon.png', type: 'image/x-icon' }],
     ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=UA-148373443-1' }],
     ['script', {}, `
@@ -21,6 +22,17 @@ module.exports = {
       activeBackgroundColor: 'rgba(1, 80, 111, .25)',
     }))`]
   ],
+  plugins: {
+    'rss-support': {
+      site_url: 'https://blog.rikumi.dev',
+      copyright: `${new Date().getFullYear()} Rikumi`,
+      filter: (page) => {
+        page.lastUpdated = +page.frontmatter.date + 8 * 3600000;
+        return /posts\//.test(page.relativePath)
+      },
+      count: 50,
+    }
+  },
   theme: 'journal',
   themeConfig: {
     summaryLength: 120,
@@ -40,6 +52,10 @@ module.exports = {
       {
         text: '作品',
         link: '/works/'
+      },
+      {
+        text: 'RSS',
+        link: '/rss.xml'
       }
     ],
     modifyBlogPluginOptions(opts) {
