@@ -27,8 +27,9 @@ module.exports = {
       site_url: 'https://blog.rikumi.dev',
       copyright: `${new Date().getFullYear()} Rikumi`,
       filter: (page) => {
+        page._content = (page._content || '').replace(/^---[\s\S]+\n---\s*/, '');
         page.lastUpdated = +page.frontmatter.date + 8 * 3600000;
-        return /posts\//.test(page.relativePath)
+        return /posts\//.test(page.relativePath);
       },
       count: 50,
     }
