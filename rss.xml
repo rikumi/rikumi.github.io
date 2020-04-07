@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[/rkm/]]></title><description><![CDATA[Can you hear me?]]></description><link>https://blog.rikumi.dev</link><generator>RSS for Node</generator><lastBuildDate>Tue, 07 Apr 2020 16:06:08 GMT</lastBuildDate><atom:link href="https://blog.rikumi.dev/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2020 Rikumi]]></copyright><language><![CDATA[zh-CN]]></language><item><title><![CDATA[IMouse：iPad Pro 的鼠标指针，用了又用]]></title><description><![CDATA[<hr>
+<h2>title: IMouse：iPad Pro 的鼠标指针，用了又用
+date: 2020-03-21
+featured_image: https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80
+summary: IMouse 是一个 Web 前端小插件，只需动动手指，就能在你的页面上引入新 iPad Pro 的鼠标指针效果。</h2>
+<p>项目主页：<a href="https://github.com/rikumi/imouse">https://github.com/rikumi/imouse</a></p>
+<p><img src="https://img.shields.io/npm/v/imouse" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/imouse" alt=""></p>
+<h2>介绍</h2>
+<p>PC（含 Mac）GUI 的世界中，几十年没有改变的设计有两个：一个是窗口，另一个是鼠标指针。传统的鼠标指针设计固然高效，但它经常引起我们的无端思考：为什么是一个箭头？为什么链接的指针是一个手？为什么箭头往左歪？</p>
+<p>新 iPad Pro 的触摸板体验（参见<a href="https://sspai.com/post/59569">这篇文章</a>）让我们眼前一亮，其中就包含了对鼠标指针的重新思考。也许这不是比传统鼠标指针更好的设计，但至少是推翻它的一次大胆尝试。</p>
+<p>IMouse 是一个 Web 前端小插件，只需动动手指，就能在你的页面上引入这样的鼠标效果。</p>
+<h2>已实现功能</h2>
+<ul>
+<li>普通圆形鼠标指针（带毛玻璃效果）；</li>
+<li>选择文字时变为垂直光标（不支持悬浮在文字上方时变为垂直光标）；</li>
+<li>悬浮在链接上方时框住链接，支持自定义代表链接的 selector；</li>
+<li>按下时缩小变色效果；</li>
+<li>指针颜色、大小、动画时长等基本参数定制。</li>
+</ul>
+<h2>已知问题</h2>
+<ul>
+<li>不支持自动切换深色/浅色光标；</li>
+<li>会卡在 <code>iframe</code> 外侧（跨域 <code>iframe</code> 由于浏览器限制无法支持；非跨域 <code>iframe</code> 需要通信，暂不实现）；</li>
+<li>在较大的链接元素上 hover 体验可能不佳；</li>
+<li>在 macOS 端，弹出横幅通知会导致鼠标指针恢复正常箭头显示，这是 macOS 的 Bug。</li>
+</ul>
+<h2>引入方式</h2>
+<ul>
+<li>NPM 引入：</li>
+</ul>
+<pre><code class="language-js">import IMouse from 'imouse';
+
+IMouse.init(options);
+</code></pre>
+<ul>
+<li>Script 引入：</li>
+</ul>
+<p>首先下载 <a href="https://raw.githubusercontent.com/rikumi/imouse/master/dist/index.js">imouse.js</a> 并下发。</p>
+<pre><code class="language-html">&lt;script src=&quot;imouse.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    window.addEventListener('DOMContentLoaded', () =&gt; IMouse.default.init(options));
+&lt;/script&gt;
+</code></pre>
+<h2>文档</h2>
+<h3><code>IMouse.init(options: IMouseProps): IMouse</code></h3>
+<p>初始化 IMouse 并指定参数。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>defaultBackgroundColor</td>
+<td>string</td>
+<td><code>'rgba(30, 111, 255, .1)'</code></td>
+<td>非 hover 默认状态下的光标背景颜色，CSS 格式</td>
+</tr>
+<tr>
+<td>activeBackgroundColor</td>
+<td>string</td>
+<td><code>'rgba(30, 111, 255, .2)'</code></td>
+<td>非 hover 按下状态下的光标背景颜色，CSS 格式</td>
+</tr>
+<tr>
+<td>defaultSize</td>
+<td>number</td>
+<td><code>20</code></td>
+<td>非 hover 默认状态下的光标直径</td>
+</tr>
+<tr>
+<td>activeSize</td>
+<td>number</td>
+<td><code>15</code></td>
+<td>非 hover 按下状态下的光标直径</td>
+</tr>
+<tr>
+<td>hoverPadding</td>
+<td>number</td>
+<td><code>8</code></td>
+<td>hover 状态下的光标 padding 大小</td>
+</tr>
+<tr>
+<td>activePadding</td>
+<td>number</td>
+<td><code>4</code></td>
+<td>hover 按下状态下的光标 padding 大小</td>
+</tr>
+<tr>
+<td>hoverRadius</td>
+<td>number</td>
+<td><code>8</code></td>
+<td>hover 状态下的光标圆角半径</td>
+</tr>
+<tr>
+<td>activeRadius</td>
+<td>number</td>
+<td><code>4</code></td>
+<td>hover 按下状态下的光标圆角半径</td>
+</tr>
+<tr>
+<td>selectionWidth</td>
+<td>number</td>
+<td><code>3</code></td>
+<td>文字选择状态下的光标宽度</td>
+</tr>
+<tr>
+<td>selectionHeight</td>
+<td>number</td>
+<td><code>40</code></td>
+<td>文字选择状态下的光标高度</td>
+</tr>
+<tr>
+<td>selectionRadius</td>
+<td>number</td>
+<td><code>2</code></td>
+<td>文字选择状态下的光标圆角半径</td>
+</tr>
+<tr>
+<td>hoverSelector</td>
+<td>string</td>
+<td><code>'a, button,</code>&lt;br/&gt;<code>input[type=&quot;button&quot;],</code>&lt;br/&gt;<code>input[type=&quot;checkbox&quot;],</code>&lt;br/&gt;<code>input[type=&quot;radio&quot;],</code>&lt;br/&gt;<code>input[type=&quot;file&quot;],</code>&lt;br/&gt;<code>input[type=&quot;submit&quot;]'</code></td>
+<td>允许 hover 的元素，CSS 选择器格式</td>
+</tr>
+<tr>
+<td>normalTransitionDuration</td>
+<td>number</td>
+<td><code>200</code></td>
+<td>非 hover 状态下的动效时长，单位 ms</td>
+</tr>
+<tr>
+<td>hoverTransitionDuration</td>
+<td>number</td>
+<td><code>50</code></td>
+<td>hover 状态下的动效时长，单位 ms；值越大，甩动光标时发生的抖动越强烈</td>
+</tr>
+<tr>
+<td>blurRadius</td>
+<td>number</td>
+<td><code>10</code></td>
+<td>非 hover 状态下的光标毛玻璃半径</td>
+</tr>
+<tr>
+<td>glowRadius</td>
+<td>number</td>
+<td><code>200</code></td>
+<td>hover 状态下的光标发光点半径</td>
+</tr>
+<tr>
+<td>style</td>
+<td>React.CSSProperties</td>
+<td><code>{}</code></td>
+<td>光标的附加样式</td>
+</tr>
+<tr>
+<td>zIndex</td>
+<td>number</td>
+<td><code>10000</code></td>
+<td>Z 轴层级</td>
+</tr>
+</tbody>
+</table>
+<h3><code>IMouse#destroy()</code></h3>
+<p>销毁 IMouse 实例并恢复原始鼠标指针。</p>
+]]></description><link>https://blog.rikumi.dev/2020/03/21/imouse/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/03/21/imouse/</guid><pubDate>Sat, 21 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[Fresh Shell 3：基于 Node.js 的 JavaScript「壳中壳」]]></title><description><![CDATA[<hr>
+<h2>title: Fresh Shell 3：基于 Node.js 的 JavaScript「壳中壳」
+date: 2020-03-06
+featured_image: https://user-images.githubusercontent.com/5051300/76057979-0e7d4a00-5fb6-11ea-9db8-188b083578e4.png
+summary: Fresh 是一个构造极简的 JavaScript Unix Shell。它能在不破坏语法的前提下，让 JavaScript 语法和任意一种标准 Shell 的语法融合，并同时满足你基于 Shell 语法的日常使用和基于 JavaScript 的 Hacking。</h2>
+<p>项目主页：<a href="https://github.com/rikumi/fresh-shell">https://github.com/rikumi/fresh-shell</a></p>
+<p><img src="https://img.shields.io/npm/v/fresh-shell" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/fresh-shell" alt=""></p>
+<h2>背景</h2>
+<p>Shell 是 Unix 世界中一个不可或缺的工具，但它的语法也许不那么优雅、难以学习，阻止了你很多突发奇想，让很多需要高生产力的临时需求不得不变成写一个冗长的 Node 脚本再去调试运行。</p>
+<p>例如，你如何批量重命名一大堆文件？如何把一个文件夹里所有的 png 文件都调用一次 <code>tinypng</code> CLI，并用得到的压缩图片文件替换原文件？对于没有系统学习过 Shell 语法的开发者，这些任务都是艰巨的，写一个这样的脚本往往要用到 Node.js，同时一些细小的任务还是需要用到 Shell。</p>
+<p>人们曾经想过改进 Shell 的语法，但事实证明，这是一个大工程，而且是一个社会工程。我们常用的 Zsh 对 Bash 兼容性很好，但它语法也就跟 Bash 一样复杂；假如我们下决心用上稍微优雅一些的 Fish，如何把别人留在开发文档里的 Bash 复杂命令改成 Fish？如何去说服你的同事跟你一起用 Fish 来避免分享高级用法的过程中出现语法冲突？</p>
+<p>有开发者想到了将两种语法融合，<a href="https://xon.sh/">Xonsh</a> 就是这样一个产物。但经过长期使用，我们会发现 Xonsh 并没有实现全部的 Shell 语法，很多语法都是缺失的，这些问题的根源在于 Xonsh 试图把两个语法糅合在一起，而不是区分它们的上下文。</p>
+<p>Fresh 是一个构造极简的 JavaScript Unix Shell。它能在<strong>不破坏语法</strong>的前提下，让 JavaScript 语法和<strong>任意一种标准 Shell</strong> 的语法融合，并同时满足你基于 Shell 语法的日常使用和基于 JavaScript 的 Hacking。</p>
+<p>为什么不破坏语法？因为 Fresh 区分上下文，使用自动补全的 Tag Function 来处理 Shell 语法。</p>
+<h2>安装和使用</h2>
+<p>安装 Fresh 之前，请确保你的 Node.JS 已安装并位于 <code>/usr/local/bin/node</code> 下。</p>
+<pre><code class="language-sh">rikumi $ npm i -g fresh-shell
+rikumi $ fresh
+
+rikumi ƒ`|
+</code></pre>
+<p>安装后，你可以将 fresh 的入口程序（通常为 <code>/usr/local/bin/fresh</code>）设置为终端和 VS Code 的默认 Shell。</p>
+<p>Fresh 中必备的两个字符是 ƒ`，我们可以称之为「软提示符」（位于标准输入流而非输出流中、可以删除和修改的提示符）。软提示符的存在让我们可以直接键入 Shell 命令，而不需要多余的语法。</p>
+<p>输入任何你需要的 Shell 命令（如 <code>ls</code>），回车之后，Fresh 会自动补全末尾的反引号 `，因此会产生 Tag Function Call 语法：ƒ`<code>ls</code>`，其中函数 ƒ 的含义为<strong>同步执行 Shell</strong>，因此 <code>ls</code> 命令会被执行。这就是 Fresh 的基本工作原理。</p>
+<h2>如何输入 ƒ`</h2>
+<p>使用 option+F 可以输入 ƒ；`（反引号）是半角状态下 Tab 上方的按键。</p>
+<h2>交互执行和隐藏执行</h2>
+<p>ƒ 函数（<code>exec</code> 函数）有两种模式：交互执行和隐藏执行。</p>
+<p>当输入的命令行是单一的 ƒ 调用时，会进入交互执行状态，输入输出以标准输入输出的形式提供；当 ƒ 调用是输入的表达式中的一部分，会进入隐藏执行状态，标准输出和标准错误输出不会直接上屏，而是作为 ƒ 函数的返回值提供。</p>
+<p>ƒ 函数的返回值是一个特殊字符串，字符串的值为子程序的标准输出（经过 UTF-8 解码得到的内容）；该字符串上附加有 <code>status</code>、<code>stderr</code>、<code>error</code> 三个属性，分别表示状态码、标准错误输出（经过 UTF-8 解码得到的内容）和 JavaScript 错误对象。</p>
+<p>下图中分别展示了命令 <code>git status</code> 的交互执行模式，以及隐藏执行模式下的 <code>status</code>、<code>stderr</code>、<code>error</code> 属性。</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/76059992-302d0000-5fbb-11ea-8c11-99db4e89bcaa.png" alt="image"></p>
+<h2>内置指令</h2>
+<p>Fresh 本身并不是 Unix Shell，而是 Unix Shell 的一层封装，所有的 Shell 命令都是在子进程中执行的。这也就意味着 Fresh 执行的 Shell 无法改变 Fresh 本身的状态。而一部分状态是需要跨命令保持的，其中就包括<strong>工作目录（CWD）</strong>、<strong>环境变量</strong>以及<strong>别名</strong></p>
+<p>如果我们用 Shell 模式执行 <code>cd</code>/<code>export</code>/<code>alias</code> 语句，它们退出后不会对 Fresh 本身产生任何影响；因此，Fresh 实现了 <code>cd</code>/<code>export</code>/<code>alias</code> <strong>内置指令</strong>，让单一的 <code>cd</code>/<code>export</code>/<code>alias</code> 语句能够工作。</p>
+<p>注意，Fresh 只支持在单一语句中独立使用 <code>cd &lt;directory&gt;</code>、<code>export &lt;KEY&gt;=&lt;value&gt;</code>、<code>alias [&lt;command&gt;=&lt;replacement&gt;]</code> 的语法，并支持在其中进行简单的环境变量插值；复杂的用法将会以 Unix Shell 模式执行，导致它们不会对 Fresh 本身的状态产生影响。以下是一个对比简单 <code>cd</code>/<code>export</code> 语句和复杂 <code>cd</code>/<code>export</code> 语句的例子。</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/76062025-c3683480-5fbf-11ea-83c5-aa1d4e9e49e0.png" alt="image"></p>
+<p>可以看到，简单的 <code>cd</code>/<code>export</code>/<code>alias</code> 语句会被 Fresh 捕获，产生的效果会对后面的指令生效；复杂的 <code>cd</code>/<code>export</code>/<code>alias</code> 语句会采用 Shell 模式进行执行，因此不会对 Fresh 本身以及后面的指令产生影响。</p>
+<h2>Node.js 环境与自动 require</h2>
+<p>Fresh 的本质是一个 Node.js REPL（但并没有使用 Node.js REPL 库，而是用表现更稳定、可定制性更强的 Node.js Readline 库进行实现），其中只有 ƒ 函数是与 Shell 执行相关的；除 ƒ 函数之外，Fresh 也是一个完整的 Node.js 执行环境。</p>
+<p>相比标准 Node REPL，Fresh 面向终端场景，加入了自动 <code>require</code> 的能力，即在全局命名空间下，找不到的对象，会自动尝试 <code>require</code>。同时，在配置文件中也可以增加新的自动导入函数。</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/76062665-17274d80-5fc1-11ea-9925-bc6d2f8459c3.png" alt="image"></p>
+<h2>融合使用</h2>
+<p>借助上述特性，可以将 Shell 命令与 JavaScript 融合使用，Shell 中使用模板插值语法 <code>${}</code> 可以嵌入 JavaScript 表达式；JavaScript 中也可以使用 ƒ 函数嵌入 Shell 执行结果：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/76063500-cd3f6700-5fc2-11ea-9ab9-f35371766d24.png" alt="image"></p>
+<h2>配置文件</h2>
+<p>Fresh 支持使用配置文件进行自定义，实现嵌套 Shell 和配置继承、提示符美化（如实现简易的 Powerline 风格）、定制 JavaScript 环境、定制 Tab 自动完成、定制颜色高亮等。</p>
+<p>配置文件位于 <code>~/.freshrc.js</code>，会在 Fresh 启动时被执行。配置文件中可以对全局配置对象 <code>config</code> 进行修改。预设的 config 对象参见<a href="https://github.com/rikumi/fresh-shell/blob/master/src/core/config.js">这里</a>。</p>
+<h3>定制动词</h3>
+<p>修改 <code>config.verb</code>，可以将默认的动词 ƒ 修改成其他<strong>合法的 JavaScript 标识符</strong>。</p>
+<h3>嵌套 Shell 与执行前指令</h3>
+<p>Fresh 可以使用 Bash、Zsh、Fish、Xonsh 等任何支持 <code>-c</code> 参数的第三方 Shell 作为内嵌 Shell 工具，只需在配置文件中更改 <code>config.shell</code> 即可：</p>
+<pre><code class="language-js">config.shell = '/bin/zsh';
+</code></pre>
+<p>被嵌套的 Shell 默认以 <code>--login</code>（Login + Interactive）方式执行，在该模式下，Shell 将会加载更多的默认环境变量，但不会自动加载配置文件。</p>
+<p>如要修改被嵌套的 Shell 的附加执行参数（默认为 <code>['--login']</code>），可以在配置文件中操作 <code>config.shellArgs</code>。注意，<code>-c</code> 将会自动添加；</p>
+<p>如需加载 <code>.bashrc</code>/<code>.zshrc</code> 等配置文件（不推荐），可以在 <code>config.shellCommandPrefix</code> 中设置需要添加到每次 Shell 被执行字符串之前的指令，例如 <code>config.shellCommandPrefix = 'source ~/.bashrc;'</code>，注意不要忘了以分号结尾。</p>
+<h3>配置文件中执行 Shell 语句</h3>
+<p>在配置文件中，可以像在 Fresh 内一样使用 ƒ 函数，但固定处于隐藏执行模式，如果要查看输出，需要配合 <code>console.log</code> 等方式。</p>
+<p>请注意对 <code>config.shell</code> 的修改与执行 Shell 语句之间的先后顺序。</p>
+<h3>定制提示符（以 Powerline 风格为例）</h3>
+<p>为了方便自定义，配置对象中 <code>config.prompt</code> 函数被拆成三个函数：<code>config.prompt</code>、<code>config.git</code>、<code>config.cwd</code>（实际被 Fresh 调用的只有 <code>config.prompt</code> 函数），以便于分别改写提示符样式、Git 显示格式和 CWD 显示格式。</p>
+<p>这里以 Powerline 风格提示符为例，展示如何改写提示符样式。</p>
+<pre><code class="language-js">const chalk = require('chalk').default;
+
+config.prompt = (status = 0) =&gt; {
+    const bgColor = status ? chalk.bgRed : chalk.bgBlue;
+    const fgColor = status ? chalk.red : chalk.blue;
+    const bgBlack = chalk.bgBlack;
+    const fgBlack = chalk.black;
+    const fgWhite = chalk.white;
+    const git = config.git();
+    if (git) {
+        return bgColor(' ' + fgBlack(config.cwd()) + ' ') +
+            bgBlack(fgColor('') + fgWhite(config.git()) + ' ') +
+            fgBlack('') + ' ';
+    } else {
+        return bgColor(' ' + fgBlack(config.cwd()) + ' ') +
+            fgColor('') + ' ';
+    }
+}
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/76068492-35df1180-5fcc-11ea-9720-e9209b4f86f0.png" alt="image"></p>
+<h3>定制 Tab 自动完成</h3>
+<p>Fresh 默认配置中提供了路径自动完成和 Git 分支自动完成；你还可以修改 <code>config.complete</code> 函数来完善这一特性。自动完成函数的写法参见 <a href="https://nodejs.org/api/readline.html#readline_use_of_the_completer_function">Readline 文档</a>。</p>
+<h3>定制语法高亮</h3>
+<p>为了方便自定义，默认配置对象中将语法高亮分为四个函数：<code>config.colorizeToken</code>、<code>config.colorizeCode</code>、<code>config.colorizeCommand</code>、<code>config.colorizeOutput</code>，它们分别对应于对单个 JavaScript Token 的高亮、对一段代码的 Token 解析与高亮、对输入命令的高亮以及对 JavaScript 输出结果的高亮。实际被 Fresh 调用的只有 <code>config.colorizeCommand</code> 和 <code>config.colorizeOutput</code> 两个函数。</p>
+<h3>定制进程标题</h3>
+<p>改变 <code>config.makeTitle</code> 函数可以定制 Fresh 的进程标题，用于显示在 GUI 终端中。该函数接受零个或一个参数，接受零个参数时，需要返回 Fresh 处于空闲状态时的进程标题；接受一个参数时，该参数是要执行的命令行程序的 argv 列表，需要返回 Fresh 执行该子程序时的默认进程标题。</p>
+<h2>建议与贡献</h2>
+<p>欢迎对本项目提出 Issue 或 Pull Requests。需要注意的是，Fresh 作为一个外壳程序，对于功能上的要求会进行一定的取舍，在保持实现简单的前提下合理迭代。</p>
+<p>因为 Fresh 的最大意义是用 &lt; 500 行代码实现 JavaScript 与其他 Shell 的融合，而非做一个完美无缺的 Shell 本身。</p>
+]]></description><link>https://blog.rikumi.dev/2020/03/06/fresh-shell-3/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/03/06/fresh-shell-3/</guid><pubDate>Fri, 06 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[回到 Apple 阵营：我们存在的意义]]></title><description><![CDATA[<hr>
+<h2>title: 回到 Apple 阵营：我们存在的意义
+date: 2020-02-25
+featured_image: https://user-images.githubusercontent.com/5051300/74851324-0c8c7780-5376-11ea-8fa1-ff90aa2554bf.JPG
+summary: 我存在的意义并不在于我产生过的数据，而在于我「现在」正在进行的思考。</h2>
+<blockquote>
+<p><strong>本期 BGM「花蕾（からい）」来自原作走心、动画要命的 Key 社作品「Rewrite」。</strong></p>
+</blockquote>
+<p>&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=320 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=26131690&amp;height=66&amp;loop=1&quot;&gt;&lt;/iframe&gt;</p>
+<blockquote>
+<p>注：本篇作为《<a href="/2019/09/18/history-of-my-oneplus-6t-1">小记 OnePlus 6T 折腾史（上）</a>》的续篇。之后的折腾大同小异，从 Lineage OS 换到了非常好用的 Evolution X，又换回了氧，后来在试图回收未遂之后又回了氢，暂且作为一个不带出门的备用机吧。</p>
+</blockquote>
+<p>Android 生态有它独到的地方。用 OnePlus 6T 时，便捷的 Google 跨平台服务、比以前更灵敏的触摸和滚动，省心的一加游戏模式，通用的 USB-C，都让我们觉得今天的 Android 已经算得上是一个完美的平台。</p>
+<p><strong>但论工业设计和细节体验，一加可能是 Android 阵营中拖后腿的品牌。</strong> 它把主扬声器放在 USB-C 接口左侧，打游戏时总会把它遮住，不得不换一个方向用；「崩、崩」声音的劣质线性马达比普通转子马达还夸张；息屏后的屏幕在光照下泛宝蓝色，屏幕上下不对称，前面板跟后面板形状不一致；拨动开关没用多久就坏了；后摄玻璃很容易磨损，每次刚打开后摄一定糊的很彻底……</p>
+<p>Android 跟 iOS 相比，也有一些依然落后的地方。比如老生常谈的电话权限问题，国产软件后台常驻与通知之间的矛盾，以及隔离存储没能成功实装、不 Root 就没法妥善管理外置存储的矛盾，有时候让人很头大。当你遇到一些情况想要快速删除某个 App <strong>及其数据</strong>的时候，你只能做到删除 App 本身。</p>
+<p>这些体验问题，外加对于单手握持的执念、对于 Apple 阵营的执念、多设备统一的执念，让我每天晚上都会打开京东，漫无目的地翻找我想要的移动设备。</p>
+<p>我想要的设备要有 iOS 的安全性，要有说走就走的快充，要有不到 6 寸的易握持小屏，要有方便使用有线耳机的 USB-C，要有双卡，要有上下双扬声器…… 以上这些条件筛着筛着，搜索结果就没了。可是除了小屏这点见仁见智意外，其他却都是实打实的大众需求。<strong>浮躁的手持设备产业里，还有几个厂商是真的用心做手机的呢？</strong></p>
+<p>这样的搜索一天又一天重复着，然后我终于开始寻找妥协。妥协的答案有两个：一个是回到 iPhone，另一个是拥抱三星。保险起见，我选择了熟悉的 iPhone。</p>
+<h2>iPhone 11 Pro + Beats X</h2>
+<p>&lt;img src=&quot;https://user-images.githubusercontent.com/5051300/74897068-e47e3200-53d0-11ea-8c27-558b76c815a4.jpg&quot; style=&quot;width: 360px; display: block; margin: 0 auto&quot; /&gt;</p>
+<p>&lt;center style=&quot;font-size: 0.8em; padding: 1em 0 2em&quot;&gt;▲ 拍摄于 2019 年的最后一天；壁纸来自&lt;a href=&quot;https://www.pixiv.net/artworks/75379216&quot; target=&quot;_blank&quot;&gt;望月けい&lt;/a&gt;。&lt;/center&gt;</p>
+<p>这台 iPhone 11 Pro 型号为 MWD92ZA/A，赶在 2019 年的最后一周拿到了货，两个月的使用给我最大的感觉就是「香」。</p>
+<p>买它的动机是突然疲惫于 Android 阵营的刷机体验，觉得手持一台可玩性太强、经常影响正常使用甚至影响工作作息的手机是一种「罪孽」——基于这样的心理咬牙买了它。当时甚至试图把 OnePlus 6T 直接回收，后来因为阴差阳错被退了回来，这是后话了。</p>
+<p>跟 Android 手机相比，iPhone 是完全没办法写出一整篇文章的——只要把它摆在桌上，所有跟它有关的事都不需要介绍，一切都是那么顺理成章。</p>
+<p>总体来讲，iPhone 的工业设计一直是 Android 阵营很难轻易企及的。当你看到圆润的鹅卵石造型，处处等宽的边框，前后一致的圆角，保持干净透明的屏幕，你很难想象这些特征会同时出现在一款 Android 设备上。如果抛去机身形状这个见仁见智的话题不谈，能同时做到后面几点的也许还有三星、以前的 Sony 和魅族，但现在它们也各自走上了不同的路。</p>
+<p>最新的 iPhone 最值得称道的就是超广角和线性马达了。久违的自动保存滤镜设置让我可以每次都使用「鲜明」或「鲜明（暖）」来拍摄，让照片多一点冲击力。线性马达真正做到了「听不见摸得着」，真实的触感让我觉得 3D Touch 被砍掉其实也算是一件好事，当然如果开启声音，还会配上一个细微的「嗒」声。关于防水这点，由于今天的手机防水性能都只是聊胜于无，不仅进水没有保修，而且也并不能在水中使用，所以跟 OnePlus 6T 相比，也只是能放心地斜放在洗手间的镜子架上陪我洗澡罢了。</p>
+<p>操作系统方面自然也不用多说，单是桌面图标足够饱满、排列整齐这一点，在 Android 中也许只能用 Lawnchair 启动器经过一整天的调教才能勉强拥有。Google 生态下常见的圆形五图标排列方式，不仅看久了会腻、第三方适配不好，而且也给壁纸留下了太多发挥空间。如果没有一张好的壁纸，尤其是对于一直喜欢使用纯黑壁纸的 rkm 来说，会在追求极简而非好看的路上一直堕落下去。</p>
+<p>由于日区 iCloud &amp; App Store 成功绑定了招行 JCB 卡，我在这部设备以及 iPad 上几乎所有的软件都是从日区下载/购买的，除了日区没有的 QQ 音乐每次会从公司的内部分发平台 RDM 上下载；偶尔遇到需要在国区下载的软件，也有专门的账号负责。</p>
+<p>关于一直拖着没买 iPhone 的几点顾虑，到手后发现可有可无。USB-C 的缺失并没有造成太大的损失，我也从有线耳机顺利跳坑到无线耳机。题图中挂在口罩后面的 Beats X 是同 iPhone 一起购买的，听感中规中矩，蓝牙延迟也非常稳定，没有出现猜测到的忽快忽慢的问题。Cytus II 中实测到的延迟如下表。</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>播放设备</th>
+<th>操作方式</th>
+<th>延迟(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>内置扬声器</td>
+<td>打击音判断</td>
+<td>0</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>内置扬声器</td>
+<td>触觉判断</td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>Beats X</td>
+<td>打击音判断</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>Beats X</td>
+<td>触觉判断</td>
+<td>0.14</td>
+</tr>
+<tr>
+<td>iPad (7th Gen)</td>
+<td>内置扬声器</td>
+<td>打击音判断</td>
+<td>0</td>
+</tr>
+<tr>
+<td>iPad (7th Gen)</td>
+<td>内置扬声器</td>
+<td>手指敲击音判断</td>
+<td>0.07</td>
+</tr>
+</tbody>
+</table>
+<p>至于一加特有的「游戏模式」，可以在 iOS 中设定好「引导式访问」后，进入游戏时连按三次侧边按钮即可进入，回到竖屏双击侧边按钮即可用 Face ID 退出，同时也避免了 Home Bar 误触等问题，不过在这个模式中通知无法显示出来，也不会发出声音或震动，需要用可穿戴设备来补充。</p>
+<h2>Apple Watch S5</h2>
+<p><img src="https://user-images.githubusercontent.com/5051300/74903950-78f28f80-53e5-11ea-922d-0214655e7d03.JPEG" alt=""></p>
+<p>这块 Apple Watch S5 是在春节期间拼多多「内购」活动时购买的，GPS 版本（经过一系列调研，我发现对于手机不离手的人来说，蜂窝版本没有任何意义），到手价不到 3k，也算是给自己完成整个 Apple 生态的闭环。由于物流的问题，我在 Watch App 上挑了一个星期的表盘后，手表本体才送到我手上，于是有了图中这样郑重其事的开箱环节。</p>
+<p>开箱并完成设置后，第一件事情便是尝试邀请一个学长分享运动记录，结果失败了——似乎是因为我 iCloud 在日区，而学长在国区，也许是因为数据所在的服务器不同的问题，任何一方发出邀请后另一方都收不到。</p>
+<p>接下来就是漫无止境的更换表盘。</p>
+<h3>表盘</h3>
+<p>watchOS 目前支持的表盘见<a href="https://support.apple.com/zh-cn/guide/watch/apde9218b440/watchos">这个页面</a>，绝大多数表盘都可以更换颜色、更改日期的格式（不显示日期/显示日期/显示日期+星期）、另外有一些可定制模块。</p>
+<p>经过一段时间的归纳梳理，我发现表盘上大约有五种类型的可定制模块（官方称为「复杂功能」）：</p>
+<ul>
+<li><strong>圆形图标复杂功能</strong>：一些四角或中间空间比较大的表盘具有，例如「健身记录指针」「健身记录数字」「呼吸」「实用」的左上角和右上角、「计时码表」「彩色」的外侧四角。这种复杂功能大多只能显示静止的图标或一个数字，例如天气情况只有「天气」（显示气温）、「天气概况」（显示天气图标）和「降雨概率」三种。另外「健身记录」的圆形图标会略大一圈，很难看（效果可以参考「计时码表」和「彩色」的预览图）。</li>
+<li><strong>圆形彩图复杂功能</strong>：比上一种复杂功能长得略大一些，但是完全是不同的样式，出现在「图文」「子午线」「加州」（官网误作「加州面」，应该很好吃）的内侧四角、「模块」「图文模块」「紧凑模块」的左上角或下方。</li>
+<li><strong>图文复杂功能</strong>：弧形样式，出现在「图文」和「太阳刻度盘」的外侧四角，缺点是很多模块并没有弧形，就很草率的放一个图标或者放一些文字在那里，显得非常不对称，甚至官方网站上示例的「图文」右下角这个「有声书」的图标怎么看怎么不顺眼……这种情况数不胜数，导致我根本没用过「图文」表盘。什么时候官方能把指南针做成一个类似 PUBG 方向标那样的东西放在其中一角，能跟着我一起转，感觉体验会很好。</li>
+<li><strong>文字</strong>：出现在诸如「健身记录指针」「健身记录数字」「呼吸」「实用」的下方、「天文」「动态」「太阳」「玩具总动员」等表盘的右下方等。值得一提的是，前三种复杂功能都把健身记录展示成偏大一号的三个圈，而且我的圈一般都不完整，丑陋不堪，所以文字方式反而是展示健身记录最正常的一种方式（按照活动量、运动时间、站立次数，格式为「X千卡・Y分钟・Z/12」）。</li>
+<li><strong>图表</strong>：出现在「图文模块」「模块」中间和「紧凑模块」下方，第三方定制的空间很大，例如微信官方给出的样例截图很好看，但我平时几乎没有消息，达不到这样紧凑的效果。</li>
+</ul>
+<p>今年的春节因为疫情的原因迟迟没有结束，于是我自从戴上这块 Apple Watch 到现在还没有达成过一次红圈（活动），更别提绿圈（运动）了；而我使用的表盘不论怎么更换，都一直保持着「时间日期+天气+运动记录」的模块配置方式。我曾经主力使用过的表盘有以下这么几个：</p>
+<ul>
+<li>「实用」「简约」一直在轮换使用；</li>
+<li>「太阳」（默认太阳高度图版本）用过三天；</li>
+<li>「单色数字」（罗马数字版本）用过两天；</li>
+<li>「天文」（星轨图那个版本）用过一天；</li>
+<li>「呼吸」（默认花朵版本）用过一天；</li>
+</ul>
+<p>值得一提的是，本来以为好看的「子午线」因为是圆角矩形而不是圆形表盘，在夜间看起来会很奇怪。</p>
+<h3>功能</h3>
+<p>这个版本的 Apple Watch 加入了 1Hz AOD，在平时不使用的时候也能保持常亮，而且亮度适中，不会明显变暗。点击或抬腕都可以恢复唤醒状态（有一个很顺滑的呼吸放大动画），放下手腕或用手掌拍一下屏幕都可以立即进入睡眠。设置中可以调整唤醒时间在 15 秒与 70 秒两个选项之间切换，但对于非常习惯持久亮屏的 rkm，反而发现 70 秒有些用不上，15 秒真的足够了。</p>
+<p>续航方面，也许是因为一天一充的缘故，Apple Watch 一直没有自带完整的睡眠监测功能（虽然一些第三方 App 会提供）。因此，我也在纠结了一段时间充电时机问题后，顺理成章的把磁吸充电座放在了床上。需要注意的是，有时到了睡前发现电量还有 60%+，以为不需要充电了，但是如果出于侥幸心理轻易放弃一天一充，第二天晚上很容易就会提前关机。watchOS 提供了省电模式（即只显示一个绿色数字时间），由于需要非常复杂的步骤重启后才能退出，用了两次后就不再用了。</p>
+<p>关于通知提醒，Apple Watch 的限制是手机必须锁屏状态才会通知，对于亮屏党来说，很多时候确实带来了不少困扰，但我最最需要的功能——手机处于引导式访问模式时，通知自动转移到手环震动——竟然是支持的，再也不用担心打游戏收不到女朋友消息了。</p>
+<p>关于联网和系统升级，Apple Watch 非常神奇，它可以直接通过蓝牙（？）使用手机上的网络连接，而不用担心手机的续航问题。系统升级暂时还比较麻烦，有下载到手表和安装两个阶段，下载的阶段要求手机必须连接 Wi-Fi，安装的阶段要求手表必须在充电，所以一般都会分两步走。</p>
+<p>关于防水性能，在它的控制中心里有一个水滴图标（进水模式？也许是游泳模式吧），点击后屏幕会固定，屏蔽点击操作，并且要求你向上旋转表冠来解锁。解锁时，左边的扬声器会发出「噗噗噗」的声音，也许是有助于排水。</p>
+<p>关于 Apple Pay，由于一直没能出门，暂时还无法体验，而且 Apple Pay 目前还没有支持深圳通或者交通联合，深圳地铁的银联闪付也只能在指定站点进出，所以只能等到以后再体验了。</p>
+<h2>三星 Space Monitor</h2>
+<p>除了上面提到以及题图中出现的所有 Apple 设备：新买的 iPhone 11 Pro、Beats X、Apple Watch S5，半年来专用于音游的 iPad Gen7，以及陪伴我将近三年的 MacBook Pro 13（mid-2017, 无 Touch Bar）之外，为了远程办公需要，春节期间也入手了一台 Samsung Space Monitor（32inch）作为搭配。</p>
+<p>刚从京东小哥手里接住这款显示器时，给我的感觉就是真的太大了，从来没有用过跟（比较小的）电视一样大的显示器，比公司的 iMac 还大一圈。装好显示器后，找了半天调节按钮在哪里，只看到背板上有一个圆形的开关键。在找回并仔细阅读了说明书后，我发现这个圆形的开关键是可以像摇杆那样使用的，一个键顶 5 个键。（此处莫名想起摇杆导航键难用到基本靠抠的 Nokia 3230……）</p>
+<p>将这款显示器第一次接上电脑时遇到了一个坑：<strong>同一个雷雳 3 接口的带宽无法同时支撑一个 USB 3.0 接口和一个 4K HDMI</strong>，所以如果使用带 USB 3.0 的 Hub 提供的 HDMI 接口，刷新率会被强行降至 30Hz。由于这是一个硬件问题，无论通过 SwitchResX 还是在 Windows 系统中都无法正常开启高于 30Hz 的显示模式。无奈之下，只好第二天又单独买了一条 HDMI 转接线。需要注意的是，更换合适的线材后，需要在 SwitchResX 或 Windows 的显示器设置中手动选择 60Hz 的模式才能恢复 60Hz 显示。</p>
+<p>Space Monitor 这款显示器不仅屏占比很高，显示密度大，分辨率达到了 4k，而且发色很准。在与 MacBook Pro 内置 Retina 显示器选择相同的色彩模式（作为高饱和度爱好者，我日常都会使用发色饱满鲜艳的 709-5 颜色方案）后，显示器伽马调整为对比度较高的模式 3，在能区分白色和灰白色的前提下，将显示器对比度拉高到 75，可以达到与内置 Retina 显示器完全一致的发色效果。唯一的缺陷在于可视角度，屏幕上观察角 &gt;10 度的区域，饱和度都会略微降低，颜色轻微发白，也许是因为雾面屏上仍然存在的反射有关。</p>
+<p>选择 Space Monitor 的另一个原因是我的桌子非常窄，桌子上方没有足够的空间摆放显示器，而这款显示器是背夹式的，尽管我的桌子后面有挡板，可以夹住的宽度有限（约 4cm），实际效果十分稳固，没有出现桌子抖一下屏幕抖十下的情况。</p>
+<p>另外，买这款显示器后得到了一个意外收获：由于显示器支架竖杆的下端是接近 90 度调节（直立～前倾 90 度），上端连接屏幕背板的部分也是接近 90 度调节（直立～后仰 90 度），因此我意外获得了一个录制手元的支架，只要把显示器支架前倾适当的角度，显示器本体后仰适当的角度，就可以将手机用双面胶粘在显示器顶部，记录手在 iPad 上的操作了。</p>
+<h2>结语：我们存在的意义</h2>
+<p>在回归 iPhone 之前，我曾经设想过回到 iOS 之后的使用方式：删除所有能删除的内置应用，装上 Google 日历、Google 助理、Google 云端硬盘、Google 相册、Gboard……</p>
+<p>在回归 iPhone 之后，我发现完全没有这么做的必要；Google 相册里的内容，留在云端就好；云端硬盘里的文件，必要时从电脑端访问就好；最后我发现，作为一个至少是自诩的节能主义者来说，应用程序更多还是本地使用的，使用哪家的生态真的不重要，<strong>云，真的不重要</strong>。</p>
+<p>我知道很多人喜欢 Apple 生态是因为 iCloud 的便捷。「云」确实是一旦沾上了就最不容易离开的东西，既然如此，为什么我们还要重度依赖云端服务呢？</p>
+<p>对我个人来讲，Apple 的所谓「生态」，更重要的是在离线场景下，我的手机和电脑是一体的，和手腕是一体的，随时可以在另一台设备上延续工作，工作时可以在电脑端回短信，上厕所时可以在手机上继续看刚才的文档……</p>
+<p><strong>所谓生态，更重要的是设备间的「体验」不会发生割裂，当下的「操作」不会被打断。而并不是让你可能一年也不会看几次的「文件」和「照片」一直都拖泥带水的跟着你走。</strong></p>
+<p>人是不懂得垃圾回收的动物。很多人看重这些积累性的东西，直到离开了世界，数十年之后，他本想传给子孙的东西会被子孙当作垃圾扔掉。每个人存在过的痕迹都会这样被一点点抹除，这不是什么魔幻，这是一种自然规律。与其抱怨它，不如现在就接受：</p>
+<p><strong>「我存在的意义并不在于我产生过的数据，而在于我「现在」正在进行的思考。」</strong></p>
+]]></description><link>https://blog.rikumi.dev/2020/02/25/back-to-apple-world/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/02/25/back-to-apple-world/</guid><pubDate>Tue, 25 Feb 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[iOS 键盘难题与可见视口（VisualViewport）API]]></title><description><![CDATA[<hr>
+<h2>title: iOS 键盘难题与可见视口（VisualViewport）API
+date: 2020-02-21
+featured_image: https://images.unsplash.com/photo-1526045612212-70caf35c14df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60
+summary: 2015 年三月，iOS 发布了 8.2 版本。这在当时看来也许只是这个现代的操作系统的一次小更新，但在 Web 开发者眼里，有些微妙的问题产生了。</h2>
+<blockquote>
+<p>本文已于 2020/2/25 发表在 <a href="http://www.alloyteam.com/2020/02/14265/?newui=true">AlloyTeam 团队博客</a>，2020/3/1 发表在 <a href="https://segmentfault.com/a/1190000021874101">SegmentFault</a>，2020/3/21 转载至 <a href="https://mp.weixin.qq.com/s/ZtXB23YV0UkK9roIv8qsJA">AlloyTeam 公众号</a> 及 <a href="https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw">前端早读课公众号</a>。感谢团队和上述平台的支持。</p>
+</blockquote>
+<blockquote>
+<p>Web 开发者与 iOS 长达四年的较量，终于在 iOS 13 发布这一刻落下帷幕。</p>
+</blockquote>
+<h2>iOS 8.2 和它的键盘难题</h2>
+<p>2015 年三月，iOS 发布了 8.2 版本。这在当时看来也许只是这个现代的操作系统的一次小更新，但在 Web 开发者眼里，有些微妙的问题产生了。这是一件在 Android 世界里想象不到的麻烦事儿。</p>
+<p>在此之前 Web 开发者都非常清楚，在 <code>window</code> 全局对象上的 <code>innerWidth</code>/<code>innerHeight</code> 表示浏览器窗口中可以看到页面的区域的尺寸，而 <code>outerWidth</code>/<code>outerHeight</code> 表示浏览器窗口整体的尺寸。可以看到页面的区域又被称为「视口」（Viewport），在 CSS 的世界里，任何 <code>position: fixed</code> 的元素都会脱离文档流并以视口为基准进行定位，以便在页面滚动时让这些元素相对于窗口固定，例如桌面 Web 设计中常见的头部、侧边栏、「返回顶部」按钮等等。</p>
+<p>可是从 iOS 8.2 开始，这些概念开始不那么灵了。</p>
+<h3>难题一：不可靠的 fixed</h3>
+<p><img src="https://user-images.githubusercontent.com/5051300/74962199-69596200-544a-11ea-867e-e8db24e44f76.png" alt="image"></p>
+<p>iOS 8.2 以后，也许是为了满足设计上的磨砂半透明键盘后面能有点东西，达到若隐若现的效果，又或者是因为交互体验上，不想因为键盘动画上推过程中发生多次重新渲染，iOS 唯一指定浏览器内核、Webkit 鼻祖 Safari 将 <code>fixed</code> 元素的布局基准区域从键盘上方的可见区域改成了键盘背后的整个视窗。</p>
+<p>上图是对于一般情况的呈现。当你使用其他传统设备访问一个页面时（如左图），滚动到某个位置（紫色边框线的顶部）后，使用双指放大到一个小区域内（图中「可视区域」+「不透明键盘」的区域），然后点击某个输入框开始编写文字。此时，窗口（<code>window</code> 对象）会产生一次 <code>resize</code> 事件，由于键盘的挤压，<code>fixed</code> 元素的基准区域会变成紫色边框线标注的区域。</p>
+<p>在 iOS 8.2+ 设备中（如右图），滚动到某个位置后，使用双指放大到一个小区域内（图中「可视区域」+「半透明键盘」的区域），然后点击某个输入框开始编写文字，此时 <code>window</code> 对象不再产生 <code>resize</code> 事件，CSS 和 JS 都无从得知软键盘的开启，更不知道键盘占据了多少区域，因此，<code>fixed</code> 元素的基准区保留在右图紫色区域，不再变化。</p>
+<p>因为上图是一种一般情况，这里考虑了放大，似乎从肉眼看来，可视区域内的布局没有受到什么影响。但在现代移动端 Web 设计中，我们常常使用 Viewport Meta Tag 以及屏蔽多点触摸和双击手势等方式来禁止放大页面，此时问题就会凸显出来：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/74963876-69a72c80-544d-11ea-98e2-a87c0f73724c.png" alt="image"></p>
+<p>进入移动互联网时代之后，我们在手机上浏览的页面更多变成了专为移动设备设计的页面，它们狭长、不需要放大就适合阅读。这时，在其他传统设备上，键盘弹起后，<code>window</code> 对象发生 <code>resize</code>，所有 <code>fixed</code> 布局的元素自动被推至键盘上方的区域之内；而到了 iOS 8.2 的设备上，键盘弹起后，<code>window</code> 对象不再发生 <code>resize</code>，<code>fixed</code> 元素也保留在原来的位置，丝毫注意不到键盘的存在。</p>
+<p>这对于普通的 Web 应用来说不会带来太大的影响，但对于一些需要追求特殊交互的应用来说，打击是巨大的。<strong>最大的问题在于，再也没有东西可以牢靠地吸附在键盘上方了，无论是一行提示语、一条工具栏，还是一个自动完成列表，都再也做不到了。</strong></p>
+<h3>难题二：自作聪明的页面上推</h3>
+<p>正如上图右侧所呈现的，当键盘弹起时，页面无法感知到键盘的存在。那么，如果将要输入的目标（即「输入框」，例如 <code>input</code>、<code>textarea</code> 或一般的 <code>contenteditable</code> 元素）正好被弹起的键盘遮住，体验不会很糟糕吗？</p>
+<p>iOS 的设计者想到了这一点，然后它们以一个聪明的方式解决了：滚动。</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/74966210-9e1ce780-5451-11ea-93dc-38fe4e4980d2.png" alt="image"></p>
+<p>像上图这样，点击输入框开始输入时，键盘动画弹起的过程中，页面会随之一起滚动（如果满足一定的条件也会同时进行缩放，此处忽略这种情况），但滚动的结果有些出乎意料：输入框本身可以理解地滚动到了实际可视区域的正中间，但 <code>fixed</code> 元素不会发生重新计算，而是保持原来的相对位置，跟着输入框一起被上推；在滚动过程中，还会允许屏幕底部超出页面底部（「滚动过头」），以便让输入框尽可能露出来。收起键盘后，「滚动过头」的部分会被弹回，<code>fixed</code>元素发生重新计算，但<strong>页面并不会回到与打开键盘前相同的位置</strong>。</p>
+<p>这看起来并没有太多问题，但这里的问题是：假如我们有一个<strong>单屏 Web 应用</strong>，即将 <code>html</code> 元素设置为 <code>overflow: hidden</code>，问题就会变成这样：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/75001808-6340a100-549d-11ea-8bb8-4a9e44f91913.png" alt="image"></p>
+<p>打开键盘前，页面处于不可滚动的状态，这完全符合我们的预期；但打开键盘后，无论键盘是否遮住输入框，<strong>页面变得可滚动了</strong>。换句话说，视口（Viewport）这个概念在这样的情况下竟然「悬空」，与屏幕上实际的显示区域脱离，并且可以上下滚动起来。这个滚动可以通过阻止 <code>touchmove</code> 事件的默认行为来屏蔽，但键盘刚刚弹出时，仍然会自动向上滚动那一大段距离。</p>
+<p>更加顺理成章却又无法接受的问题是，<strong>假如恰好页面内有不小心垂直溢出的内容的话</strong>，当键盘收起后，进入了一个「奇怪的状态」：明明无法滚动的 <code>html</code> 区域，却显示了向下滚动一段距离后的内容（例如，底部出现大量留白），且因为 <code>overflow: hidden</code> 的作用而无法滚动回来。</p>
+<blockquote>
+<p>在很多不便使用 100% 的情况下，我们会在 CSS 中使用 100vh 的的概念来代表视口高度，而这个高度在 Safari 中似乎是表示工具栏自动收起时，视口的<strong>最大高度</strong>，因此会导致 100vh 高度的元素很可能已经溢出了 <code>html</code> 区域。这也是这里会提到单屏 Web 应用的页面中可能会存在垂直溢出内容的主要原因。</p>
+</blockquote>
+<p>有必要提到，如果我们在这样的「奇怪状态」下，依然认为页面是单屏不会滚动的页面，而继续使用触摸事件到屏幕/视口顶部的距离（<code>screenY</code> 或 <code>clientY</code>）来参与一些比较复杂的逻辑计算的话，会导致触摸的位置与换算到页面上需要响应的位置之间存在偏差。</p>
+<h2>以往的解决办法</h2>
+<p>在 iOS 13 出现之前，fixed 不可靠问题是无法解决的，除非在 Native 侧对 <code>WKWebView</code> 的 <code>scrollView</code> 做一些判断，并通过 JS API 暴露给 Web —— 但把 Web 应用的能力限制在某个特定的客户端内，是一件很不优雅的事情。</p>
+<p>针对键盘打开时发生强制滚动且无法手动滚回的问题（<strong>难题 2</strong>），有三种可行的解决思路：</p>
+<h3>1. 主动避开键盘后再聚焦</h3>
+<p><img src="https://user-images.githubusercontent.com/5051300/75006161-c802f800-54ab-11ea-9b4d-7095c5a0a05b.png" alt="image"></p>
+<p>这是一种较为通用且简便易行的办法：在输入目标（<code>input</code> 等）发生 <code>touchend</code> 时，阻止默认行为，提前重新布局，将输入框移到不太可能被键盘遮挡的位置（当然，具体多高才不受遮挡，当时只能靠猜），然后立即调用 <code>focus()</code> 方法主动聚焦输入框。</p>
+<p>但键盘打开后，仍然需要使用防止滚动的措施（阻止整个页面上 <code>touchmove</code> 的默认行为），来防止用户手动将页面上推。</p>
+<h3>2. 反向滚动</h3>
+<p><img src="https://user-images.githubusercontent.com/5051300/75005997-414e1b00-54ab-11ea-9737-398bc65075b0.png" alt="image"></p>
+<p>在键盘弹起的瞬间（<code>focus</code> 事件的下一个宏任务周期），我们可以从 <code>window.scrollY</code> 得知页面滚动的目标位置。很容易想到，此时我们可以通过 <code>window.scrollTo(0, 0)</code> 来恢复到原位置，但在实际尝试中，我们会发现，这样处理会导致页面整体向下瞬移，然后再逐渐移回到屏幕上。</p>
+<p>这是为什么呢？我们可以用上面这张图来解释。在之前的图中我们看到了，iOS 对键盘弹出时的视口处理是浮动的，因此我们可以大胆猜测，<strong>在键盘弹起的瞬间，视口事实上发生了瞬移。</strong> 在页面 <code>window.scrollY</code> 变成目标值的同时，视口瞬移到页面下方同样的距离，这使得从肉眼看起来，页面依然处于原来的位置。随后，视口带着页面开始一起上移，直到再次与屏幕重合，产生了页面被强制滚动的效果，而在此过程中 <code>window.scrollY</code> 并不会逐渐变化，而是只在开始的一瞬间发生变化。因此，如果我们直接在键盘打开时执行 <code>window.scrollTo(0, 0)</code>，页面会跟随视口一同瞬移到较低的位置，然后随视口一起回到屏幕上。</p>
+<p>换句话说，键盘打开时的强制滚动并非 <code>window.scrollTo</code> 的 <code>smooth</code> 模式，而是由 iOS Native 的滚动容器来驱动的。只要在 <code>focus</code> 的瞬间，键盘可能会遮住输入框，我们就无法阻止强制滚动的发生和进行。</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/75006883-4f516b00-54ae-11ea-922e-633aa1682d93.png" alt="image"></p>
+<p>既然我们无法阻止，我们可以用一个反向滚动的动画来抵消它。以聚焦后的 <code>window.scrollY</code> 为起点，聚焦前的 <code>window.scrollY</code>（通常为 0）为终点，构造与 iOS Spring Animation 相反的缓动曲线，用向下滚动的动画抵消向上滚动的动画，可以允许输入框在键盘弹起时被遮住，而页面只会发生轻微的抖动。</p>
+<p>我们的目的当然不是让键盘遮住输入框，而是首先保证页面不受强制滚动的影响。因此，在执行反向滚动后，同样可以将输入框的位置移动到可视范围之内，避开键盘。</p>
+<p>使用这种方案，同样需要配合上面所说的防止手动滚动的措施。</p>
+<h3>3. 收起键盘时恢复原位</h3>
+<p>上面两种方案是针对于不希望强制滚动的情况。如果可以允许键盘弹起时强制滚动，但希望键盘收起时回到原位，只需要在键盘收起的 <code>blur</code> 事件中，使用 <code>window.scrollTo</code> 让页面回到原位置即可。</p>
+<h2>iOS 13 VisualViewport API 与新思路</h2>
+<p>昨天，我在 Google 搜索 iOS Safari 的键盘问题，已经不知道是第几次这样绝望地寻找了，直到我找到了这篇 <a href="https://tkte.ch/2019/09/23/iOS-VisualViewport.html">Safari 13, Mobile Keyboards, And The VisualViewport API.</a>。文章指出，Safari 13（iOS 13）已经支持了 VisualViewport API，这是一个可以反映实际可视区域的实验性标准。根据 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Visual_Viewport_API">MDN 页面</a>，目前只有 IE 和 Legacy Edge 不支持这个 API。</p>
+<p>经过测试，iOS 13 对于这个 API 支持非常完善，已经能够完全体现页面上不含键盘的可视区域所在的位置了。<strong>可是，明明只有 iOS 8.2 不会报告键盘弹出，为何却有一个跨平台的 API 来补偿呢？其他浏览器有 <code>window.innerWidth</code>、<code>window.innerHeight</code> 和 <code>resize</code> 事件不是就足够好了吗？</strong></p>
+<p>这就需要回归到本文的第一张图片来解释了：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/74962199-69596200-544a-11ea-867e-e8db24e44f76.png" alt="image"></p>
+<p>没错，问题在于页面缩放。可以看出，当页面发生放大后，fixed 元素是不会一起移动到实际可视区域的。而且经过测试发现，Android 下的 <code>window.innerWidth</code>、<code>window.innerHeight</code> 也不会随页面放大而一起变化。反而在 iOS 下，<code>window.innerWidth</code>、<code>window.innerHeight</code> 会随着页面放大而等比例减小，虽然不会去掉键盘高度，但确实反映了显示在屏幕内的页面区域尺寸。</p>
+<p>而 VisualViewport API 在 Android 和 iOS 两端，都完整反映了<strong>在缩放和键盘弹出等一系列影响下，实际可视区域在页面中的位置和大小</strong>。</p>
+<p>因此，<strong>VisualViewport API 对于 iOS 以外的平台，最大的意义是可以反映页面的放大区域；而对于 iOS Safari 浏览器，最大的意义是可以反映键盘的弹出。</strong> 基于这一点，我们可以实现一个真正相对于可视区域 fixed（固定）的 <code>fixed</code> 容器。</p>
+<h3>实现一个 VisualViewport 组件</h3>
+<p>如何实现一个 <code>fixed</code> 容器？关于这一点，也许有一部分 Web 开发者并不知情。在 Web 开发者的直觉中，<code>fixed</code> 元素是始终相对于视口定位，没有任何一个元素能够改变它的定位方式；但事实上，问题却有些不同。</p>
+<p>如果你曾经使用过一些性能优良的滚动容器，如 iScroll、BetterScroll、AlloyTouch 等，你可能会遇到这样一个问题：<code>fixed</code>「不灵了」，它们可能不再相对于视口定位，而是被限制在了滚动容器之内。</p>
+<p>这是因为，在滚动容器经常会遇到的性能瓶颈中，组件的开发者通常会选择 CSS 3D Transform 来强制硬件加速，让滚动体验更顺畅。在开启了 3D Transform 的容器内，由于渲染限制，<code>fixed</code> 元素无法再相对于视口布局，而是被「圈」在了 3D Transform 容器之内。我们只需要反其道而行之，给一个容器开启 3D Transform，就可以让内部的 <code>fixed</code> 元素相对于该容器布局了。</p>
+<p>下面我们以 React 为例，实现一个可以兼容 Android/iOS 13+，始终贴着可视区域的 VisualViewport 组件。</p>
+<h4>定义 VisualViewport 类型</h4>
+<p>由于我目前使用的 TypeScript 3.7.5 还没有定义 VisualViewport API，首先我们需要手动进行类型抹平。</p>
+<pre><code class="language-tsx">interface VisualViewport extends EventTarget {
+    width: number;
+    height: number;
+    scale: number;
+    offsetTop: number;
+    offsetLeft: number;
+    pageTop: number;
+    pageLeft: number;
+}
+
+// eslint-disable-next-line
+declare global {
+    interface Window {
+        visualViewport?: VisualViewport;
+    }
+}
+</code></pre>
+<h4>定义组件</h4>
+<p>在组件中，我们对于支持 VisualViewport API 的平台使用 VisualViewport API，对于不支持的平台可以使用 <code>window.innerWidth</code>/<code>window.innerHeight</code> 进行兼容。</p>
+<pre><code class="language-tsx">import * as React from 'react';
+
+interface VisualViewportComponentProps {
+    className?: string;
+    style?: React.CSSProperties;
+}
+
+interface VisualViewportComponentState {
+    visualViewport: VisualViewport | null;
+    windowInnerWidth: number;
+    windowInnerHeight: number;
+}
+
+export default class VisualViewportComponent extends React.Component&lt;{}, VisualViewportComponentState&gt; {
+    state: VisualViewportComponentState = {
+        visualViewport: null,
+        windowInnerWidth: window.innerWidth,
+        windowInnerHeight: window.innerHeight,
+    }
+
+    componentDidMount() {
+        // TODO: 挂载事件监听器
+    }
+
+    componentWillUnmount() {
+        // TODO: 卸载事件监听器
+    }
+
+    getStyles(): React.CSSProperties {
+        // TODO: 根据 state 计算样式
+        return {};
+    }
+
+    render() {
+        return &lt;div className={'visual-viewport ' + (this.props.className || '')} style={this.getStyles()}&gt;
+            {this.props.children}
+        &lt;/div&gt;;
+    }
+}
+</code></pre>
+<h4>定义事件监听器</h4>
+<p>通过监听 <code>window.visualViewport</code> 的 <code>resize</code> 和 <code>scroll</code> 事件以及 <code>window</code> 的 <code>resize</code> 事件，我们将可见视口和实际视口的尺寸变化转化为组件内的 state 变化，以便触发重渲染。</p>
+<pre><code class="language-tsx">    componentDidMount() {
+        if (typeof window.visualViewport !== 'undefined') {
+            window.visualViewport.addEventListener('resize', this.onVisualViewportChange);
+            window.visualViewport.addEventListener('scroll', this.onVisualViewportChange);
+        }
+        window.addEventListener('resize', this.onResize);
+    }
+
+    componentWillUnmount() {
+        if (typeof window.visualViewport !== 'undefined') {
+            window.visualViewport.removeEventListener('resize', this.onVisualViewportChange);
+            window.visualViewport.removeEventListener('scroll', this.onVisualViewportChange);
+        }
+        window.removeEventListener('resize', this.onResize);
+    }
+
+    onVisualViewportChange = (e: Event) =&gt; {
+        this.setState({
+            visualViewport: e.target as VisualViewport || window.visualViewport
+        });
+    }
+
+    onResize = () =&gt; {
+        this.setState({
+            windowInnerWidth: window.innerWidth,
+            windowInnerHeight: window.innerHeight
+        });
+    }
+</code></pre>
+<h4>计算样式</h4>
+<p>下面，我们根据 state 中提供的可见视口和实际视口尺寸，对可见视口在实际视口中的相对位置进行计算，并应用到组件容器的样式中。</p>
+<pre><code class="language-tsx">    getStyles() {
+        const {
+            visualViewport,
+            windowInnerWidth,
+            windowInnerHeight,
+        } = this.state;
+
+        // 开启 3D Transform，让 fixed 的子元素相对于容器定位
+        // 同时自身也设置为 fixed，以便在非放大情况下不需要频繁移动位置
+        const styles: React.CSSProperties = {
+            position: 'fixed',
+            transform: 'translateZ(0)',
+            ...this.props.style || {}
+        };
+
+        // 支持 VisualViewport API 情况下直接计算
+        if (visualViewport != null) {
+            // 需要针对 iOS 越界弹性滚动的情况进行边界检查
+            styles.left = Math.max(0, Math.min(
+                document.documentElement.scrollWidth - visualViewport.width,
+                visualViewport.offsetLeft
+            )) + 'px';
+
+            // 需要针对 iOS 越界弹性滚动的情况进行边界检查
+            styles.top = Math.max(0, Math.min(
+                document.documentElement.scrollHeight - visualViewport.height,
+                visualViewport.offsetTop
+            )) + 'px';
+
+            styles.width = visualViewport.width + 'px';
+            styles.height = visualViewport.height + 'px';
+        } else {
+            // 不支持 VisualViewport API 情况下（如 iOS 8~12）
+            styles.top = '0';
+            styles.left = '0';
+            styles.width = windowInnerWidth + 'px';
+            styles.height = windowInnerHeight + 'px';
+        }
+
+        return styles;
+    }
+</code></pre>
+<h3>效果和总结</h3>
+<p><img src="https://user-images.githubusercontent.com/5051300/75015193-fdffa680-54c2-11ea-8a93-f5204ad5d7c7.png" alt="image"></p>
+<p>经过这样的实现，我们的组件可以在支持的浏览器中正确定位到当前可见视口的位置（上图中的靛蓝色区域），并将内部的元素以可见视口为基准进行定位。对于移动端 Web 应用来说，这样的组件有很多用途，例如吸附键盘的工具栏或自动完成列表、需要避开键盘居中的对话框等等。值得一提的是，在 PC 浏览器上，这个 API 也同样适用（可以响应页面的放大）。</p>
+<p>在 iOS 下，这样的实现还存在一些迟钝和小 bug（例如，键盘展开后的强制滚动状态下向上滑动，可以露出不论是 Viewport 还是 VisualViewport 都无法到达的白色衬底区域）。</p>
+<p><strong>但至少，在 iOS 8.2 发布四年后，iOS 13 对 VisualViewport 的支持，让获取键盘高度、避开键盘、吸附键盘这三件事终于有了相对优雅的办法。</strong></p>
+]]></description><link>https://blog.rikumi.dev/2020/02/21/keyboard-problem-visual-viewport/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/02/21/keyboard-problem-visual-viewport/</guid><pubDate>Fri, 21 Feb 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[Ryan Dahl: Deno, a new way to JavaScript]]></title><description><![CDATA[<hr>
+<h2>title: 'Ryan Dahl: Deno, a new way to JavaScript'
+date: 2019-12-11
+featured_image: https://user-images.githubusercontent.com/5051300/75620937-54f33300-5bc9-11ea-9ab2-391f327f73a1.jpg
+summary: 12 月 11 日，Node.js 原作者 Ryan Dahl 来到腾讯滨海大厦，亲自介绍他的新作品 Deno，这是一个全新开发的 JavaScript 和 TypeScript 运行时。</h2>
+<h1>提要</h1>
+<p>12 月 11 日，Node.js 原作者 Ryan Dahl 来到腾讯滨海大厦，亲自介绍他的新作品 Deno，这是一个全新开发的 JavaScript 和 TypeScript 运行时。</p>
+<p>以下是转录的英文原文，为了流畅阅读，部分语句稍有删减。本次分享所用 PPT 与<a href="https://docs.google.com/presentation/d/1z4NxX2p4JiWFvHQ9TUiY77L_ePq2sey9llNy-Mipo0I/edit#slide=id.g5467cd45c1_0_246">网络上之前已有的一些 PPT</a> 几乎一致，可以直接对照查看。</p>
+<h1>原文</h1>
+<p>Hello.</p>
+<p>Yeah, I'm going to talk about Deno. It's a project I've been working on for the last year and a half with some people. Just out of curiosity, have you guys heard of Deno? A couple of you. Most of you. That's good to hear. Before I start, I just need to make a small disclaimer, you know, Deno is a project that's very similar to Node. It's something like my second iteration on it. And often, this kind of causes people to panic because they've invested a lot of time into learning Node and they have a lot of software that runs on Node, and they might worry that, they're going to need to rewrite all of that software. It causes panic for some people. And I just want to assure you that Node is very stable software and it has a very slow and steady release cycle. Node is going to be on the ground for a long time. This project is about exploring new ideas in the same space without disrupting existing software. So don't panic. This is meant for people interested in exploring what else is possible, what else can we do with in this space.</p>
+<p>So, with that said, Node has some problems. In particular, Node was designed in 2009-2010, and a lot has changed since then in the world of JavaScript. Most notably like the JavaScript language has gone through a lot of years of revisions in the standards, and a lot of new features have been added to the language, In particular, the <code>Promise</code>, <code>async</code>/<code>await</code>, and it's got ES modules. So the language has improved a lot. Also, when Node was developed, there was no way to do binary data inside of JavaScript, there was only strings, right? So, things like <code>TypedArray</code>s, which had been around for probably five years at this point, were not baked into the Node API from the get-go. So, the point is that JavaScript has improved. And given the concept that this Node system is a useful thing to do, you know maybe it's time to explore improving on these API's.</p>
+<p>There are some problems with Node, or some design regrets I'd consider. In particular, Node is strongly tied to NPM and it's a centralized distribution for getting modules. And, you know, this is not very webby. On the web we don't have any central server, right? Tencent isn't a central server of the Internet, nor as Google. It's a distributed system, and it would be nice if the software could also be a distributed system, that is, we don't rely on npmjs.org. We can just access any server. And V8, which is the JavaScript engine that Node is built around, is a secure sandbox, right? It's running inside of Chrome. It can execute third party code securely. And Node isn't really taking advantage of that right? Node has plugged a bunch of poles into the V8 to allow you to access the disk, to access the network, to do all sorts of stuff, which is what you want to do with it. But with all those holes, you've lost any sense of security with your code. So, it's very difficult to run third party code without auditing the whole code base, because V8 is a secure sandbox that was something that could have been a feature of Node but is not.</p>
+<p>So I think what we're trying to do with this project is we think that dynamic languages are very useful things, right? A lot of people, you know, Rust is around and Go is around, and these are very good systems for certain problems, but I think there're a lot of problems that are best dealt with dynamic languages. If you need to rename a bunch of files in a directory, or you want to write a prototype very quickly, you want a scripting language. So, we think that not enough effort is being put into improving dynamic language platforms. And this project is an attempt to make this really nice. So, it's a fun and productive scripting language. I think neither Python nor Ruby nor Node are completely satisfactory systems, and it's an important enough problem that we should give some effort to.</p>
+<p>This is the Deno land project, kind of a &quot;Node 2.0&quot;. If you want, this is some artwork from the Japanese segment of our community that you have a really good artist who's part of the project. And I don't know which I'll demonstrate it embedded. It's a command line runtime, and it's for executing JavaScript and TypeScript and WebAssembly. And it's built on top of V8, as I said, and a TypeScript compiler from Microsoft, and it's built also using Rust instead of C++, which is what we used for Node.</p>
+<p>Okay, so I'm going to go through some of the features, some of the ways that we're trying to make this a nice and fun scripting platform. So Deno is a single executable file. You don't download a zip file and have like a thousand different files that are part of the distribution. There's exactly one file. And, we're making the promise that it will always be a single executable file, and right, we ship on Mac, Linux and windows. And yeah, I said that it's a TypeScript runtime. Are you guys using TypeScript here at Tencent? So, I guess you know it's great. It's a very nice way to, once you have some JavaScript code that's becoming productionized and is being used in a lot of places. Adding types is a good way to add reliability to that code and be able to kind of deal with more complex systems.</p>
+<p>And Deno has TypeScript compiled into the single executable. There's only one file, but we use a feature in V8 called the V8 snapshots to take all of the TypeScript code and turn it into a binary. And that binary is inserted into the Deno executable. Do you guys, probably not, but does anybody know V8 snapshots? One person, two people. So, I'm just talking to you guys. You had snapshots, a very awesome feature that is not used very well. Basically, you know, when you start up a JavaScript VM, like V8, it needs to go and parse all of that JavaScript code, and if you're doing that on every step, that's a lot of wasted time at startup. In order to make startup time as fast as possible, V8 has this feature that had a compile time - that is at my compile time, at Deno's compiled time, not you as a user - we take all of the TypeScript code and load it into memory. So basically, V8 compiles all of that code and loads all those structures into memory, and then we can serialize that memory into a file and basically have very fast startup time, so we're not repurposing the parser on startup anyway, yet it's a small point.</p>
+<p>Anyway, TypeScript is kind of compiled in JavaScript, of course. I'll still support it, and you can bypass the TypeScript compiler entirely by just using JavaScript files. And the use case that I'm interested in here is, I think often I find myself when I'm programming that I start with an idea, and I prototype. When it's just an idea, I don't want to deal with type systems and kind of complicated things. I just want to get it out right and to validate some idea. 90% of the time I throw away that code, like often you're not using that code at all, but you know, one time out of ten, that code turns into some system that needs to go into production. At that point, you take your JavaScript code and you want to start adding types to it, start making this a bit more robust. At that point, you would move to TypeScript. Then, maybe this has been in production for a year and you realize there's some hot bits of this code, some function in there is getting executed a lot, and maybe you would like to take that bit of code and kind of put that into native code. Maybe you want to write that in Rust and use WebAssembly for that. This is kind of the development cycle that this kind of smooth transition from prototype to production to optimizations. Where I think traditionally what you would do is you write a prototype. Once you realize it's useful, rewrite it from scratch in a new language, and then once you realize that things too fast or too slow, maybe start rewriting in a different language. It's nice to have this kind of smooth transition.</p>
+<p>So anyway, we use TypeScript. And kind of the interesting thing with Deno is this idea of our package manager. I said that it doesn't rely on a single server. There's no fixed server. The way that this works is rather than running a program like NPM to fetch code from some system, you can just put the URL directly into your code. And you know, Deno knows how to go down and fetch that URL, cache it onto the hard drive, and link that into your program. What's interesting about this is that this is how our websites work. So, this is kind of standards-compatible way of linking websites.</p>
+<p>If you use ES modules and you do an <code>import</code> statement with a URL, this will work in Chrome. So, hopefully we're providing a very simple but usable way of linking to third party code. The way I think of it is you have your code, which is local on your machine, your project, that's on your hard drive. And you would link to that code using relative URLs like <code>./foo.js</code>. But once you want to link to a third-party module, that would be over HTTP somehow. I'm going to demonstrate this in a second, but this code follows the same semantics as web browsers, so when it's downloaded, it stays on your hard drive and it's never flushed. The point is that when you're on an airplane or you're in China and can't access the Internet, you can still run these programs because they're cached on your hard drive.</p>
+<p>We're trying to be more browser compatible than that in Node, and notably, we kind of invented a lot of APIs that mirrored browser APIs, and in Deno, we're trying to be very careful to make where, you know, obviously we're doing stuff outside of the web browser, we're opening files and we're opening network connections, and a lot of these things don't have corresponding APIs in the web browser, but a lot of APIs do have corresponding. And more and more, there's a lot of web APIs that do this sort of things. So, we try to be as browser compatible as possible. For example, we have fetch built in, so if you want to make a new HTTP request, you can use the fetch API. And we try to keep that as close as possible to the browser. We have a set of standard modules. The idea is that, we all kind of need some modules to be to rely on in Node. We built some functionality into the Node executable, but you kind of have this situation where we were trying to keep the core small, but as a result, there was a lot of utility functions that people needed and they ended up getting those from third party sources.</p>
+<p>And then what happens is, you know, because these are third party modules, and they're controlled by some untrusted entity. Some random person has some module there. This kind of introduces a security problem. This is an attack vector. Somebody can somehow take over an NPM package for some small utility module, and unless you're very good at checking all of the code that you're running, that can be a way to attack. Anyway, we're trying to do this differently, so we have a large standard module system and we review all of the code. You're not allowed to just randomly insert code into there, so this is secure code, and it's based closely on the go standard library. We kind of want to take advantage of the intellectual effort that went into the go project and kind of reuse a lot of the ideas from them, and yes, I mentioned it's secure by default, so without any flags, you are run inside of a sandbox. Without doing anything, you can't access the disk, you can't access the network, and the person who is executing the program needs to opt into these permissions. And then to opt into these permissions, there's various flags. So, you can do like <code>--allow-read</code>, that will give you access to the file system, or you could say <code>--allow-env</code> to, to access with environmental variables. With all that said, let me just type a little bit and kind of show you what I'm talking about.</p>
+<p>You can execute a REPL just by typing <code>deno</code>. This is some JavaScript works the same as it does in Node. Let's do like a small little program here. Just the typical <code>hello world</code> example. You can do <code>deno run</code>, and that executes <code>hello world</code>. I mentioned that this is running inside of a secure sandbox, right? So, what happens if we try to access the disk? Let's try to open a file now. I've got this file, <code>hello.txt</code>, which is <code>hello world</code>. And what I want to do is write a cat program to, to cat out that file. So, I'm going to open the file and then print it to stdout, so this will look like this. By the way, I'm using JavaScript now instead of TypeScript, just because we're hacking around. Well, let's do <code>Deno.open('hello.txt')</code>. This will open a file, and everything's using async await, so we need to give it await there. And, we get a file object. And just to make sure this is what I think it is, let's just print that out. So, let's do <code>deno run hello_world.js</code>. And now I've got this error. It says, uncaught permission denied, run again with <code>--allow-read</code> flag because I was trying to open something from the disk. So, this is what I mean by a bit of security. We don't allow you to randomly open files from the disk.</p>
+<p>Now I was able to open the file and I've printed it out. Let's try to improve this a little bit. What we're going to do is do this <code>Deno.copy()</code>, and this file object is like a stream. Maybe this <code>hello.txt</code> is 10GB or something, a very large file. We don't necessarily want to buffer all of that file in memory, so this file object is just a file handle. What we want to do is now stream this to stdout. So, we want to read a little bit of data from the file, right into stdout. The way we do this is the <code>Deno.copy()</code> function and the destination is <code>Deno.stdout</code> and the source is file. This is doing a little loop of copying data from the file to stdout, and we're going to await that, and maybe at the end I'll do <code>console.log</code> and just so we know that we're done. Okay, so let's try that again. So now we've printed <code>hello world</code> out, right?</p>
+<p>I mentioned that we can load files from URLs. Let's see if this works actually. Exactly, my Internet situation here is a little sketchy. So this URL, if you can see it as a URL to a file, and if I load this in a web browser, you know, we have the Deno land website and we kind of see the text that this source code, this is some HTML, obviously. We have this kind of fancy trick in here that if you grab this URL and you access it from <code>curl</code>, then you get the raw source code rather than the HTML version of this. This is just a stupid little trick, but there's exact header and web browsers, we can use that to detect whether the client is trying to display a website or is asking for some raw data. So, if I just <code>curl</code> that, hopefully I have the raw contents here, and it's basically grabbing the command line arguments. It's an array of file names. This is supposed to be like the cat program. So, the way that I do <code>cat hello.txt</code>, what I want to do is do it a similar thing with Deno. Basically, we're doing the same thing that we did in the previous program. We're just looping through each of the files and we're opening them, and then we're copying them to stdout. Very simple, but just to demonstrate how we run programs that are on the Internet, so this program is hosted through HTTP. Let me try to <code>cat hello.txt</code>. As you see, again, I get this permission denied, obviously just because it's a third-party module, doesn't mean that it has permission to access the disk, so I need to <code>--allow-read</code> here, or there's a little trick if you do <code>-A</code>, you just opt out of everything, so this is just allow all things; never give me a permission denied, which, you know, during development is usually what you want. So, this thing works as expected.</p>
+<p>And the question is, this seems to run very fast, like it doesn't seem to be making a network connection as I'm running this thing. I've mentioned before that the URLs are cached, and what you can do is you can examine using <code>deno info</code>, and hopefully it's going to tell you some information about that URL and where it's cached on the hard drive. If I run this, it says that the local version of it is <code>/Users/rld/Library/Caches/deno/deps/https/deno.land/std/examples/cat.ts</code>, right? So, there's this directory of stuff that Deno creates a cache directory, much like the web browser created where we download code to. And you know, you might see here the compiled JavaScript version of that TypeScript code. So, it has <code>.ts</code> extension, so it's TypeScript, but so we have to compile it to JavaScript, and we can cache that compilation on object, and source maps, etc.</p>
+<p>This program itself is not so interesting, because it doesn't have any dependencies. But more complicated programs are going to import other things. Here's a more complicated program, <code>http/file_server.ts</code>. This program runs a local web server on your computer and hosts a local file through file server. Let's try running that now. It says permission denied. You know, it's trying to start a server. You can't do that without network access, so I need to do <code>--allow-net</code> and now I've got a server running. If I tried to <code>curl</code> this server here, how does that work? All right, I got an internal server error. Why do you think that is? I was actually expecting this error out up here, but it didn't. It might be a bug. But yeah, we haven't given it file access, so it's not able to serve the local directory because it hasn't been given access to the local disk. So, what we need to do is give it <code>--allow-read</code> here. So now when I <code>curl</code> this, I should get some HTML, so now I know I'm serving up the local directory, right? So, I can see like that file that we just made. So, just as an example of a more complicated program, let's use the info with this more complicated program now. So, this thing obviously has a lot of dependencies. And what you see here, you know, along with the kind of cached file stuff. You get a tree of dependency of all of the modules that it's using, because we've built this on top of web APIs, this sort of stuff, and other tooling inside of Deno is usable for code that's just used on websites. If you're using ES modules and you're not using Deno at all, but you want to say, examine the dependency, the tree of your program, this should work for you.</p>
+<p>So, let me do it one more small demo. We have a bunch of tooling inside of this, and if you do <code>deno help</code>, you'll see a bunch of things. I'm not going to go into all of this stuff. It's too much. But when I do want to show you is this one feature called <code>deno bundle</code> and it allow you to take a program, all of the dependencies, which are many files, which might be on an HTTP server, might be locally on your disk, bundle those all into a single thing. It's just like Webpack, right? So, if I do this, <code>deno bundle</code>. What we should do is get some stuff printed to stdout, which is all of the code inside the file server. And you know, what you can do is pipe that to a file, and if I do like <code>ls -lh file.js</code>, it's a 177KB bundle file. So, what's nice is that, you know, even though we were fetching all this stuff, you can still kind of provide this little bundled file. And kind of bypass all of these fancy edges that we've added for our fetching third party resources than we're not. Yeah, so, just to finish up here, I should say one of the problems that we had in Node was, that it's a monolithic application, right? So, we shipped this Node binary and basically the only way you can use Node is by a spawning a Node process. Yes, it's very difficult to integrate Node into an existing app. And in Deno, we're trying to be a bit more thoughtful about this, so we're breaking it up into smaller components, and these are published as Rust crates. And the idea with this is that it allows embedding, and you know, most users are not going to be interested in this. Most users are making websites, making small applications and stuff, but some users have very particular needs like embedding V8, for example, if you're doing AWS Lambda type application, some sort of serverless type thing, then you might need to embed a JavaScript engine inside of a web server. And spawning an entire Node process is very complicated. That implies having a huge directory tree, you know, maybe calling NPM, this kind of allows you to have smaller versions of the Deno infrastructure. So, you know, cloud function is one application. The Electron-style application - you guys know what Electron is - is a use of Node that we didn't anticipate, and you know, I think the design of Electron works and it's very successful, but it's kind of hacked together and not the most elegant way. It's basically Chrome, Node, and <em>bang</em>, here's your thing, and you know, surprisingly that works, but I think we can do a better solution with this. We don't have an actual Electron thing working yet, but I think by building this into smaller components, we're going to enable this sort of applications, so kind of a next generation Electron-type thing. So anyway, if you're a rust user, you have, say, a database and you want to provide a map-reduce function a way to execute JavaScript across a large database, you might want to embed V8 into your database, actually. And embedding V8, when you start getting into the details, it's not easy at all. I have spent my entire career doing it. It's a very large piece of software and we're hoping to make this a bit easier.</p>
+<p>For the future, we're working very hard to ship a stable release. We've been shipping beta releases for the last year. We hope to have 1.0 out probably this month, maybe January. You know, it's hard. But yeah, we're very interested in using WebAssembly or kind of providing users with a way to, you know, import Rust code, and do this in a secure way somehow. We're also interested in doing a WebGL bindings, which would enable users to do things like TensorFlow.js, to do accelerated matrix multiplication. WebCrypto is another, often asked for, web API. So, there's kind of these web APIs that are clearly target audience, and it would be very nice to have a single executable that you don't need to install Cuda for, and can suddenly do a fast matrix multiplication. This enables very fast development time for that sort of projects.</p>
+<p>To the rest of it. I would just say this is an open collaboration we have. It's not just me working on it. We have many contributors. And here's my email address. Feel free to email me if you have any questions or just come up and talk to me. And the website, obviously.</p>
+<p>I don't know what our timing situation is here. Is there time for questions?</p>
+<h1>提问环节</h1>
+<blockquote>
+<p>Q1: I just wonder if you import the URL, and you cache it, how can you update when it is updated?</p>
+</blockquote>
+<p>So, what happens so that URL might change, obviously. Right? If we cache this forever, how do you get the updates? It's just like in the web browser, you know; you've cached some HTML, and if you hit reload, you're just getting the same cache each HTML, but if you hit shift and then reload and then it will re-download this stuff. I'll show you an example of that. The way that you do this, say where we're running this file server, right? We're trying to run this file server. Maybe this URL is getting updated in the last couple of minutes and we want to get that new code. We just do a --reload, and then this is going to re-download all of the dependencies for that. So, it's based off of web browser semantics.</p>
+<blockquote>
+<p>Q2: In Node.js we have dependencies, and, it's a problem that we have different versions of dependencies, is there any version of TypeScript files on the net?</p>
+</blockquote>
+<p>In NPM you can specify versions and there's different versions of modules, but I haven't mentioned anything about versions here. What I would say is that when you <code>import</code> an NPM module, say, you are using express. There's a string <code>&quot;express&quot;</code>, and that specifies the module. Implicit to that is the NPM server, and then implicit to that is that you get the latest version of express. Now you can also do <code>&quot;express@0.1.2&quot;</code>, or whatever, and specify a version up to that. So now you have a string that specifies that module name and the version. And then implicit to that is the server, right? NPM is the server. So that's implicit. All of this can be factored into the URL. So, this is just a string, right? What we can do is put the version into the string. And for Deno land, we've come up with a certain scheme to do this, so what you can do is like @v0.5.0, this will specify a specific version of that URL. So, by putting the version in the URL itself, I think you're fully specifying this now, of course, this is still up to the server to show the same version every time. Right. But I would say that's still up to NPM to still ship you the same version of express, right?</p>
+<p>I mean, who knows? They could send you something else. What we're doing here is we're just explicitly specifying the server, and there may be a Deno package repository that makes the promise that every time you go to a URL, you get exactly the same file, but that's up to the server. We're agnostic to that, just like the web, but I think the version problem can be solved by specifying versions in the URL.</p>
+<blockquote>
+<p>Q3: Will Deno prevent the cache folder being too large?</p>
+</blockquote>
+<p>No, not currently. I mean, it should, that should be a feature. We don't have that feature yet. So basically, what we want is an LRU, like purging the lease recently used to have like some upper size limit of on the cache, say 500MB. You know, after that we should purge some files. We don't have that feature in there, but it's certainly going to be something that you think, yeah.</p>
+<blockquote>
+<p>Q4: If you <code>import</code> a URL in the file, as in Go, they have made a module management system. So, does Deno has this plan for a centralized dependency management?</p>
+</blockquote>
+<p>Nope. We're trying to keep it simple and trying to keep it very browser centric, staying with the same things that the browser is specified, and then add tooling, like this bundling thing. So, users who need, say, vendor dependencies can do so. But in terms of having a centralized thing, we have the Deno land server, which, you know, in some sense as a centralized system. But beyond that, no.</p>
+<blockquote>
+<p>Q5: Does Deno support something like mirrors, because you know, in China there is no Internet.</p>
+</blockquote>
+<p>Yeah, I can't remember. So, people are asking for this, and I'm just going to check the documentation. Yeah. I think we have HTTP_PROXY, so you can set it, probably contributed by a Chinese user. I think this is a recent issue, so this is being worked on, so you know, maybe.</p>
+<blockquote>
+<p>Q6: You have mentioned that it's up to the server to manage the versioning thing, and will Deno provide a standard library to create a repository for versioning or something?</p>
+</blockquote>
+<p>That's a very good question. I would like to show you guys a feature that I did show in my talk. This website, Deno land, has a lot of functionality in it, and let me just show you, this is actually quite a cool server. This is, for example, the HTTP server, right? And here's the code for it. What we have is this Deno land server has had some cool things. For example, documentation, we're hoping to, to kind of solve the JavaScript documentation problem by doing static analysis of the code via HTTP. So, what this server can do is if I click on documentation here, actually in the client, it's parsing that code in the browser itself and providing some documentation.</p>
+<p>My point is that this is a fairly complicated code base with this, and it's actually a separate project. It's called demo website 2; this website is written in Node currently. The problem is that we have kind of a chicken and egg sort of problem. So, we're kind of trying to build this system, but we also need the server at the same time. So, making a dependency on Deno is too difficult for us right now. So, this part is written in Node. Actually, I would very much like to have this ported over to Deno and then put in as kind of a standard module so that people can run their own Deno land. But. It's going to take a while before we can actually run this code base.</p>
+<blockquote>
+<p>Q7: When do you think is time you to really put this into production use, maybe just for some internal projects?</p>
+</blockquote>
+<p>I think when we hit 1.0, that's it. That's basically going to mean like we'll make some stability guarantees about APIs. Currently we're changing APIs without any notice. So, once 1.0 comes out, which as I said, Yes.</p>
+<blockquote>
+<p>Q8: How about Deno with machine learning? Are there more details?</p>
+</blockquote>
+<p>Yeah, I'm very interested in this topic. So, TensorFlow.js I think is a spectacular project, and TensorFlow.js uses WebGL, right? In TensorFlow.js, there's actually two backends right now. There's one for running on Node, and there's one for running in the web browser. And running on Node uses TensorFlow and uses kind of TensorFlow's Cuda libraries. In web browser backend there's this WebGL thing. What I'm hoping to do is to basically support WebGL, and then we can run these machine learning codes on top of that. This was actually like one of the very first things that I wanted to do with this system, but it's proven difficult to get all of these smaller modules loaded, and kind of the correctness of the system is more important. So, we're basically trying to get the fundamentals working before we start adding on new things. But yes, WebGL. I want to support it.</p>
+<blockquote>
+<p>Q9: I still have a question about the version controlling, In something like semantic version control, when we just want to stick a package to a major version, how can we express that in a URL?</p>
+</blockquote>
+<p>So, in semantic versioning, what you might want to specify is I just want version 1.2 and I want to be able to take any patch updates that are coming through. I don't want to tie myself to a specific version. So, the way this would work in Deno is up to the server just as before. When you specify the version, say this is a full semantic version, you know, maybe you want to link to a code that, you know, potentially starts upgrading underneath you, right? Cause you want to get, bug fixes. What you would like to do is just link to something like this without that, or maybe even something like this, some, some way of doing &quot;^1.2.0&quot;. This doesn't work. The Deno land server does not support this. How Deno land server works is that it goes to GitHub and gets the content, so what we allow is linking to branches. The idea of this is to kind of link to branches, and so you could potentially do something like that. You know, &quot;@stable&quot; where that's a branch, and then you'll always kind of get that stable code base, which you know, may come with bug fixes if you do --reload. So, it's up to the server basically.</p>
+<blockquote>
+<p>Q10: When we first <code>import</code> a TS file, we might not specify the version, but if, say, my teammates joined our team and downloaded the packages, their version can be different. Is there a lock file for this?</p>
+</blockquote>
+<p>There is, so, <code>deno help run</code>, we have this lock file feature. So yes, you can, if you're in CI or whatever, you can fix the shock in some of the file.</p>
+<blockquote>
+<p>Q11: How do you compare between the Node.js and Deno?</p>
+</blockquote>
+<p>Great question. So, to be honest, we are worse. But we're keeping very, so, you know. We're trying to do things differently here, and we have very careful designs of this stuff, and because we're kind of at this very broad scope, we're trying to be very careful about getting all of these different pieces correct. And, one of the unfortunate side effects of it is that performance is not the most important thing for us. So, you know, web servers, I think, if you want the fastest server, don't even write it in JavaScript, right. Write it in Rust. So, you know, to some extent, don't get me wrong, performance matters, and, you know, privately, I would say like, we will be faster than Node. Like, I guarantee it. We track our mini benchmarks on every commit of Deno. And so, we are aware of our performance issues. And in particular, when people mean faster or slower in dynamic languages, they mean it on a web server basis.</p>
+<p>So, this is a <code>hello world</code> web server that's just seeing how much throughput you can do on a <code>hello world</code> server, so the items to look at here is Node TCP and Deno TCP, and bigger is better. So, Node TCP is 51,000 requests per second, and Deno TCP is 41,000. So, my point is that we know, and we're working on it, we're just trying to kind of, you know, ladder up through this system.</p>
+<p>I haven't mentioned how kind of the internal details of this, but the internals of Deno function much differently than Node. Maybe I won't go into this now, but there's basically an abstraction layer problem where all calls out of the VM go through a central bottle now, right? So we kind of have something like a &quot;syscall&quot; in Deno, whereas in Node, we kind of make separate bindings for every API. And we're kind of funneling everything through this one bottleneck. It's a good thing because we're going to have very uniform performance for different API because they all go through the same system.</p>
+<p>But kind of the bad part of this is that we're not able to optimize individual APIs directly, anyway. My partner and I are kind of insanely into performance. We don't think that this is the most important problem right now. I very much hope that we will address this in the near future.</p>
+<blockquote>
+<p>Q12: I want to ask, there are lot of popular packages in the Node ecosystem. Does Deno have any plan for supporting these packages?</p>
+</blockquote>
+<p>So, compatibility with existing Node things. Early on this, this project started as an experiment to see how we could do things differently and we didn't want to start with Node compatibility because that would force too many design decisions. At this point, our software is fairly mature, and we've got kind of art abstractions worked out, and so we've started a new project. It's part of the standard module. It's called <code>std/node</code>. And here we're starting to fill in the Node APIs and make that this bigger. So, for example, we have a file system (fs). This project has just started a couple of weeks ago, but basically what we hope to do is have kind of, an API-compatible standard module for Deno. And in this way, we can start using Node code, hopefully. In particular, let me point out, we have, global. We have a require implementation oh no, it's module. Let me just go into the documentation. So basically, you can create a require and you can require FSA. So anyway, the short answer to your question is that we're working on it. We hope, you know, now that we've kind of established our abstractions, we hope that this will be better, but currently it's operating.</p>
+<blockquote>
+<p>Q13: As developers we're concerned about security. How do you guarantee that the third-party code with malware cannot escape from the sandbox?</p>
+</blockquote>
+<p>So the question is, you know, you've got some third party code, but maybe there's some intermediate party that has injected some bad code into this request, so you're making this HTTP request to the server and what you think is good code and you get back code. So, the answer to that is locked files. So, what you want to do is you want to develop your program and audit the code that you use. You need to trust the code that you use because it's in your program, right? So at least like at some point, you need to know what you're running, right? And then you create a lock file and then you can fix at those versions, right? So that they can update underneath you, but it will error if it doesn't match the same checksum as when you developed it.</p>
+<blockquote>
+<p>Q14: Have you found any issues when third-party code escapes from the sandbox?</p>
+</blockquote>
+<p>Yeah, there's tons of issues like that. I mean, this is very under development, and I don't doubt that there's many ways to break out the sandbox. The point is that those are bugs and we correct them. So instead of in Python and Ruby and Node, this is not a bug, this is normal operation. Right? But you know, it's going to take a while for us to mature and work out all of these many ways of things breaking out of the sandbox. But, yeah, I mean, more or less it's working, I would say. I wouldn't stake my life on it. I think this kind of comes over time, like as exploits are found and you fix them, and you know, add a test out of them. So, I think over time it becomes more secure.</p>
+<blockquote>
+<p>Q15: Did you ever encounter any problem with the version of TypeScript? TypeScript is under development and there must be some issues.</p>
+</blockquote>
+<p>We bundled TypeScript, so we have a fixed version of TypeScript, which you can see if I do Deno. And Deno is kind of where we put all of our non-webby things. And if I do Deno.version, I can see my TypeScript version. So, this is the version of TypeScript that is bundled into Deno. And yes, TypeScript is changing quickly and it's going to get out of date, but I think TypeScript has kind of, you know, had a very fast development cycle and is starting to stabilize. And I think the APIs are not changing as much anymore. And of course, Deno is kind of also going very fast at development and starting to stabilize what we would hope for in, you know, like a year or so. These things kind of stabilize. You don't want the languages to always be changing. So, what I'm kind of hoping is that this matters less and less as time goes on. It matters a little bit right now, especially with like top level await and that sort of stuff. But in six months the version of TypeScript is not going to matter as much as it did like a year ago.</p>
+]]></description><link>https://blog.rikumi.dev/2019/12/11/ryan-dahl-deno/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/12/11/ryan-dahl-deno/</guid><pubDate>Wed, 11 Dec 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[四鸭子问题：几何概型的理论分析与程序模拟测试]]></title><description><![CDATA[<hr>
+<h2>title: 四鸭子问题：几何概型的理论分析与程序模拟测试
+date: 2019-11-29
+featured_image: https://images.unsplash.com/photo-1465247431621-ae634a2477be?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000q=80
+summary: 四只小鸭子在一个大的圆形水池中，分别随机出现在圆中的任意一点。四只鸭子出现在同一个半圆内的概率是多少？</h2>
+<h2>问题</h2>
+<p>四只小鸭子在一个大的圆形水池中，分别随机出现在圆中的任意一点。四只鸭子出现在同一个半圆内的概率是多少？</p>
+<h2>争论</h2>
+<p>首先看到大家的争论，有一个明显错误的逻辑：每个鸭子落在一个半圆内的概率是 1/2，第一只鸭子随便落，后三只鸭子都要跟第一只鸭子落在同一个半圆，所以是 1/8。</p>
+<p>为什么这个推理是错的？因为它直接照搬了古典概型中抛硬币的问题，没有考虑到四鸭子问题属于几何概型，情况是不相通的。在古典概型中，抛硬币只有两种结果，要么正面，要么反面，第一个硬币抛下去，后三个硬币跟第一个硬币结果相同，也<strong>就是要跟第一个硬币在同一个面</strong>。</p>
+<p>而鸭子问题不同，第一个鸭子本身并不属于某个确定的半圆，第二只鸭子跟它在同一个半圆的概率并不是 1/2，而是 1；就算两只鸭子下水，也不一定能确定一个半圆，因为能包含这两只鸭子的半圆不只有一个；同理，就算三只鸭子下水，也不一定能确定一个半圆。</p>
+<p>因此后面的鸭子的选择并不是二元的，而是有一个区间的，落在区间内的概率也并不是 1/2，而是都大于 1/2，这是考虑几何概型时需要注意的问题。</p>
+<h2>分析</h2>
+<p>形象地理解，一只鸭子下水之后，<strong>第二只鸭子无论落在哪里，都会跟第一只鸭子处于同一个半圆</strong>；这里由于是概率问题，我们不考虑跟第一只鸭子正好成 180 度的情况，因为这种情况在几何概型中属于概率无限接近零（也可以称为概率为零）的<strong>小概率事件</strong>。</p>
+<p>我们可以假设最极端的情况，<strong>假如第二只鸭子与第一只无限接近 180°</strong>，也就是说，它们已经明确确定了一个不可旋转的半圆。后两只鸭子都落在这个半圆内就算事件成立，后两只中的任意一只不落在这个半圆内就算事件不成立。</p>
+<p>在这样的假设下，后两只鸭子的选择就很明确，要么在这个半圆内，要么在这个半圆外，两只鸭子都做了选择之后，事件成立的概率显然是 1/4。</p>
+<p>但这是假设前两只鸭子尽可能成 180° 的情况，如果不然呢？</p>
+<p>如果第二只鸭子只是与第一只鸭子成一小角度，可以想象，第三只鸭子的选择范围变大了，它可以在两只鸭子所成的角度的一侧，也可以在另一侧，也可以在中间，可以选择的余地已经大于 180°；同理，如果前三只鸭子都在一小角度内，第四只鸭子的选择范围也变大了。换句话说，实际上原题的概率应该大于 1/4，甚至远大于 1/4。</p>
+<p>破除这个假设之后，问题已经变得更难思考起来，也许已经变成了无法思考只能用数学证明的范畴，于是我们可以先进行模拟测试，先找到问题的答案。</p>
+<h2>问题简化</h2>
+<p>在模拟测试前，我们需要先将问题简化。在上一节的分析中，我们发现，问题已经被简化成角度的概率问题，而与到圆心的距离无关。</p>
+<p>严谨一点讲，以水池的中心为原点，建立极坐标系后，问题简化为<strong>随机在一个圆周上选择四个角度，四个角度在同一个半周之内</strong>。</p>
+<p>需要特别提及的是，在几何概型问题进行化归的过程中，需要特别注意<strong>不可以使等可能性发生畸变</strong>。例如高中数学中常常提到的一个问题：<strong>在一个三角形里，在一个内角之内随机画出一条射线，落在对边上的概率问题，是不可以化归为在对边上任意取点的，因为等可能性发生了畸变。</strong> 本问题中，由于圆的性质，每一个微小角度所成的扇形面积都相等，所以我们才可以将圆面积内随机取点的问题化归为圆周上随机取角度的问题。</p>
+<p><strong>假如我们遇到另一个在圆面内随机取点的问题，问题的结果与角度无关而与到圆心的距离有关，这时就不可以将该问题化归为在半径上随机取点的问题</strong>，因为从圆面积到到与圆心距离的映射会使等可能性产生畸变。</p>
+<h2>模拟测试</h2>
+<p>我们使用 JavaScript 进行模拟测试，首先需要考虑一个问题：在一个圆周内，当我们说「两个角度在同一个半周内」时，我们是想表达什么？</p>
+<p>大二时上过一门高级数据结构的选修课，其中我负责做了一个 Chord（弦网络）的实现和展示，当时的实现可以参见<a href="https://github.com/rikumi/ChordNetwork/blob/master/ClientNode.py">这里</a>。在弦网络中，节点之间形成环形拓扑，按照顺时针编号，从 0 编到 n-1；而在算法的要求上，每一个节点需要「顺时针」传递某些信息。这时我们会发现，<strong>我们所理解的「顺时针」出现了表达障碍</strong>。如果顺时针只是简单的大小关系，从节点 0 到节点 1 是顺时针，那么从节点 n-1 到节点 0 是不是顺时针？</p>
+<p>回到几何问题上，如果从 0° 到 90° 是顺时针，那么从 270° 到 0° 是不是顺时针？角度的循环性给我们带来一个巨大的困惑：<strong>当我们比较角度时，我们到底在比较什么？</strong></p>
+<p>当时经过长时间的思考，我发现：从角 a 到角 b 成「顺时针」，其实是指角 b 落在角 a 与角(a+180°) 之间；如果没有落在这半周，我们就称角 a 到角 b 成「逆时针」。</p>
+<p>换句话说，由于圆周角的循环性，我们对「顺/逆时针」的理解是不严谨的，在思考问题时，要尽可能回归到三个角度之间的三元关系来思考。在上面弦网络的实现代码中，我引入了一个函数 <code>is_clockwise(id1, id2, id3)</code>，用于比较所谓的「顺/逆时针」，其实是三个角度之间的顺序关系。</p>
+<p>回到我们的鸭子问题，为了判断两个鸭子是否在同一个半周，我们也需要引入这样一个函数：</p>
+<pre><code class="language-js">const isClockwise = (a, b, c) =&gt;
+  [a &lt; b, b &lt; c, c &lt; a].filter((k) =&gt; k).length === 2;
+</code></pre>
+<blockquote>
+<p>处于 0~360° 圆周内的三个角度 (a, b, c) 成「顺时针」，当且仅当 <code>a&lt;b</code>、<code>b&lt;c</code>、<code>c&lt;a</code> 三个表达式有且仅有两个成立。</p>
+</blockquote>
+<p>接下来，我们就可以利用这个关系，定义「多个角度在同一个半周内」的函数：</p>
+<pre><code class="language-js">const isInSameSemicircle = (...o) =&gt;
+  o.find(
+    (a, i) =&gt;
+      [...o.slice(0, i), ...o.slice(i + 1)]
+        .map((b) =&gt; isClockwise(a, b, (a + 180) % 360))
+        .filter((k) =&gt; k).length %
+        (o.length - 1) ===
+      0
+  ) != null;
+</code></pre>
+<blockquote>
+<p>多个角 o 都在同一个半周内，当且仅当在 o 中存在一个角 a，使得：</p>
+<p>a) 对 o 中除角 a 外的其他任意角 b，都有角 (a, b, a+180°) 成顺时针，或者</p>
+<p>b) 对 o 中除角 a 外的其他任意角 b，都有角 (a, b, a+180°) 成逆时针</p>
+</blockquote>
+<p>翻译成白话，意思就是在这些角中能找到一个角，剩下的所有角都在它的一侧的半周，而非另一侧的半周。</p>
+<p>接下来，我们可以对这两个判定函数进行一些简单的测试：</p>
+<pre><code class="language-js">isClockwise(-10, 60, 120); // -&gt; true
+isClockwise(0, 120, 60); // -&gt; false
+isInSameSemicircle(0, 80, 120); // -&gt; true
+isInSameSemicircle(0, 80, 240); // -&gt; false
+</code></pre>
+<p>正合我意。现在，我们来定义随机生成角度和随机进行试验的函数：</p>
+<pre><code class="language-js">const randomAngle = () =&gt; Math.random() * 360;
+
+const randomResult = () =&gt;
+  isInSameSemicircle(
+    randomAngle(),
+    randomAngle(),
+    randomAngle(),
+    randomAngle()
+  );
+</code></pre>
+<p>下面，让我们来进行三批试验，每批试验 1000000 次，看一下「四只鸭子均出现在同一个半圆内」出现的频率吧：</p>
+<pre><code class="language-js">Array(1000000)
+  .fill()
+  .map(randomResult)
+  .filter((k) =&gt; k).length / 1000000;
+// -&gt; 0.500323
+Array(1000000)
+  .fill()
+  .map(randomResult)
+  .filter((k) =&gt; k).length / 1000000;
+// -&gt; 0.49939
+Array(1000000)
+  .fill()
+  .map(randomResult)
+  .filter((k) =&gt; k).length / 1000000;
+// -&gt; 0.499731
+</code></pre>
+<p>可以肯定，原题中的事件成立的概率为 50% 即 1/2，大于 1/4，与我们的分析相符，但是如果能分析的再接近一些就好了。</p>
+<h2>如果是五只鸭子？或者六只？</h2>
+<p>上面的结果 1/2 适用于四只鸭子的情况，可以说非常巧合。如果是五只鸭子，是不是会降下来呢？或者如果是三只鸭子，结果又如何？我们可以做更加普遍性的测试：</p>
+<pre><code class="language-js">// count 只鸭子单次试验的结果
+const randomDucksOnce = (count = 4) =&gt;
+  isInSameSemicircle.apply(
+    null,
+    Array(count)
+      .fill()
+      .map(randomAngle)
+  );
+
+// count 只鸭子的 times 次试验的频率
+const randomDucks = (count = 4, times = 1000000) =&gt;
+  Array(times)
+    .fill()
+    .map(() =&gt; randomDucksOnce(count))
+    .filter((k) =&gt; k).length / times;
+
+randomDucks(2); // -&gt; 1                 (2/2)
+randomDucks(3); // -&gt; 非常接近 0.75       (3/4)
+randomDucks(4); // -&gt; 非常接近 0.5        (4/8)
+randomDucks(5); // -&gt; 非常接近 0.3125     (5/16)
+randomDucks(6); // -&gt; 非常接近 0.1875     (6/32)
+randomDucks(7); // -&gt; 非常接近 0.109375   (7/64)
+randomDucks(8); // -&gt; 非常接近 0.0625     (8/128)
+randomDucks(9); // -&gt; 非常接近 0.03515625 (9/256)
+randomDucks(10); // -&gt; 非常接近 0.01953125 (10/512)
+</code></pre>
+<p>可以写出这个数列的通项公式：</p>
+<blockquote>
+<p>randomDucks(n) = <code>2n / 2^n</code></p>
+</blockquote>
+<p>通过观察可以猜测，n 只鸭子随机出现在圆形水池中的任意一点，落在同一个半圆面内的概率为 <code>2n / 2^n</code>。</p>
+<h2>后续</h2>
+<p>看到这个公式，是否觉得有神奇的对称美？</p>
+<p>对于这个 n 鸭子问题，算法 dalao <a href="https://rexskz.info/">Rex</a> 给出了完美的数学解释，以下是 Rex 的叙述：</p>
+<blockquote>
+<p>可以忽略多鸭子在同一直径上的情况（因为概率为 0），那就相当于在圆内随机画了 n 条直径，每只鸭子只占用了其中一条半径，这一共有 2^n 种情况。</p>
+<p>只有当这几只鸭子占用的半径相邻时，才是在同一个半圆，可以假设第一只鸭子在某个角度的半径上，其它鸭子顺时针依次占用剩下的半径，那么一共有 2n 种情况。</p>
+<p>所以概率是 <code>2n / 2^n</code>。</p>
+</blockquote>
+<p>简单地讲，由于问题中出现的是半圆，由于半圆的特殊性质，让这个本来看起来是几何概型的问题，变成了古典概型问题：</p>
+<ol>
+<li>
+<p>每只鸭子下水后，都产生了一条直径，并占用了其中一侧的半径，n 只鸭子产生了 n 条直径，即 2n 条半径；每只鸭子在自己的直径上随机选择其中一个半径，会出现 2 种结果，因此 <strong>所有鸭子选定自己的直径后，选择自己所在的半径时，会出现 2^n 种等概率的情况</strong>；</p>
+</li>
+<li>
+<p>所有鸭子出现在同一个半圆内，当且仅当所有这些鸭子连续占用了其中 n 条相邻的半径，因为在 n 条直径中，任意画一个半圆只能包含 n 条半径，不能再多了；所有鸭子选定自己的直径后，顺时针方向第一只鸭子可能出现在 2n 条半径之一，而其余鸭子只能依次选择相邻的半径，因此 <strong>所有鸭子选定自己的直径后，有 2n 种情况会出现在同一个半圆内</strong>。</p>
+</li>
+</ol>
+<p>因此，n 只鸭子下水，落在同一个半圆面内的概率为 <code>2n / 2^n</code>，我初次看到这个通项，以为需要跑到 n 维空间去做几何规划才能得到这样的答案，没想到竟然可以化归为古典概型来解释，实在是妙不可言 😏。</p>
+]]></description><link>https://blog.rikumi.dev/2019/11/29/four-ducks-problem/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/29/four-ducks-problem/</guid><pubDate>Fri, 29 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[在 kbone 中实现小程序 svg 渲染]]></title><description><![CDATA[<hr>
+<h2>title: 在 kbone 中实现小程序 svg 渲染
+date: 2019-11-27
+featured_image: https://images.unsplash.com/photo-1489769002049-ccd828976a6c?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80
+summary: 本文针对单个页面上出现大量 HTML inline SVG 的实战场景，通过识别并转换成 background-image，来实现小程序 kbone 对 SVG 的支持。</h2>
+<h2>背景</h2>
+<p>2019 年底，微信小程序已经推出了近三个年头，我身边的前端开发者基本都做过至少一次小程序了。很多友商曾打算推动小程序进入 W3C 标准，而微信并不为所动，个人认为，小程序本身在框架设计上称不上「标准」，微信也并没打算做一个「标准的平台」。</p>
+<p>小程序更注重产品形态和交互，注重对开发者能力的制约，尽可能减少对用户的干扰；因此，也许小程序从设计之初就没有过多考虑开发层面的「优雅」，而是以方便上手、容易学习为主。最典型的例子就是 <code>App()</code>、<code>Page()</code> 这一类直接注入到模块内的工厂方法，你不知道、也不需要知道它从何处来，来无影去无踪，是与现在 JS 生态中早已普及的模块化开发有点相悖的。</p>
+<p>在架构上，小程序选择了将逻辑层与视图层分离的方式来组织业务代码。小程序的源码提交上传时，JS 会被打包成逻辑层代码（<code>app-service.js</code>），在运行时与逻辑层基础库 <code>WAService.js</code> 相结合，在逻辑层 Webview（或 JSCore）中执行；WXML/WXSS 将会编译成 JS 并拼接成 <code>page-frame.html</code>，在运行时与视图层基础库 <code>WAWebview.js</code> 相结合，在视图层堆栈的 Webview 中执行。基础库负责利用客户端提供的通信管道，相互建立联系，对小程序和页面的生命周期、页面上虚拟 DOM 的渲染等进行管理，并在必要时使用客户端提供的原生能力。</p>
+<p>&lt;img src=&quot;https://user-images.githubusercontent.com/5051300/69689794-db006900-1104-11ea-85b5-4cd21b45fd84.png&quot; style=&quot;display:block;width:454px;height:auto;margin:20px auto;&quot;/&gt;</p>
+<p>&lt;center&gt;小程序实例的典型架构&lt;/center&gt;</p>
+<p>熟悉小程序的开发者都知道，这样的架构最主要的目的就是禁止业务代码操作 DOM，迫使开发者使用数据驱动的开发方式，同时在小程序推出初期可以避免良莠不齐的 HTML 项目快速攻占小程序平台，后期则可以缓解小程序平台上的优质产品流失。</p>
+<h2>kbone 是什么</h2>
+<p>从 2017 年初小程序推出开始，业界最关心的就是小程序能否转为普通的 Web 开发。最初我们只能简单的用 Babel 进行 JS 的转换；后来小程序推出了 web-view 组件，开发者则开始想办法让 Web 页面使用小程序能力；在知道了 web-view 中的消息不能实时传到小程序逻辑层后，大家则开始选择妥协，改用语法树转换的方式来实现。很多小程序开发框架都是在这一个阶段产生的，如 Wepy、Labrador、mpvue 和 Taro。</p>
+<p>语法树转换终究是不可靠的——在 Wepy 和 Taro 的使用中，我们常常会碰到很多语法无法识别的坑，坑的数量与代码量成正比。因此，这些框架更适用于从零开始写，而不适合将一个大型项目移植到小程序。</p>
+<p><a href="https://github.com/wechat-miniprogram/kbone">kbone</a> 是微信团队开源的微信小程序<strong>同构</strong>框架，与基于语法树转换的 Wepy、Taro 等传统框架不同，kbone 的思路是在逻辑层用类似 SSR 的方式模拟出 DOM 和 BOM 结构，让逻辑层的 HTML5 代码正常运行；而 kbone 会负责将逻辑层中的虚拟 DOM 以 setData 的形式传递给视图层，让视图层利用小程序组件递归渲染的能力，产生出真实的 DOM 结构。</p>
+<p>使用 kbone 之后，我们可以将小程序页面理解为一个独立的 html 文档（而不是 SPA 中的一个 router page）。在每个页面的 JS 中初始化 kbone，为逻辑层提供虚拟 DOM 和 BOM 的环境，然后就可以像 H5 一样加载各种主流前端框架和业务代码，kbone 会负责逻辑层和视图层之间的 DOM 和事件同步。</p>
+<h2>让 kbone 支持 HTML5 inline SVG</h2>
+<p>在 HTML 中，SVG 的引入有很多种不同的方式，可以像图片一样使用 <code>&lt;img&gt;</code> 标签、<code>background-image</code> 属性，也可以直接在 HTML 中插入 <code>&lt;svg&gt;</code> 标签，另外还有 <code>&lt;object&gt;</code>、<code>&lt;embed&gt;</code> 等不太常见的方式。</p>
+<p>在一些大型 web-view 项目迁移到 kbone 的过程中，常常会遇到 HTML inline SVG（在 HTML 中直接插入 SVG 标签）这种情况；有的页面还会异步加载一个含有很多小图标（<code>&lt;symbol&gt;</code>）的大 SVG、在页面上用 <code>&lt;use xlink:href=&quot;#symbol-id&quot;&gt;</code> 的方式，实现 SVG 的 Sprite 化。</p>
+<p>本文针对单个页面上出现大量 HTML inline SVG 的实战场景，通过识别并转换成 <code>background-image</code>，来实现小程序 kbone 对 SVG 的支持。</p>
+<h3>构造用例</h3>
+<p>首先我们以 <a href="https://developers.weixin.qq.com/s/R9Hm0Qm67Acd">kbone 官方示例</a> 为基础，导入该项目后，在项目根目录新建 <code>kbone-svg.js</code>，然后进入 <code>/pages/index/index.js</code>，在 <code>onLoad()</code> 的结尾先写出调用方式和示例：</p>
+<pre><code class="language-js">Page({
+  data: ...,
+  onLoad(query) {
+    ...
+    init(this.window, this.document)
+    this.setData({ pageId: this.pageId })
+    this.app = this.window.createApp()
+    this.window.$$trigger('load')
+    this.window.$$trigger('wxload', { event: query })
+
+    // 添加我们的调用方式和示例
+    require('../../svg.js')(this.window)
+
+    this.document.body.innerHTML += `
+      &lt;p&gt;SVG 渲染&lt;/p&gt;
+      &lt;svg xmlns='http://www.w3.org/2000/svg' viewBox=&quot;0 0 40 40&quot; id=&quot;bell&quot; width=&quot;40&quot; height=&quot;40&quot;&gt;
+        &lt;g stroke=&quot;none&quot; stroke-width=&quot;1&quot; fill=&quot;none&quot; fill-rule=&quot;evenodd&quot; opacity=&quot;0.65&quot; transform=&quot;translate(3.8, 2.8)&quot;&gt;
+          &lt;polygon fill=&quot;#000000&quot; points=&quot;0.2 27.2 32.2 27.2 32.2 30.2 0.2 30.2&quot; /&gt;
+          &lt;path d=&quot;M15.84,1.66 L6.6,6 L4.5,28.7 L27.16,28.7 L25.1,6.01 L15.84,1.66 Z&quot; stroke=&quot;#000000&quot; stroke-width=&quot;3&quot; /&gt;
+          &lt;polygon fill=&quot;#000000&quot; points=&quot;11.52 30.2 13.68 33.2 18 33.2 20.16 30.2&quot; /&gt;
+        &lt;/g&gt;
+      &lt;/svg&gt;
+
+      &lt;p&gt;SVG Symbol 渲染&lt;/p&gt;
+      &lt;svg xmlns='http://www.w3.org/2000/svg' style=&quot;display:none&quot;&gt;
+        &lt;defs&gt;&lt;symbol viewBox=&quot;0 0 40 40&quot; id=&quot;bell&quot;&gt;
+          &lt;g stroke=&quot;none&quot; stroke-width=&quot;1&quot; fill=&quot;none&quot; fill-rule=&quot;evenodd&quot; opacity=&quot;0.65&quot; transform=&quot;translate(3.8, 2.8)&quot;&gt;
+            &lt;polygon fill=&quot;#000000&quot; points=&quot;0.2 27.2 32.2 27.2 32.2 30.2 0.2 30.2&quot; /&gt;
+            &lt;path d=&quot;M15.84,1.66 L6.6,6 L4.5,28.7 L27.16,28.7 L25.1,6.01 L15.84,1.66 Z&quot; stroke=&quot;#000000&quot; stroke-width=&quot;3&quot; /&gt;
+            &lt;polygon fill=&quot;#000000&quot; points=&quot;11.52 30.2 13.68 33.2 18 33.2 20.16 30.2&quot; /&gt;
+          &lt;/g&gt;
+        &lt;/symbol&gt;&lt;/defs&gt;
+      &lt;/svg&gt;
+
+      &lt;svg xmlns='http://www.w3.org/2000/svg' width=&quot;40&quot; height=&quot;40&quot;&gt;
+        &lt;use xlink:href=&quot;#bell&quot;&gt;&lt;/use&gt;
+      &lt;/svg&gt;
+
+      &lt;p&gt;SVG 自引用渲染&lt;/p&gt;
+      &lt;svg viewBox=&quot;0 0 80 20&quot; width=&quot;80&quot; height=&quot;20&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+          xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+        &lt;!-- Our symbol in its own coordinate system --&gt;
+        &lt;symbol id=&quot;myDot&quot; width=&quot;10&quot; height=&quot;10&quot; viewBox=&quot;0 0 2 2&quot;&gt;
+          &lt;circle cx=&quot;1&quot; cy=&quot;1&quot; r=&quot;1&quot; /&gt;
+        &lt;/symbol&gt;
+
+        &lt;!-- A grid to materialize our symbol positioning --&gt;
+        &lt;path d=&quot;M0,10 h80 M10,0 v20 M25,0 v20 M40,0 v20 M55,0 v20 M70,0 v20&quot; fill=&quot;none&quot; stroke=&quot;pink&quot; /&gt;
+
+        &lt;!-- All instances of our symbol --&gt;
+        &lt;use xlink:href=&quot;#myDot&quot; x=&quot;5&quot;  y=&quot;5&quot; style=&quot;opacity:1.0&quot; /&gt;
+        &lt;use xlink:href=&quot;#myDot&quot; x=&quot;20&quot; y=&quot;5&quot; style=&quot;opacity:0.8&quot; /&gt;
+        &lt;use xlink:href=&quot;#myDot&quot; x=&quot;35&quot; y=&quot;5&quot; style=&quot;opacity:0.6&quot; /&gt;
+        &lt;use xlink:href=&quot;#myDot&quot; x=&quot;50&quot; y=&quot;5&quot; style=&quot;opacity:0.4&quot; /&gt;
+        &lt;use xlink:href=&quot;#myDot&quot; x=&quot;65&quot; y=&quot;5&quot; style=&quot;opacity:0.2&quot; /&gt;
+      &lt;/svg&gt;
+    `
+  }
+})
+</code></pre>
+<p>本例中，结合 <code>&lt;defs&gt;</code> <code>&lt;symbol&gt;</code> 和 <code>&lt;use&gt;</code> 的<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol">文档</a>，给出了三种示例，分别用来代表普通 SVG 的渲染、跨 SVG 引用 Symbol（类似于雪碧图）的渲染、以及 SVG 内引用当前文档中的 Symbol 的渲染情况。</p>
+<h2>分析和实现</h2>
+<p>上述示例中，我们模拟 H5 条件下最一般的情况，直接在 body 下添加 HTML。如何支持这样的情况？首先我们打开 kbone 的代码 <code>/miniprogram_npm/miniprogram-render/node/element.js</code>，观察 <code>innerHTML</code> 的 setter：</p>
+<pre><code class="language-js">set innerHTML(html) {
+  if (typeof html !== 'string') return
+
+  const fragment = this.ownerDocument.$$createElement({
+    tagName: 'documentfragment',
+    // ...
+  })
+
+  // ...
+  ast = parser.parse(html)
+  // ...
+
+  // 生成 dom 树
+  ast.forEach(item =&gt; {
+    const node = this.$_generateDomTree(item) // &lt;--
+    if (node) fragment.appendChild(node)
+  })
+
+  // 删除所有子节点
+  this.$_children.forEach(node =&gt; {
+    // ...
+  })
+  this.$_children.length = 0
+
+  // ...
+  this.appendChild(fragment)
+}
+</code></pre>
+<p>可以看到，<code>innerHTML</code> 被转化成 <code>$_generateDomTree</code> 的调用，生成新的子节点，并替换掉所有旧的子节点。而在 <code>$_generateDomTree</code> 中，最终将会调用 <code>this.ownerDocument.$$createElement</code>。</p>
+<p>根据 <code>/miniprogram_npm/miniprogram-render/document.js</code> 中的定义，<code>Document.prototype.$$createElement</code> 作为我们熟知的 <code>Document.prototype.createElement</code> 的内部实现，因此为了监听 <code>&lt;svg&gt;</code> 等节点的创建，需要对 <code>$$createElement</code> 方法进行 Hook。</p>
+<p>在 kbone 官方文档 <a href="https://github.com/wechat-miniprogram/kbone/blob/develop/docs/domextend.md">DOM/BOM 扩展 API</a> 一章中不难发现，我们可以使用 <code>window.$$addAspect</code> 函数对所需的方法进行 Hook：</p>
+<pre><code class="language-js">window.$$addAspect('document.$$createElement.after', (el) =&gt; {
+  if (el.tagName.toLowerCase() === 'svg') {
+    setTimeout(() =&gt; renderSvg(el), 0);
+  }
+});
+</code></pre>
+<p>在这里，我们监听了 <code>&lt;svg&gt;</code> 节点的建立，并在下一个宏任务中（即等待 <code>&lt;svg&gt;</code> 节点的所有子节点挂载完成后）调用我们自己的 <code>renderSvg()</code> 方法。在 <code>renderSvg()</code> 中，我们希望进行下列一些操作：</p>
+<ol>
+<li>首先分析并保存当前 SVG 文档中的所有 Symbol，以便于当前 SVG 文档内部或者其它 SVG 中使用；</li>
+<li>将当前 SVG 文档中的跨文档 <code>&lt;use&gt;</code> 节点替换成对应 Symbol 的 HTML，如果对应的 Symbol 还没有加载，则监听其加载完成；</li>
+<li>清理当前 SVG 文档，并转换为 <code>data:image/svg+xml</code> 格式的 Data URI；</li>
+<li>将当前 SVG 标记为已渲染，清除所有子节点，并将生成的 Data URI 设置为 CSS <code>background-image</code> 属性。</li>
+</ol>
+<p>在并不知道 Symbol 是否可以再包含 <code>&lt;use&gt;</code> 的情况下，为了简化问题，我们可以先假设所有的 Symbol 中不会包含 <code>&lt;use&gt;</code>，即不存在 Symbol 之间多级依赖和循环依赖的情况。经过反复修改，<code>renderSvg()</code> 方法实现如下：</p>
+<pre><code class="language-js">const symbolMap = {};
+const symbolUseMap = {};
+
+const renderSvg = (el) =&gt; {
+  // 如果之前已经完成渲染，就不重复渲染
+  if (el.style.backgroundImage) return;
+
+  // 分析并保存当前 SVG 文档中的所有 Symbol，以便于当前 SVG 文档内部或者其它 SVG 中使用
+  // 同时，记录这些 Symbol，如果在当前 SVG 中本地使用，则不需要替换他们
+  const localSymbols = new Set(
+    el.querySelectorAll('symbol').map(resolveSymbol)
+  );
+
+  // 先假设没有完成渲染
+  let isFullRendered = true;
+
+  // 将当前 SVG 文档中的跨文档 `&lt;use&gt;` 节点替换成对应 Symbol 的 HTML
+  el.querySelectorAll('use').forEach((use) =&gt; {
+    const symbolId = (
+      use.getAttribute('xlink:href') || use.getAttribute('data-xlink-href')
+    ).replace(/^#/, '');
+
+    // 如果是当前文档内局部的 Symbol，不需要替换，background-image 会直接解析
+    if (localSymbols.has(symbolId)) return;
+
+    const symbol = symbolMap[symbolId];
+    if (symbol) {
+      // 如果对应的 Symbol 已经加载，将 &lt;use&gt; 替换成对应的 Symbol
+      // 这里暂时简化考虑，直接覆盖 &lt;use&gt; 的父节点的所有内容
+      const parentNode = use.parentNode;
+      parentNode.innerHTML = symbol.innerHTML;
+      parentNode.setAttribute('viewBox', symbol.getAttribute('viewBox'));
+
+      if (!symbolUseMap[symbolId]) symbolUseMap[symbolId] = new Set();
+      symbolUseMap[symbolId].delete(el);
+    } else {
+      // 如果对应的 Symbol 还没有加载，则监听其加载完成
+      if (!symbolUseMap[symbolId]) symbolUseMap[symbolId] = new Set();
+      symbolUseMap[symbolId].add(el);
+      isFullRendered = false;
+    }
+  });
+
+  // 若存在没加载完的 Symbol，先不执行渲染，因为渲染过程是一次性的，需要破坏所有子节点
+  if (!isFullRendered) return;
+
+  // 清理当前 SVG 文档，并转换为 `data:image/svg+xml` 格式的 Data URI
+  let svg = el.outerHTML;
+  const svgDataURI = parseSvgToDataURI(svg);
+  const backgroundImage = `url('${svgDataURI}')`;
+
+  if (backgroundImage.length &gt; 5000) {
+    console.error('[kbone-svg] SVG 长度超限', { svg, data: svgDataURI });
+  }
+
+  // 将当前 SVG 标记为已渲染，清除所有子节点，并将生成的 Data URI 设置为 CSS `background-image` 属性
+  el.innerHTML = '';
+
+  if (el.getAttribute('width'))
+    el.style.width = el.getAttribute('width') + 'px';
+  if (el.getAttribute('height'))
+    el.style.height = el.getAttribute('height') + 'px';
+
+  el.style.backgroundImage = backgroundImage;
+  el.style.backgroundPosition = 'center';
+  el.style.backgroundRepeat = 'no-repeat';
+
+  console.log('[kbone-svg] 渲染 SVG 元素完成', { svg, data: svgDataURI });
+};
+</code></pre>
+<p>接下来我们需要实现 resolveSymbol 方法。当遇到 Symbol 时，需要解析其 ID，保存该 Symbol 节点，并触发所有依赖当前 Symbol 的其他 SVG 的重新渲染。</p>
+<pre><code class="language-js">const resolveSymbol = (el) =&gt; {
+  const symbolId = el.id;
+  el.id = null;
+  const symbol = el;
+
+  if (symbolMap[symbolId] !== symbol) {
+    symbolMap[symbolId] = symbol;
+    setTimeout(
+      () =&gt; symbolUseMap[symbolId] &amp;&amp; symbolUseMap[symbolId].forEach(renderSvg),
+      0
+    );
+  }
+
+  console.log('[kbone-svg] 保存 Symbol 完成', symbol);
+  return symbolId;
+};
+</code></pre>
+<p>最后，我们需要定义 SVG 进行清理和渲染（转化为 Data URI）的过程。在此之前，需要对 setAttribute 和 setAttributeNS 进行一个 polyfill，因为 kbone 不支持为节点设置任意属性，很多属性设置之后会丢失。</p>
+<pre><code class="language-js">const _setAttribute = window.Element.prototype.setAttribute;
+window.Element.prototype.setAttribute = function(attribute, value) {
+  const oldHtml = this.outerHTML;
+  _setAttribute.call(this, attribute, value);
+  const newHtml = this.outerHTML;
+
+  // 如果设置属性后 outerHTML 没有改变，则设置到 dataset 中
+  if (oldHtml === newHtml) {
+    this.dataset[attribute] = value;
+  }
+};
+
+// 对设置 xlink:href 时可能出现的报错进行 polyfill，改为 data-xlink-href
+window.Element.prototype.setAttributeNS = function(xmlns, attribute, value) {
+  this.setAttribute('data-' + attribute.replace(':', '-'), value);
+};
+</code></pre>
+<p>接下来即可定义 SVG 文档转化为 Data URI 的过程了，这里需要用到很多正则表达式。</p>
+<pre><code class="language-js">const parseSvgToDataURI = (svg) =&gt; {
+  // 将被设置到 dataset 中的属性还原出来
+  svg = svg.replace(/data-(.*?=(['&quot;]).*?\2)/g, '$1');
+
+  // 将被设置到 data-xlink-href 的属性还原出来
+  svg = svg.replace(/xlink-href=/g, 'xlink:href=');
+
+  // 将 dataset 中被变成 kebab-case 写法的 viewBox 还原出来
+  svg = svg.replace(/view-box=/g, 'viewBox=');
+
+  // 清除 SVG 中不应该显示的 title、desc、defs 元素
+  svg = svg.replace(/&lt;(title|desc|defs)&gt;[\s\S]*?&lt;\/\1&gt;/g, '');
+
+  // 为非标准 XML 的 SVG 添加 xmlns，防止视图层解析出错
+  if (!/xmlns=/.test(svg))
+    svg = svg.replace(/&lt;svg/, &quot;&lt;svg xmlns='http://www.w3.org/2000/svg'&quot;);
+
+  // 对 SVG 中出现的浮点数统一取最多两位小数，缓解数据量过大问题
+  svg = svg.replace(/\d+\.\d+/g, (match) =&gt;
+    parseFloat(parseFloat(match).toFixed(2))
+  );
+
+  // 清除注释，缓解数据量过大的问题
+  svg = svg.replace(/&lt;!--[\s\S]*?--&gt;/g, '');
+
+  // 模拟 HTML 的 white-space 行为，将多个空格或换行符换成一个空格，减少数据量
+  svg = svg.replace(/\s+/g, ' ');
+
+  // 对特殊符号进行转义，这里参考了 https://github.com/bhovhannes/svg-url-loader/blob/master/src/loader.js
+  svg = svg.replace(/[{}\|\\\^~\[\]`&quot;&lt;&gt;#%]/g, function(match) {
+    return (
+      '%' +
+      match[0]
+        .charCodeAt(0)
+        .toString(16)
+        .toUpperCase()
+    );
+  });
+
+  // 单引号替换为 \'，由于 kbone 的 bug，节点属性中的双引号在生成 outerHTML 时不会被转义导致出错
+  // 因此 background-image: url( 后面只能跟单引号，所以生成的 URI 内部也就只能用斜杠转义单引号了
+  svg = svg.replace(/'/g, &quot;\\'&quot;);
+
+  // 最后添加 mime 头部，变成 Webview 可以识别的 Data URI
+  return 'data:image/svg+xml,' + svg.trim();
+};
+</code></pre>
+<p>以上是经过反复 debug 后的相对稳定的代码。放在上文的演示项目中，效果如下图：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/69700727-237c4e80-1126-11ea-9742-5124a7c5fc39.png" alt="image"></p>
+<p>可以看出，前两例中已经可以渲染出图片，第三例中，与 <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol">MDN 官方文档的表现</a> 不太一致，经过检查，生成的 Data URI 直接打开并没有问题，可能是小程序视图层的环境对 SVG 内的尺寸换算存在问题。</p>
+<p>在 Android 和 iOS 真机调试中，本例没有出现无法显示的兼容问题，这也说明了这种方案可行。</p>
+<h2>问题与总结</h2>
+<h3>kbone 解决了 JS 难题，却留下了 CSS 难题</h3>
+<p>在上述例子中可以看到，kbone 已经非常类似于 H5 的环境，但有一个很容易忽略的问题：由于实际的操作对象是 <code>&lt;body&gt;</code> 的虚拟 DOM，且小程序视图层并不支持 <code>&lt;style&gt;</code> ，<strong>我们已经无法通过 JS 给整个页面（而非特定元素）注入 CSS</strong>，因此也无法通过纯 JS 层面的 polyfill 来为 <code>svg</code> 等某一类元素定义一些优先级较低的默认样式。</p>
+<p>例如，在解析 SVG 的过程中，我们可能希望通过获取 SVG 元素的尺寸来设置渲染后背景图的默认尺寸（像 <code>&lt;img&gt;</code> 那样），同时允许来自业务代码中的尺寸覆盖，这在 kbone 环境下，甚至也许在小程序架构中是不可能的——除非我们利用 Webpack 的黑魔法将自己的 polyfill 编译到 WXSS 中去，或者如果你有超人的胆量和气魄，也可以给你迁移过来的业务代码中要覆盖你的样式批量加上 <code>!important</code>。</p>
+<p>同理，可以肯定的是，我们也无法在 JS 中控制诸如媒体查询、字体定义、动画定义、以及 <code>::before</code>、<code>::after</code> 伪元素的展示行为等，这些都是只能通过静态 WXSS 编译到小程序包内，而无法通过小程序 JS 动态加载的。</p>
+<h3>数据量消耗</h3>
+<p>另外，虽然在 HTML5 环境中十分推崇 SVG 格式，但放在 kbone 的特定环境下，把 SVG 转换成 CSS <code>background-image</code> 反而是一种不甚考究的方案，因为这将会占用 <code>setData()</code>（小程序基础库中称为 <code>vdSyncBatch</code>）的数据量，降低数据层和视图层之间通信的效率，不过好在每个 SVG 图片只会被传输一次。</p>
+<p>在写这个项目的同时，我也尝试将经过清理后生成的 SVG 利用小程序接口保存到本地文件，然后将文件的虚拟 URL 交给视图层，结果并不乐观。视图层在向微信 JSSDK 请求该 SVG 文件的过程中，也许因为没有收到 Content-Type 或者收到的 Content-Type 不对，导致 SVG 文件无法被正确解析展示出来。这可能是小程序的 Bug，或者也许是小程序并没有打算支持的灰色地带。</p>
+<h3>小结</h3>
+<p>尽管依然存在诸多问题，通过一个 polyfill 来为项目迁移过程中遇到的 SVG 提供一个临时展示方案仍然是有必要的——这让我们可以先搁置图片格式的问题，将更重要的问题处理完之后，再回来批量转换格式、或改用 Canvas 来绘制。</p>
+<p>文中完成的 kbone SVG polyfill 只有一个 JS 文件，托管在我个人的 <a href="https://github.com/rikumi/kbone-svg">GitHub</a>，同时为了方便使用也发布到 <a href="https://www.npmjs.com/kbone-svg">NPM</a>。本文存在很多主观推测和评论，如有谬误，欢迎留言指正。</p>
+<p><img src="https://img.shields.io/npm/v/kbone-svg" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/kbone-svg" alt=""></p>
+]]></description><link>https://blog.rikumi.dev/2019/11/27/kbone-svg/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/27/kbone-svg/</guid><pubDate>Wed, 27 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[Hello, VuePress]]></title><description><![CDATA[<hr>
+<h2>title: 'Hello, VuePress'
+date: 2019-11-06</h2>
+<p>经过一天的修改，rkm 今日基于 <a href="https://github.com/vuepressjs/vuepress-theme-blog">vuepress-theme-blog</a> 进行开发，将 <a href="https://github.com/SumiMakito/hexo-theme-journal/">hexo-theme-journal</a> 主题移植到 VuePress 中，采用 VuePress 的 SSR 方案代替 Hexo 老套的 EJS 方案，完成了 <strong><a href="https://github.com/rikumi/vuepress-theme-journal">vuepress-theme-journal</a> 的第一个版本</strong>。</p>
+<p>同时，[ RKM ] 博客也迁移至 VuePress 继续维护，项目结构将会<a href="https://github.com/rikumi/rikumi.github.io/tree/src">更加清晰</a>。</p>
+]]></description><link>https://blog.rikumi.dev/2019/11/06/migrating-to-vuepress/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/06/migrating-to-vuepress/</guid><pubDate>Wed, 06 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[利用 TypeScript 装饰器实现 Electron JSBridge]]></title><description><![CDATA[<hr>
+<h2>title: 利用 TypeScript 装饰器实现 Electron JSBridge
+date: 2019-11-03
+summary: 对于前端开发者来说，声明和实现分离显然并不是一种友好的办法，但我们可以利用装饰器语法，将声明和实现「自动」分离。</h2>
+<h2>背景</h2>
+<p>最近参与的某 PC 端项目中，团队决定使用 Electron 作为新增业务的 Native 支持层，同时与老业务的 Win32 应用程序无缝共存。熟悉 Electron 的同学可能知道这意味着什么。</p>
+<p>Electron 作为 NW.js 的继任者，最大的改动就是将 NW.js 的融合环境（以 HTML 为入口，同时支持前端和 Node 技术的环境）一分为二，变成了一个<strong>纯 Node.js 的主进程（Main process）<strong>加上</strong>一系列默认关闭 Node 支持的前端渲染进程（Renderer process）</strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8l3aj6x7qj30yq0agmxs.jpg" alt=""></p>
+<p>如果从 NW.js 和 Electron 同源于 Chromium 的角度来看，NW.js 相当于一个嵌入了 Node.js 支持的单窗口浏览器，每开一个进程就相当于打开了一个新的浏览器窗口；而 Electron 则相当于一个支持多标签页的浏览器，主进程是那个独立于所有标签页之外的那个「看不见的」框架层，渲染进程则相当于在这个浏览器中打开的一个个「看得见的」Tab。</p>
+<p>这样的架构设计，可能是为了迫使开发者更多地从逻辑/视图分离的角度来思考，开发出鲁棒性更强的应用程序；因此，脱胎于 Atom 的 Electron 造就了 VS Code、<a href="https://hyper.is/">Hyper</a>、Discord 等优秀的新一代跨平台桌面应用程序，同时也经常受到开发者的诟病。</p>
+<p>诟病的主要原因在于，主进程和渲染进程是两个「进程」，它们之间不存在任何语言层面的资源共享，两者之间的任何交互都必须通过消息来实现。也就是说，只要一个应用程序基于 Electron，里面就至少要有两个进程和一个消息通道。</p>
+<p>于是到了上文提到的需求中，我们就有了 <strong>Win32</strong>、<strong>Electron 主进程</strong>、<strong>Electron 渲染进程（Preload 脚本）</strong>、<strong>Electron 渲染进程（页面 JS）</strong> 四个环境，其中最后两个环境属于同一个进程，一共有三个进程，这三个进程<strong>两两之间</strong>都有<strong>相互调用</strong>的需求场景。最极端的情况是，Win32 进程甚至需要调用页面上 JS 提供的某个函数。</p>
+<p>Electron 为我们提供了 ipc 库，与 Win32 之间的通信也定好了具体的协议收发方式，但同一个函数的同一个定义可能需要被三个环境当中的任何一个调用，每一种调用方式在调用方和被调用方都需要写一次逻辑，一共就是 6 套不同的处理逻辑。每次增加这样的一个函数，需要浪费在这上面的工作量是惊人的。所以，我希望把这六种逻辑统一封装起来，实现定义一次、处处使用。</p>
+<h2>灵感</h2>
+<p>这一次的灵感来源于当时经常接触到的 PC 端的 C++ 代码。在 C++ 中，每次实现一个函数都需要先在头文件里写一次声明、在源文件里写一次实现，遇到这样的困难咬咬牙就挺过去了，可是，为什么要这样设计呢？</p>
+<p>头文件作为一个「模块」的接口声明，其实承担了两个完全不同的任务：一方面，它被接口的实现方（被调用方）引入，用于准确地实现这些接口；另一方面，它也被接口的依赖方（调用方）引入，用于准确地使用这些接口。**调用方只需要有声明，不需要有实现；被调用方既需要有声明，又需要有实现。**于是，声明和实现顺势分离成两个文件，让调用方只编译头文件，被调用方编译源文件及其头文件即可，这是头文件存在的最主要原因。</p>
+<p>我们在项目中使用的是 TypeScript，对于前端开发者来说，声明和实现分离显然并不是一种友好的办法，但我们可以利用装饰器语法，将声明和实现「自动」分离。</p>
+<p>我们只需要定义一些装饰器，用于表示某个函数需要在哪个环境执行；用这一套装饰器来修饰一些函数的实现，然后将这些实现在每一个环境中都引入一次；在装饰器中判断当前的环境，如果该函数恰好在当前环境执行，就保留原本的函数体实现；否则，将函数体实现替换为对对应远程函数的调用。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8l50fj32sj317w0go413.jpg" alt=""></p>
+<p>这样一来，我们就可以让接口函数定义一次、处处使用。下面一节中，让我们看一下具体的实现代码；同时这样做也带来了一些问题，我们将会在本文末尾展开讨论。</p>
+<h2>实现</h2>
+<p>注：代码仅作为实现思路演示，有适当删改。</p>
+<pre><code class="language-js">import { ipcMain, ipcRenderer } from 'electron';
+
+let localCallbackSeq = 0;
+
+/**
+ * 将主进程函数暴露给渲染进程
+ */
+const exposeMainFunctionToRenderer = (name, asyncFn) =&gt; {
+  ipcMain.on('call', (event, seq, method, params) =&gt; {
+    if (method === name) {
+      Promise.resolve(asyncFn(params))
+        .then((result) =&gt; {
+          event.reply('callback', seq, null, result);
+        })
+        .catch((error) =&gt; {
+          const { message, code } = error;
+          event.reply('callback', seq, { message, code });
+        });
+    }
+  });
+};
+
+/**
+ * 在渲染进程调用主进程暴露的函数
+ */
+const callMainFunctionFromRenderer = async (name, params) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    const localSeq = ++localCallbackSeq;
+
+    const invokeResultHandler = (event, seq, error, result) =&gt; {
+      if (seq === localSeq) {
+        ipcRenderer.removeListener('callback', invokeResultHandler);
+
+        if (error) {
+          let { code, message } = error;
+          error = new Error(message);
+          error.code = code;
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    };
+
+    ipcRenderer.on('callback', invokeResultHandler);
+    ipcRenderer.send('call', localSeq, name, params);
+  });
+};
+
+/**
+ * 将渲染进程函数暴露给主进程
+ */
+const exposeRendererFunctionToMain = (name, asyncFn) =&gt; {
+  ipcRenderer.on('call', (event, seq, method, params) =&gt; {
+    if (method === name) {
+      Promise.resolve(asyncFn(params))
+        .then((result) =&gt; {
+          ipcRenderer.send('callback', seq, null, result);
+        })
+        .catch((error) =&gt; {
+          const { message, code } = error;
+          ipcRenderer.send('callback', seq, { message, code });
+        });
+    }
+  });
+};
+
+/**
+ * 在主进程调用渲染进程暴露的函数
+ */
+const callRendererFunctionFromMain = async (name, params) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    const localSeq = ++localCallbackSeq;
+
+    const invokeResultHandler = (seq, error, result) =&gt; {
+      if (seq === localSeq) {
+        ipcMain.removeListener('callback', invokeResultHandler);
+
+        if (error) {
+          let { code, message } = error;
+          error = new Error(message);
+          error.code = code;
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    };
+
+    ipcMain.on('callback', invokeResultHandler);
+    mainWindow.webContents.send('call', localSeq, name, params);
+  });
+};
+
+/**
+ * 将主进程的函数暴露给 Native 端
+ */
+const exposeMainFunctionToNative = (name, asyncFn) =&gt; {
+  // 根据 Native 端的通信协议，进行类似的监听
+};
+
+/**
+ * 在主进程调用 Native 端提供的函数
+ */
+const callNativeFunctionFromMain = async (name, params) =&gt; {
+  // 根据 Native 端的通信协议，进行类似的调用
+};
+
+const overrideFn = (target, name, descriptor, value) =&gt; {
+  if (descriptor) {
+    descriptor.value = value;
+  } else {
+    target[name] = value;
+  }
+};
+
+/**
+ * 装饰器，用于定义 Native 端提供的服务函数，被装饰的函数不需要实现。
+ */
+const nativeService = (target, name, descriptor) =&gt; {
+  if (process.type === 'browser') {
+    // 主进程
+    const serviceFunction = callNativeFunctionFromMain.bind(null, name);
+    exposeMainFunctionToRenderer(name, serviceFunction);
+    overrideFn(target, name, descriptor, serviceFunction);
+  } else {
+    // 渲染进程
+    overrideFn(
+      target,
+      name,
+      descriptor,
+      callMainFunctionFromRenderer.bind(null, name)
+    );
+  }
+};
+
+/**
+ * 装饰器，用于定义主进程提供的服务函数。
+ */
+const electronService = (target, name, descriptor) =&gt; {
+  let serviceFunction = descriptor ? descriptor.value : target[name];
+
+  if (process.type === 'browser') {
+    // 主进程
+    exposeMainFunctionToRenderer(name, serviceFunction);
+    exposeMainFunctionToNative(name, serviceFunction);
+  } else {
+    // 渲染进程
+    overrideFn(
+      target,
+      name,
+      descriptor,
+      callMainFunctionFromRenderer.bind(null, name)
+    );
+  }
+};
+
+/**
+ * 装饰器，用于定义渲染进程提供的服务函数。
+ */
+const pageService = (target, name, descriptor) =&gt; {
+  let serviceFunction = descriptor ? descriptor.value : target[name];
+
+  if (process.type === 'browser') {
+    // 主进程
+    let localFunction = callRendererFunctionFromMain.bind(null, name);
+    exposeMainFunctionToNative(name, localFunction);
+    overrideFn(target, name, descriptor, localFunction);
+  } else {
+    // 渲染进程
+    exposeRendererFunctionToMain(name, serviceFunction);
+  }
+};
+
+export { nativeService, electronService, pageService };
+</code></pre>
+<p>在实现了上述这些装饰器之后，我们就可以利用这些装饰器来声明一个 JSBridge。这个 JSBridge 模块只需要被各个不同进程引入，就可以抹平进程间的差异，让对应的函数只在对应的进程内执行，跨进程则自动封装为异步的远程调用。</p>
+<pre><code class="language-js">import { shell } from 'electron';
+import {
+  nativeService,
+  electronService,
+  pageService
+} from '@/path/to/decorators';
+
+class JSBridge {
+  @nativeService
+  async openPhotoViewer(params) {}
+
+  @electronService
+  async openFile(filePath) {
+    return shell.openItem(filePath);
+  }
+}
+
+export default new JSBridge();
+</code></pre>
+<h2>讨论与思考</h2>
+<p>在上面的代码中，我们首先分别实现了在几种不同情况下远程函数的暴露和调用过程，然后分别定义了用于声明 Native 端、主进程、渲染进程所提供的服务函数的装饰器，根据调用端和被调用端的环境差异，执行必要的转发。在这样的设计和实现思路中，你是否发现了以下一些可能存在的问题？</p>
+<ol>
+<li>每个函数的暴露都会执行一次 <code>on()</code> 监听，同一个事件被监听 11 次以上，会触发 Node.js 的监听器内存泄漏告警，即使监听器的数量仍然是有限的，并不构成内存泄漏，但最好可以将监听统一到一处；</li>
+<li>装饰器的执行时机是在运行时的模块加载过程中，并非在编译期就执行。因此让所有进程都引入 JSBridge 定义文件，可能导致依赖被同时带到两个进程里。</li>
+</ol>
+<p>对于第二个问题，折中的方法是在主进程利用动态的 <code>require()</code>。主进程 import 到的依赖主要是外部的原生模块，并不会被 Webpack 打包，且在运行时会被转换成顶层的 <code>require()</code>，我们尽可能将这些主进程用到的 import 改为写在函数体内部的 <code>require()</code>，即可避免被渲染进程误加载。</p>
+<p>更深层次地讲，这个问题最终极的解决办法仍然需要将声明和实现分离，用一个文件去写声明，用另一个文件写实现，或者允许业务逻辑中给函数动态挂载实现。</p>
+]]></description><link>https://blog.rikumi.dev/2019/11/03/electron-static-js-bridge/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/03/electron-static-js-bridge/</guid><pubDate>Sun, 03 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[小米手环 4 NFC 版一周体验报告]]></title><description><![CDATA[<hr>
+<h2>title: 小米手环 4 NFC 版一周体验报告
+date: 2019-10-13
+featured_image: https://user-images.githubusercontent.com/5051300/66715720-241c8800-edf9-11e9-8f0c-862f627240cd.jpeg
+summary: 一个够用、实用但又不太好用的智能手环。</h2>
+<blockquote>
+<p>本期 BGM 来自 Rewrite，是神户小鸟的专属曲，名字 ニリンソウ = 二轮草，鹅掌草，花语是「ずっと離れない」。</p>
+<p>丛林的夜晚里，有着不知道延伸到何处的古树，睡着的精灵，有售货机不断吐出硬币的小鸟的幸福之梦，梦里还藏着小鸟永远无法向瑚太朗说出口的话。</p>
+</blockquote>
+<p>&lt;iframe width=&quot;1000&quot; height=&quot;100&quot; src=&quot;https://www.youtube.com/embed/re1k8nfNXJA?controls=0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;max-width: 100%; margin-bottom: 15px&quot;&gt;&lt;/iframe&gt;</p>
+<h2>从很久以前讲起</h2>
+<p>rkm 所有的文章都喜欢从很久很久以前开始讲起，这篇也不例外。</p>
+<p>2014 年，rkm 还在高三的时候，受到父母的影响开始接触网购，但暂时处于只能看不能买的阶段。这种特殊待遇，导致对很多东西疯狂种草，例如据说键盘手感很好的 Remix OS 平板（后来凉了），刚刚兴起的智能手表（当时还没有带屏手环这样的物种），同时也在为后来的大学生活早早开始挑选手机和电脑。</p>
+<p>受制于当时的知识水平，高考结束后，手机和电脑都买错了，手机买了即将要走下坡路的魅族 MX4 Pro，电脑则因为被颜值蛊惑，买了傻多戴的二合一轻薄本 Inspiron 13 7348 的国内阉割版。这些都是后来的事情，在高三刚开始的时候，rkm 买了一件同样不怎么优秀却有点让以后的我怀念的东西：智器 Z1，一个运行完整 Android 4.1 的 MIPS 设备。</p>
+<p>后来，那只手表陪伴了我整个高三，先是用自己刚刚学的 Android 技术，把一个开源的 2048 游戏改成全屏，上课玩，上厕所玩，还被同学死皮赖脸借去玩；不满于自带的启动器难看、表盘太少，不分昼夜地在魅族 M9 上用 AIDE 自己写了手表的启动器，首屏是带高考倒计日的数字表盘，后面则是应用图标，长按任意应用图标可以进入编辑模式，设置每个图标是否显示……这同时也是当时的 rkm 给自己留下的一个杀手锏功能，高考前几个月，rkm 隐藏了所有的图标，就再也无法进入编辑模式，让图标显示出来了，除非借家里或者老师的电脑跑 adb 指令。</p>
+<p>之前的智器，后来变成了小米生态链企业「华米」；而到了大学，rkm 先后换了 Weloop 品牌的 Now、Now 2 两款带屏手环，堪称带屏手环的开山鼻祖；最终都因为 rkm 的节能主义性格作祟而逐渐不戴了。</p>
+<p>上周，我遇到了今天这篇文章的主角：小米手环 4 NFC 版。</p>
+<h2>主角登场</h2>
+<p>最初这个手环发布的时候 rkm 就有关注，但处于对自己的了解，肯定不会戴很久，所以一直没打算买，直到今年十一假期，女票想要一条，所以凭借着一个绝不认输的心态，买了两条。（</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/66717580-3accda00-ee0d-11e9-90d3-7e94abf67bf4.png" alt=""></p>
+<p>此处没有开箱，只有刚刚拍的「假开箱」合照，可以看到偌大的盒子里空空如也，右侧凹区是手环，出厂时有一层包装纸；左侧大盒子里只有说明书，最右端小盒子里只有充电器；这包装质量真廉价， <strong>一看包装盒外面写着产地：深圳市宝安区，也就懂了。</strong> 🤔🤔🤔</p>
+<p>到货的当天，正好要和 <a href="https://rexskz.info">Rex</a> 面积，出门时在快递柜取了手环，一边骑平衡车一边拆包装，拆的那叫一个混乱。手环戴在手上，应用就先不装了，有空再研究。没想到的是，这一天的步数记录（26055）我直到本文发表时还没能打破，估计相当长一段时间内也不会打破了，因为 Rex 真的比女朋友还能走一万倍。</p>
+<h2>最大的槽点</h2>
+<p>到了晚上去吃雷神拉面，我开始打开路上安装好的小米运动，开始注册登录账号。先是登录小米账号，然后提示我未注册小米运动，注册的时候需要选择地区，rkm 习惯性选了香港，然后开始吃拉面，真香（现在看着这张图都香 ⬇️</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/66717783-7ff20b80-ee0f-11e9-8997-82b8a1290148.png" alt=""></p>
+<p>香了一阵子之后，rkm 开始发现问题：<strong>外区账号不能使用公交卡，不能使用门禁卡模拟，等于 NFC 就是废的。</strong> 理论上 rkm 并不在乎它废不废，但好歹也要给我第一次体验一下吧。</p>
+<p>官方的提示是需要重新注册小米账号，选择国区，让人十分费解，rkm 带着一脸黄人问号，一边吃拉面一边尝试。因为每次换账号都要重新配对手环，配对的界面文案是「请将手环紧贴手机」，我也不确定是走蓝牙还是 NFC，就真的会把手环贴在手机上，所以 Rex 也一边吃拉面一边旁观。经过来回几次尝试，再加上当晚 rkm 回家之后进行的一些补充试验，一共观察到下面几个现象：</p>
+<blockquote>
+<ol>
+<li>小米运动登录时可以选择小米账号登录，也可以选择手机号、微信登录；</li>
+<li>选择小米账号登录，首次登录会自动注册并绑定小米运动；</li>
+<li>选择手机号或微信登录，首次登录也会自动注册并绑定小米运动；</li>
+<li>绑定手机或微信是独立的，跟小米账号绑定的手机或微信没有任何关系；</li>
+<li>小米运动的地区选项也是独立的，跟小米账号所在的地区没有任何关系；</li>
+<li>小米运动账号注册时要求选择地区，一旦选了就无法更改；</li>
+<li>小米运动账号非国区无法使用 NFC 功能，并且界面上有大量删减，首页无广告（不想看）、没有发现页（不想看）、没有守望先锋系列表盘（这么藏着掖着，怕是没版权吧，而且小米奇丑无比的个性表盘，真心不想要）；</li>
+<li>小米运动账号理论上不依赖小米账号，但要使用 NFC 必须先绑定小米账号；</li>
+<li>小米账号和小米运动账号之间只能绑定不能解绑，已绑定的小米账号不能绑定新的小米运动，已绑定的小米运动不能绑定新的小米账号；</li>
+<li>小米账号中心的授权管理非常鸡肋（貌似直接把用户唯一 id 给了小米运动），即使你跑到小米账号中心去强行解除授权，下次授权还是能识别出来你之前绑定过小米运动账号，不允许换绑新的小米运动账号；</li>
+</ol>
+</blockquote>
+<p>这么几番试验之后，大概摸清楚了小米运动这个东西的套路，不管推理过程多复杂，结论就是一句话：<strong>你绑定了外区小米运动，这个小米账号就永远没法 NFC 了，除非你去找客服。</strong> 说到这里就不得不佩服小米生态链思维，一大堆碎片化的账号，碎片化的应用，扩张贼快，米家 App 却贼鸡肋，问题也贼多。</p>
+<p>rkm 也暂时认怂，毕竟只是想尝试一下这个手环的 NFC 到底能不能日常使用，还没打算真的一直用下去，况且首屏大面积国庆横幅广告、发现页各种耍酷老哥，真的不想看。所以一咬牙，注册了新的小米账号，顺手把老账号改绑到了香港手机上，新账号绑定到国内手机上，想用 NFC 就去切新账号，想用米家就切老账号，暂时解决了体验不了 NFC 的问题。</p>
+<h2>开启吐槽模式</h2>
+<h3>1. 吊不起胃口的公交卡</h3>
+<p>解决了账号的问题后，先点开公交卡的选项，开了一张深圳通，竟然是有开卡费的。和手机 NFC 相同的是，写卡到手环之后，这张卡可以一直使用，无论更换账号还是恢复出厂，都会一直存在，不过这样也有个缺陷，就是后来我不打算用这个卡了，并没有办法删除它，即使我开的数额很小并不指望退款。</p>
+<p>至于为什么不想用，因为 rkm 个人习惯手环手表戴在左手，地铁闸机和公交卡机都在右手，而且手机已经有了 NFC，比这个反手刷卡的操作要方便很多。<strong>（2019/11/3 更新：后来有一次跟 Rex 和咸鱼去蛇口，手机 NFC 死活刷不出站，好不容易出来之后下一次坐地铁又刷不进站，只好用手环救急刷了一下，以我个人的习惯，反手刷表的体位绝对无法接受，而是会快速摘下来，刷完了再戴上，体验极差。）</strong></p>
+<h3>2. 需要上传身份证、却又根本用不了的门禁模拟</h3>
+<p>看到门禁模拟这个功能的时候，rkm 其实是不太感冒的，因为之前手机解锁、有能力模拟门禁之后，也曾经仔细考虑过自己到底有哪些卡需要模拟。排除了上下班必须戴着的工卡没必要模拟之外，也就只有自己公寓的门卡了。</p>
+<p>因为刚刚搞定了账号问题，非常迫不及待地想知道这个模拟门禁到底为啥非要国区账号才能用。点开一看，原来是要上传身份证正反面，一阵恶心，这是要搞啥？抱着试一试的心态反复试了下自己的门卡，一直提示不能模拟该卡；又试了一下工卡，能模拟，但是实名认证一直出错，也不知道是出了什么问题。</p>
+<p>到了这里，我基本放弃了这个手环用 NFC 的念头，愣是把账号切回去，把 NFC 版给用成了无 NFC 版。</p>
+<h3>3. 丑到爆炸的个性表盘</h3>
+<p><img src="https://user-images.githubusercontent.com/5051300/66718810-c39e4280-ee1a-11e9-9281-531a69812424.png" alt=""></p>
+<p>除国区专供的守望先锋表盘（也丑）之外，小米运动官方目前提供了 59 个在线表盘，由于懒得截图，上图是 Google 图片上搜到的其中 48 个表盘，绝大多数表盘背景色并非纯黑，包括你可能以为是纯黑的第二行第二个、第四个，第三行第一个、第四个、第五个、第六个，第四行第一个、第二个，下载到手环上一看，都活生生糟蹋了这块 OLED 屏幕，更别提这里面其他占大多数的表盘在设计上就已经说不过去了。</p>
+<p>当然，民间有个做表盘定制的 <a href="https://www.coolapk.com/apk/tech.pingx.watchface">App</a>，但我下载了之后，发现界面比那些表盘还丑，难用的像个上世纪的程序，Web 版的域名野鸡的像个博彩网站，有的功能还要捐赠，捐赠通道竟然是微信支付宝……我觉得我还不如不下载，甚至想自己用微信小程序写一个……</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/66719014-07924700-ee1d-11e9-8180-c9bb21902d3f.png" alt=""></p>
+<p>rkm 作为一个重度节能主义者加重度强迫症，一旦用了这种第三方软件定制的表盘，就陷入了无限强迫症循环：一会觉得表盘不好看了应该改，一会又觉得第三方表盘定制的 App 太难用太丑了应该卸载……</p>
+<p>算了还是换回默认表盘吧。</p>
+<h3>4. 割裂的体验</h3>
+<p>好不容易选了个能看的表盘（例如，第二行第五个），感觉还不如默认表盘，怎么换回去？在手机上找了半天也找不到，点开手环一看，原来手环里面，上下滑的页面里有个「表盘」，可以在三个内置表盘（开箱图里的默认表盘、题图里的蓝色表盘及其黄色变种）和最后一次下载的自定义表盘之间切换。蓝色和黄色交替用了几天之后，rkm 的结论是，全都不如默认表盘。💊</p>
+<p>手机上不仅没法恢复默认表盘，手机上还没法设置亮度，默认亮度是中等亮度，在手环里可以调到最大亮度；还没法设置勿扰，手机上的「夜间模式」只是夜间固定时间降低亮度而已，导致我第一天还以为这个手环没法夜间勿扰；后来发现手环里有个勿扰的设定，可以入睡之后自动勿扰，虽然其实是半睡半醒的时候来个通知最可怕，但总比完全没有勿扰要摘掉手环睡觉好一些了。</p>
+<p>这种手环和手机之间体验过于割裂，让 rkm 感觉很多时候比较难以忍受，尤其是当我关掉了所有能关掉的功能之后——</p>
+<h3>5. 关不掉的功能</h3>
+<p>小米手环 4 跟安卓阵营其他一些智能手表一样，拥有水平和垂直两个方向的导航，水平方向上从左向右依次是表盘、支付宝、音乐控制、小爱同学；垂直方向上则可以在 App 中自由定制，默认（全开启）时有表盘、状态、心率、运动、通知、天气、卡包、更多；而「更多」里面又是另一种交互，又变成了无法定制的：勿扰、闹钟、音乐、秒表、倒计时、找手机、手机静音、支付宝、表盘、设置。</p>
+<p>这个「找手机」非常要人命，你也许只是想去点击下面的表盘或设置，在滑动的时候不小心点了，你的手机就会大叫，这个音量无法设置，只能设置用内置的铃声还是用电话铃声，而且在手环上还很难停下来，要往下滚动一屏，点击「手机静音」才会停下来。一边捂着手机扬声器一边操作手环下滑点击「手机静音」的操作真的很让人无语。</p>
+<p>因为这个「更多」的缺陷，同时 rkm 并不用支付宝，也不太想在手环上看状态、看心率、看历史通知、开始运动等等，索性就把垂直方向的导航全部关闭了，只能水平滚动，结果又带来了新的问题：支付宝我没有开启，为什么要一直占着水平导航的一屏，即使我是外区账号或者切换显示语言也关不掉？音乐控制能不能在手机正在播放音乐的时候才显示，没有播放音乐的时候隐藏？天气能不能放在表盘上显示，难道设置了天气就只能在垂直导航里点开才能显示？你们设计表盘的时候这么偷工减料的吗。</p>
+<p><strong>如果抛去印度这种比中国还欠发达的市场不看，你会发现国产品牌很难走向世界。一加在国际上的用户群体就已经足够边缘了，更何况小米这种连支付宝都关不掉就想做国际化的。</strong></p>
+<p>当然不排除可能因为我是港区，小米的产品经理觉得香港人也应该用支付宝。</p>
+<h3>6. 小障同学</h3>
+<p>虽然称之为小障同学，但它目前是我有生以来唯一一个真正用下去的语音助手。不确定这个手环是不是自己带了麦克风，以 rkm 日常使用的场景（主要是通过米家万能遥控器开关空调、打开换表盘界面等），大多数情况下是能正常理解语言并给出回应的，但有时候到了米家那里就会很坑。</p>
+<p>也不知道是因为前几天更新 macOS 把米家设备集体搞掉线了还是什么别的原因，即使我后来重置过米家万能遥控器，在我最近说「开/关空调」之后，结果一定是要么设备离线、要么显示「尝试了一下，先看看设备状态吧」，然后空调丝毫不为所动……</p>
+<h3>7. 运动记录不智能</h3>
+<p>不知道是 rkm 自己操作不对，还是因为没有进行「行为标注」，在小米运动 App 中体现的运动数据只有慢走和轻微活动，而不怎么用手的「骑平衡车」和非常剧烈用手的「其他运动」完全没有被记录，导致我今天绕深大骑了一圈竟然只记录了步数。</p>
+<p>也许接下来一段时间，rkm 会尝试在上下班骑平衡车之前开启一下行为标注，一段时间后再看看效果。但所谓「行为标注」，竟然只能给自己使用，没法做众包吗？</p>
+<h2>赞赏的部分 &amp; 总结</h2>
+<p>尽管吐槽了这么多问题，rkm 的直觉认为小米手环 4 NFC 版可能会比之前的其他手环会坚持用的更久，主要的亮点在于比较强的续航、OLED 屏与可下载表盘、应急时也许会用到的公交卡、以及可以控制米家设备的小爱同学。值得一提的是续航方面，对续航影响最大的心率测量有很多种选项，在调整时都会显示影响续航的警告信息，但即使开启了最可能影响续航的选项：每 1 分钟测量心率，续航依然在可以接受的范围内，一天下来并没有看到特别显著的电量消耗。而在 OLED 屏和可下载表盘方面，二进制格式的表盘文件虽然难以解读和修改，但至少为定制提供了一个切入点，等到表盘看腻了，写个自定义表盘也说不定。</p>
+<p>rkm 对于腕上可穿戴设备的需求比较简单，表盘能看、能满足日常计步、简易的心率跟踪、恰到好处的通知提醒、可以戴着洗澡的基本防水能力、以及可以在洗澡时切歌的播放控制，同时续航又不太尿崩，就已经可以胜任大多数日常需求了；至于在这些基本需求之上的吐槽点，都只是希望它更完美、更像一个属于我自己的东西。</p>
+]]></description><link>https://blog.rikumi.dev/2019/10/13/mi-bind-4-one-week-report/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/10/13/mi-bind-4-one-week-report/</guid><pubDate>Sun, 13 Oct 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[小记 OnePlus 6T 折腾史（上）]]></title><description><![CDATA[<hr>
+<h2>title: 小记 OnePlus 6T 折腾史（上）
+date: 2019-09-18
+featured_image: https://user-images.githubusercontent.com/5051300/65166528-76c18900-da73-11e9-9cd6-fb517744cccf.png
+summary: Google 和 OnePlus 设计师都从早期的 Material Design 1 出发，各自走上了不同的路。</h2>
+<blockquote>
+<p>题图使用黑莓史上最垃圾手机——渣 CPU、软趴趴键盘、万年 6.0、APK 装一天的 BlackBerry Priv 拍摄。</p>
+<p>当初贪图 Android 没买 Passport 的我真的是蠢哭了。</p>
+</blockquote>
+<p>再过两天就是 9 月 20 日，在这一天，你将与你身边的伙伴们拉开差距——他们买的 iPhone 11 和 iPhone 11 Pro 到货了。</p>
+<p>去年的这个时候恰巧相反。rkm 厌倦了非全面屏的 iPhone 6s 和反定制化的 iOS，就像一年后的今天反而开始怀念那颗把大拇指放进去就会爽到不行的 Home 键一样。rkm 想要买一台不一样的安卓机。</p>
+<p>彼时，还没搞出聊天宝、没被字节跳蛋收购的锤科，正处在它一生中的巅峰。尽管 TNT 工作站门可罗雀，却反而造就了<strong>坚果 R1</strong> 这款工业设计在线、情怀依旧、性能高端、价格亲民的手机。这是锤科第一部不膨胀的手机。<strong>后来我们知道，这同时也是锤科最后一部手机。</strong></p>
+<p>在结束了对 R1 的新鲜感后，「手泥收集器」细红线、十分不优雅的非居中无线充电线圈、放在指纹传感器里让你感觉每天按指纹都在「按个锤子」的奇葩 Logo、要装一个圆角插件把下面设置成 18dp 才会对称的「天圆地方」屏、无法换图标迅速审美疲劳的 Smartisan SystemUI、以及没啥卵用还会导致上班摸鱼的 TNT Mode，让我很快就把这台机器挂到了闲鱼上。卖出去的价钱正好还清了剩下的分期，让我有了一种租了一个月手机的奇妙错觉。</p>
+<p>卖出去才知道，对面是做倒买倒卖的深藏不露的中介。</p>
+<h2>入手</h2>
+<p>11 月，我收到了我的第二部全面屏手机，人生中第十部手机，OnePlus 6T 砂岩黑版本。</p>
+<blockquote>
+<p>Rkm 人生中的手机：</p>
+<p>Nokia 3230 &gt; E63 &gt; C5-03 &gt; Meizu M9 &gt; MX4 Pro &gt; MX5 &gt; iPhone 6 &gt; 6S &gt; Smartisan R1 &gt; OnePlus 6T</p>
+</blockquote>
+<p>刚刚买这一部 6T 的时候，对一加的设计风格情有独钟，真信了氢 OS 早期所谓的「设计语言与 Material Design 一脉相承」，结果买回来用了一阵子发现，不管哪里的 Material Design 都不是你这样的。</p>
+<p>当然，更客观地讲，也可以说是 Google 和 OnePlus 设计师都从早期的 Material Design 1 出发，各自走上了不同的路。至于孰优孰劣，当你看到与 OnePlus 师出同门的 Oppo 用上了同样思路只是更加激进的所谓「无边界设计」，却搞出一个用起来丑出天际的应用商店，想想这可能就是氢 OS 的未来，大概心里也就有 B-树了。</p>
+<p>再加上氢 OS 逐渐国产化，预装了越来越多奇奇怪怪不想用的软件：抖音，头条，微博，支付宝…… 一咬牙，刷了氧 OS。</p>
+<p>巧就巧在，正好赶上了氢氧同源化。刷完氧一看，还是原来的桌面，还是熟悉的味道，只是预装软件没了而已。作为一个开发者和轻度精神洁癖，我十分清楚这所谓的氧 OS 下面跑着的代码是怎么样的一坨。</p>
+<p>**所以喜欢用 OnePlus 的外国友人们大多是怎样的人呢？**当时的 rkm 对此还没什么概念；后来有个有趣的事件，马上会讲到。</p>
+<h2>刷机</h2>
+<p>今年年初，一向很懒得解锁刷机（也是快四年没有玩过安卓刷机）的 rkm，还是跟着宁静之雨的教程开始解锁刷机。看着这个有了 A/B 分区的神奇设备，rkm 不禁想起上一次刷机还是在 Android 5.1 的时代；再上一次，是在 Android 4.0.3 的时代。</p>
+<p>如果没记错的话，第一个刷入的系统，是标有 Official 的 Pixel Experience。这是一个绝妙的 ROM，有着严格等同于 Pixel 设备的绝妙体验。无论是完整的 Google 应用生态，锁屏 AOD，深色通知，增加了自动略过锁屏的 Google 可信面部解锁，Now Playing，体验感都非常棒。（图片来自网络）</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/65172538-b7270400-da7f-11e9-95cb-db002cbc7237.png" alt=""></p>
+<p>很可惜，<a href="https://forum.xda-developers.com/oneplus-6t/development/rom-pixel-experience-t3875179">这个 ROM（Pixel Experience for OnePlus 6T）</a>消失了。它当时的维护者 Saksham 由于受到社区的严重排挤和辱骂，删掉了 Pixel Experience 官网上的针对 OnePlus 6T 的官方 ROM。至于为什么骂他，当时坊间的说法是「他连如何刷自己的手机都不会」。显然这种说辞很令人怀疑，一个不会刷机的开发者，是怎么可能把即使是现成的一整套 ROM 编译和适配起来的呢？</p>
+<p>后来，一次偶然的机会，我在这些对 Saksham 颇有微词的人们的讨论群中看到了一份安利，他们认为 Bootleggers ROM 是最好的 ROM。</p>
+<p>这个被大家如此热烈追捧的 ROM 我当然要试一下了。让我万万没想到的是，刷上之后是这样的（图片来自网络）：</p>
+<p><img src="https://user-images.githubusercontent.com/5051300/65171708-13892400-da7e-11e9-8cc6-28abdd10d947.png" alt=""></p>
+<p>Excuse me? 这么亮瞎我眼睛的启动动画是几个意思？「家」是什么玩意？你们老外看不懂汉字就觉得一个黑体字很牛逼是吗？更不用说它 ROM 里面奇怪的启动器、奇怪的默认壁纸、把奇怪的设置一股脑放在一个地方的定制化选项，以及残缺不全的多语言支持。</p>
+<p>所以上一节我抛出的问题，喜欢用这些非常容易定制的 Android 机型、觉得自己「很会刷机」，觉得别人维护一个十分克制的 ROM 就是「不会刷机」的外国友人，大多是什么样的货色，我觉得大家心里也能有那么一点 B-树了。</p>
+<p>**这样的网络暴力不是偶然。**几个月之后，新的维护者 prudhvi_99 以 Unofficial 的身份接手了这个项目，用几乎没变的代码重新发布了<a href="https://forum.xda-developers.com/oneplus-6t/development/rom-pixel-experience-t3944873">新的版本</a>，结果又一次在大约一个月后主动删除。作为一个自认为比较敏锐的用户，我没有看到这个 ROM 中有任何值得你们去攻击谩骂的问题，而你们所推崇的那些充满盲目无知的汉字崇拜的电子垃圾，正在无形中消磨着这些专业开发者继续维护下去的毅力。</p>
+<h2>回归与再尝试</h2>
+<p>与国内的各类毒瘤爬虫下载站、随意搜索转发保存的百度网盘不同，国外的这些软件无论有多少转发和传播，最终都会回流到原始开发者提供的那几个下载渠道。这也就意味着，当开发者自己不再打算维护下去、并决定删除作品的时候，这份成品也许就会一瞬间在整个互联网上消失。</p>
+<p>至少 rkm 已经找不到那两份 ROM 包了；即使能找到，他们也已经不再被维护，带着很久前的安全更新和设备适配代码，等着被人们遗忘。</p>
+<p>无奈之下，暂时回了氧 OS。当你习惯了 Google 的应用生态后，你会发现第三方系统内置的应用与 Google 应用的体验完全是割裂的，没有云服务，没有一致的交互体验，没有深色模式或自适应图标，没有云端硬盘备份，一无所有。</p>
+<p>OnePlus 在不明白这一点的情况下，再怎么「优化」你的内置应用，真正希望得到良好体验的用户都不会买账的。虽然第三方厂商并没有 Google 最全套内置应用的授权，但至少在体验上做成差不多的交互，给我尽可能多的 Google 原生应用，比任何优化都好。OnePlus 不懂得这一点，甚至还会把 Android 原生的 DocumentsUI 魔改一下 Manifest，改成「下载」，这种操作我也是第一次见；全面屏手势做的倒是像模像样，一上手就穿帮：「这根本不是你想要模仿的 iOS 多任务交互，只是东施效颦罢了。」</p>
+<p>为了完整的 Google 体验，我通常会删除氧 OS 的绝大多数内置应用，装上了或原版或移植版的 Google Stock Apps，包括电话、信息、通讯录、时钟、日历、相机、相册、云端硬盘、Gmail、Gboard。唯一不能改的是「设置」，但 OnePlus 自带的「设置」在设计上也算说得过去，只是跟其它应用不那么搭配罢了；至于系统体验，我更期待 Android 10，至少手势交互上，OnePlus 不用再把自己那一套「拙劣的仿制品」搬到台上表演了。</p>
+<p>不过令我没想到的是，Android 10 并没能在 OnePlus 6T 的氢氧 OS 中如期而至。这一次，我刷上了 LineageOS 17。</p>
+<p>「未完待续」</p>
+]]></description><link>https://blog.rikumi.dev/2019/09/18/history-of-my-oneplus-6t-1/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/09/18/history-of-my-oneplus-6t-1/</guid><pubDate>Wed, 18 Sep 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[重置：Reset]]></title><description><![CDATA[<hr>
+<h2>title: 重置：Reset
+date: 2019-09-17
+featured_image: https://i.ytimg.com/vi/KQHgcSt44fw/maxresdefault.jpg</h2>
+<p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/KQHgcSt44fw?controls=0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;max-width: 100%; margin-bottom: 15px&quot;&gt;&lt;/iframe&gt;</p>
+<p>你现在所看到的 [ RKM ] 原名 [ rikumi ]，建立于 2018 年初。</p>
+<p>当时，rkm 曾在回家过年的不愉快中，每天躲在卧室里写下一些自述，试图寻找属于自己的一片净土；后来，这个年最终也没能正常过完，rkm 提早回到学校，在大门紧锁的宿舍之外找到了临时的住所，在春节仍然营业的老爷爷宅急送和昼夜交替的游戏与直播中度过了后半个假期。再后来，rkm 从某新兴短视频公司的失败面试中得到经验，受同校的学长推荐，进入了一直向往（唯一是人待的地方）的鹅厂；这个兼用做个人自述的小站也逐渐失去它本来的价值。</p>
+<p>今天，[ RKM ] 系统重置，底层换成了 <s>hso</s> hexo，使用推特网红咖啡 <a href="https://mak1t0.cc">Makito</a> 制作的 <a href="https://github.com/SumiMakito/hexo-theme-journal/">Journal 主题</a>。</p>
+<p>关于此后的文章，也许会完全看心情更新，更侧重于生活和踩坑记录。同时，文章也会保留之前随附一首音乐的风格，将安利喂到底。</p>
+<p>本期 BGM 「Reset」 来自 Cytus II，数百年沉睡后的人工智慧 Ivy 在荒芜中醒来，人类早已赢得了那场战争，而她们，也将流落在被人类尘封的荒芜之地，重新开始，寻找曾经一起叛逆的伙伴。</p>
+<blockquote>
+<p>這是 ⋯⋯ 過了多久了 ⋯⋯？</p>
+<p>滿滿的綠 ⋯⋯ 印象中，這是珍貴的顏色，但眼前到處都是樹葉、青苔與藤蔓，都快看不到天空了。</p>
+<p>得趕快回去，她還在 Shelter 裡等我。</p>
+<p>不過在回去之前 ⋯⋯ 有件事我得先做。</p>
+<p>—— Ivy@Main_Log_699_12_23</p>
+</blockquote>
+]]></description><link>https://blog.rikumi.dev/2019/09/17/reset/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/09/17/reset/</guid><pubDate>Tue, 17 Sep 2019 08:00:00 GMT</pubDate></item></channel></rss>
