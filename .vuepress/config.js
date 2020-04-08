@@ -34,10 +34,6 @@ module.exports = {
     summaryLength: 120,
     nav: [
       {
-        text: '关于',
-        link: '/about/'
-      },
-      {
         text: 'GitHub',
         link: 'https://github.com/rikumi'
       },
