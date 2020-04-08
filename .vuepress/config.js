@@ -15,12 +15,7 @@ module.exports = {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'UA-148373443-1');
-    `],
-    ['script', { src: '/imouse.js' }],
-    ['script', {}, `window.addEventListener('DOMContentLoaded', () => IMouse.default.init({
-      defaultBackgroundColor: 'rgba(1, 80, 111, .15)',
-      activeBackgroundColor: 'rgba(1, 80, 111, .25)',
-    }))`]
+    `]
   ],
   plugins: {
     'rss-support': {
