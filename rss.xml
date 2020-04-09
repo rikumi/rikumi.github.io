@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[/rkm/]]></title><description><![CDATA[Can you hear me?]]></description><link>https://blog.rikumi.dev</link><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Apr 2020 08:45:11 GMT</lastBuildDate><atom:link href="https://blog.rikumi.dev/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2020 Rikumi]]></copyright><language><![CDATA[zh-CN]]></language><item><title><![CDATA[IMouse：iPad Pro 的鼠标指针，用了又用]]></title><description><![CDATA[<p>项目主页：<a href="https://github.com/rikumi/imouse">https://github.com/rikumi/imouse</a></p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[/rkm/]]></title><description><![CDATA[Can you hear me?]]></description><link>https://rikumi.dev</link><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Apr 2020 08:45:27 GMT</lastBuildDate><atom:link href="https://rikumi.dev/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2020 Rikumi]]></copyright><language><![CDATA[zh-CN]]></language><item><title><![CDATA[IMouse：iPad Pro 的鼠标指针，用了又用]]></title><description><![CDATA[<p>项目主页：<a href="https://github.com/rikumi/imouse">https://github.com/rikumi/imouse</a></p>
 <p><img src="https://img.shields.io/npm/v/imouse" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/imouse" alt=""></p>
 <h2>介绍</h2>
 <p>PC（含 Mac）GUI 的世界中，几十年没有改变的设计有两个：一个是窗口，另一个是鼠标指针。传统的鼠标指针设计固然高效，但它经常引起我们的无端思考：为什么是一个箭头？为什么链接的指针是一个手？为什么箭头往左歪？</p>
@@ -161,7 +161,7 @@ IMouse.init(options);
 </table>
 <h3><code>IMouse#destroy()</code></h3>
 <p>销毁 IMouse 实例并恢复原始鼠标指针。</p>
-]]></description><link>https://blog.rikumi.dev/2020/03/21/imouse/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/03/21/imouse/</guid><pubDate>Sat, 21 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[Fresh Shell 3：基于 Node.js 的 JavaScript「壳中壳」]]></title><description><![CDATA[<p>项目主页：<a href="https://github.com/rikumi/fresh-shell">https://github.com/rikumi/fresh-shell</a></p>
+]]></description><link>https://rikumi.dev/2020/03/21/imouse/</link><guid isPermaLink="true">https://rikumi.dev/2020/03/21/imouse/</guid><pubDate>Sat, 21 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[Fresh Shell 3：基于 Node.js 的 JavaScript「壳中壳」]]></title><description><![CDATA[<p>项目主页：<a href="https://github.com/rikumi/fresh-shell">https://github.com/rikumi/fresh-shell</a></p>
 <p><img src="https://img.shields.io/npm/v/fresh-shell" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/fresh-shell" alt=""></p>
 <h2>背景</h2>
 <p>Shell 是 Unix 世界中一个不可或缺的工具，但它的语法也许不那么优雅、难以学习，阻止了你很多突发奇想，让很多需要高生产力的临时需求不得不变成写一个冗长的 Node 脚本再去调试运行。</p>
@@ -249,7 +249,7 @@ config.prompt = (status = 0) =&gt; {
 <h2>建议与贡献</h2>
 <p>欢迎对本项目提出 Issue 或 Pull Requests。需要注意的是，Fresh 作为一个外壳程序，对于功能上的要求会进行一定的取舍，在保持实现简单的前提下合理迭代。</p>
 <p>因为 Fresh 的最大意义是用 &lt; 500 行代码实现 JavaScript 与其他 Shell 的融合，而非做一个完美无缺的 Shell 本身。</p>
-]]></description><link>https://blog.rikumi.dev/2020/03/06/fresh-shell-3/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/03/06/fresh-shell-3/</guid><pubDate>Fri, 06 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[回到 Apple 阵营：我们存在的意义]]></title><description><![CDATA[<blockquote>
+]]></description><link>https://rikumi.dev/2020/03/06/fresh-shell-3/</link><guid isPermaLink="true">https://rikumi.dev/2020/03/06/fresh-shell-3/</guid><pubDate>Fri, 06 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[回到 Apple 阵营：我们存在的意义]]></title><description><![CDATA[<blockquote>
 <p><strong>本期 BGM「花蕾（からい）」来自原作走心、动画要命的 Key 社作品「Rewrite」。</strong></p>
 </blockquote>
 <p>&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=320 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=26131690&amp;height=66&amp;loop=1&quot;&gt;&lt;/iframe&gt;</p>
@@ -368,7 +368,7 @@ config.prompt = (status = 0) =&gt; {
 <p><strong>所谓生态，更重要的是设备间的「体验」不会发生割裂，当下的「操作」不会被打断。而并不是让你可能一年也不会看几次的「文件」和「照片」一直都拖泥带水的跟着你走。</strong></p>
 <p>人是不懂得垃圾回收的动物。很多人看重这些积累性的东西，直到离开了世界，数十年之后，他本想传给子孙的东西会被子孙当作垃圾扔掉。每个人存在过的痕迹都会这样被一点点抹除，这不是什么魔幻，这是一种自然规律。与其抱怨它，不如现在就接受：</p>
 <p><strong>「我存在的意义并不在于我产生过的数据，而在于我「现在」正在进行的思考。」</strong></p>
-]]></description><link>https://blog.rikumi.dev/2020/02/25/back-to-apple-world/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/02/25/back-to-apple-world/</guid><pubDate>Tue, 25 Feb 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[iOS 键盘难题与可见视口（VisualViewport）API]]></title><description><![CDATA[<blockquote>
+]]></description><link>https://rikumi.dev/2020/02/25/back-to-apple-world/</link><guid isPermaLink="true">https://rikumi.dev/2020/02/25/back-to-apple-world/</guid><pubDate>Tue, 25 Feb 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[iOS 键盘难题与可见视口（VisualViewport）API]]></title><description><![CDATA[<blockquote>
 <p>本文已于 2020/2/25 发表在 <a href="http://www.alloyteam.com/2020/02/14265/?newui=true">AlloyTeam 团队博客</a>，2020/3/1 发表在 <a href="https://segmentfault.com/a/1190000021874101">SegmentFault</a>，2020/3/21 转载至 <a href="https://mp.weixin.qq.com/s/ZtXB23YV0UkK9roIv8qsJA">AlloyTeam 公众号</a> 及 <a href="https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw">前端早读课公众号</a>。感谢团队和上述平台的支持。</p>
 </blockquote>
 <blockquote>
@@ -572,7 +572,7 @@ export default class VisualViewportComponent extends React.Component&lt;{}, Visu
 <p>经过这样的实现，我们的组件可以在支持的浏览器中正确定位到当前可见视口的位置（上图中的靛蓝色区域），并将内部的元素以可见视口为基准进行定位。对于移动端 Web 应用来说，这样的组件有很多用途，例如吸附键盘的工具栏或自动完成列表、需要避开键盘居中的对话框等等。值得一提的是，在 PC 浏览器上，这个 API 也同样适用（可以响应页面的放大）。</p>
 <p>在 iOS 下，这样的实现还存在一些迟钝和小 bug（例如，键盘展开后的强制滚动状态下向上滑动，可以露出不论是 Viewport 还是 VisualViewport 都无法到达的白色衬底区域）。</p>
 <p><strong>但至少，在 iOS 8.2 发布四年后，iOS 13 对 VisualViewport 的支持，让获取键盘高度、避开键盘、吸附键盘这三件事终于有了相对优雅的办法。</strong></p>
-]]></description><link>https://blog.rikumi.dev/2020/02/21/keyboard-problem-visual-viewport/</link><guid isPermaLink="true">https://blog.rikumi.dev/2020/02/21/keyboard-problem-visual-viewport/</guid><pubDate>Fri, 21 Feb 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[Ryan Dahl: Deno, a new way to JavaScript]]></title><description><![CDATA[<h1>提要</h1>
+]]></description><link>https://rikumi.dev/2020/02/21/keyboard-problem-visual-viewport/</link><guid isPermaLink="true">https://rikumi.dev/2020/02/21/keyboard-problem-visual-viewport/</guid><pubDate>Fri, 21 Feb 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[Ryan Dahl: Deno, a new way to JavaScript]]></title><description><![CDATA[<h1>提要</h1>
 <p>12 月 11 日，Node.js 原作者 Ryan Dahl 来到腾讯滨海大厦，亲自介绍他的新作品 Deno，这是一个全新开发的 JavaScript 和 TypeScript 运行时。</p>
 <p>以下是转录的英文原文，为了流畅阅读，部分语句稍有删减。本次分享所用 PPT 与<a href="https://docs.google.com/presentation/d/1z4NxX2p4JiWFvHQ9TUiY77L_ePq2sey9llNy-Mipo0I/edit#slide=id.g5467cd45c1_0_246">网络上之前已有的一些 PPT</a> 几乎一致，可以直接对照查看。</p>
 <h1>原文</h1>
@@ -664,7 +664,7 @@ export default class VisualViewportComponent extends React.Component&lt;{}, Visu
 <p>Q15: Did you ever encounter any problem with the version of TypeScript? TypeScript is under development and there must be some issues.</p>
 </blockquote>
 <p>We bundled TypeScript, so we have a fixed version of TypeScript, which you can see if I do Deno. And Deno is kind of where we put all of our non-webby things. And if I do Deno.version, I can see my TypeScript version. So, this is the version of TypeScript that is bundled into Deno. And yes, TypeScript is changing quickly and it's going to get out of date, but I think TypeScript has kind of, you know, had a very fast development cycle and is starting to stabilize. And I think the APIs are not changing as much anymore. And of course, Deno is kind of also going very fast at development and starting to stabilize what we would hope for in, you know, like a year or so. These things kind of stabilize. You don't want the languages to always be changing. So, what I'm kind of hoping is that this matters less and less as time goes on. It matters a little bit right now, especially with like top level await and that sort of stuff. But in six months the version of TypeScript is not going to matter as much as it did like a year ago.</p>
-]]></description><link>https://blog.rikumi.dev/2019/12/11/ryan-dahl-deno/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/12/11/ryan-dahl-deno/</guid><pubDate>Wed, 11 Dec 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[四鸭子问题：几何概型的理论分析与程序模拟测试]]></title><description><![CDATA[<h2>问题</h2>
+]]></description><link>https://rikumi.dev/2019/12/11/ryan-dahl-deno/</link><guid isPermaLink="true">https://rikumi.dev/2019/12/11/ryan-dahl-deno/</guid><pubDate>Wed, 11 Dec 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[四鸭子问题：几何概型的理论分析与程序模拟测试]]></title><description><![CDATA[<h2>问题</h2>
 <p>四只小鸭子在一个大的圆形水池中，分别随机出现在圆中的任意一点。四只鸭子出现在同一个半圆内的概率是多少？</p>
 <h2>争论</h2>
 <p>首先看到大家的争论，有一个明显错误的逻辑：每个鸭子落在一个半圆内的概率是 1/2，第一只鸭子随便落，后三只鸭子都要跟第一只鸭子落在同一个半圆，所以是 1/8。</p>
@@ -799,7 +799,7 @@ randomDucks(10); // -&gt; 非常接近 0.01953125 (10/512)
 </li>
 </ol>
 <p>因此，n 只鸭子下水，落在同一个半圆面内的概率为 <code>2n / 2^n</code>，我初次看到这个通项，以为需要跑到 n 维空间去做几何规划才能得到这样的答案，没想到竟然可以化归为古典概型来解释，实在是妙不可言 😏。</p>
-]]></description><link>https://blog.rikumi.dev/2019/11/29/four-ducks-problem/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/29/four-ducks-problem/</guid><pubDate>Fri, 29 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[在 kbone 中实现小程序 svg 渲染]]></title><description><![CDATA[<h2>背景</h2>
+]]></description><link>https://rikumi.dev/2019/11/29/four-ducks-problem/</link><guid isPermaLink="true">https://rikumi.dev/2019/11/29/four-ducks-problem/</guid><pubDate>Fri, 29 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[在 kbone 中实现小程序 svg 渲染]]></title><description><![CDATA[<h2>背景</h2>
 <p>2019 年底，微信小程序已经推出了近三个年头，我身边的前端开发者基本都做过至少一次小程序了。很多友商曾打算推动小程序进入 W3C 标准，而微信并不为所动，个人认为，小程序本身在框架设计上称不上「标准」，微信也并没打算做一个「标准的平台」。</p>
 <p>小程序更注重产品形态和交互，注重对开发者能力的制约，尽可能减少对用户的干扰；因此，也许小程序从设计之初就没有过多考虑开发层面的「优雅」，而是以方便上手、容易学习为主。最典型的例子就是 <code>App()</code>、<code>Page()</code> 这一类直接注入到模块内的工厂方法，你不知道、也不需要知道它从何处来，来无影去无踪，是与现在 JS 生态中早已普及的模块化开发有点相悖的。</p>
 <p>在架构上，小程序选择了将逻辑层与视图层分离的方式来组织业务代码。小程序的源码提交上传时，JS 会被打包成逻辑层代码（<code>app-service.js</code>），在运行时与逻辑层基础库 <code>WAService.js</code> 相结合，在逻辑层 Webview（或 JSCore）中执行；WXML/WXSS 将会编译成 JS 并拼接成 <code>page-frame.html</code>，在运行时与视图层基础库 <code>WAWebview.js</code> 相结合，在视图层堆栈的 Webview 中执行。基础库负责利用客户端提供的通信管道，相互建立联系，对小程序和页面的生命周期、页面上虚拟 DOM 的渲染等进行管理，并在必要时使用客户端提供的原生能力。</p>
@@ -1095,9 +1095,9 @@ window.Element.prototype.setAttributeNS = function(xmlns, attribute, value) {
 <p>尽管依然存在诸多问题，通过一个 polyfill 来为项目迁移过程中遇到的 SVG 提供一个临时展示方案仍然是有必要的——这让我们可以先搁置图片格式的问题，将更重要的问题处理完之后，再回来批量转换格式、或改用 Canvas 来绘制。</p>
 <p>文中完成的 kbone SVG polyfill 只有一个 JS 文件，托管在我个人的 <a href="https://github.com/rikumi/kbone-svg">GitHub</a>，同时为了方便使用也发布到 <a href="https://www.npmjs.com/kbone-svg">NPM</a>。本文存在很多主观推测和评论，如有谬误，欢迎留言指正。</p>
 <p><img src="https://img.shields.io/npm/v/kbone-svg" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/kbone-svg" alt=""></p>
-]]></description><link>https://blog.rikumi.dev/2019/11/27/kbone-svg/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/27/kbone-svg/</guid><pubDate>Wed, 27 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[Hello, VuePress]]></title><description><![CDATA[<p>经过一天的修改，rkm 今日基于 <a href="https://github.com/vuepressjs/vuepress-theme-blog">vuepress-theme-blog</a> 进行开发，将 <a href="https://github.com/SumiMakito/hexo-theme-journal/">hexo-theme-journal</a> 主题移植到 VuePress 中，采用 VuePress 的 SSR 方案代替 Hexo 老套的 EJS 方案，完成了 <strong><a href="https://github.com/rikumi/vuepress-theme-journal">vuepress-theme-journal</a> 的第一个版本</strong>。</p>
+]]></description><link>https://rikumi.dev/2019/11/27/kbone-svg/</link><guid isPermaLink="true">https://rikumi.dev/2019/11/27/kbone-svg/</guid><pubDate>Wed, 27 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[Hello, VuePress]]></title><description><![CDATA[<p>经过一天的修改，rkm 今日基于 <a href="https://github.com/vuepressjs/vuepress-theme-blog">vuepress-theme-blog</a> 进行开发，将 <a href="https://github.com/SumiMakito/hexo-theme-journal/">hexo-theme-journal</a> 主题移植到 VuePress 中，采用 VuePress 的 SSR 方案代替 Hexo 老套的 EJS 方案，完成了 <strong><a href="https://github.com/rikumi/vuepress-theme-journal">vuepress-theme-journal</a> 的第一个版本</strong>。</p>
 <p>同时，[ RKM ] 博客也迁移至 VuePress 继续维护，项目结构将会<a href="https://github.com/rikumi/rikumi.github.io/tree/src">更加清晰</a>。</p>
-]]></description><link>https://blog.rikumi.dev/2019/11/06/migrating-to-vuepress/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/06/migrating-to-vuepress/</guid><pubDate>Wed, 06 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[利用 TypeScript 装饰器实现 Electron JSBridge]]></title><description><![CDATA[<h2>背景</h2>
+]]></description><link>https://rikumi.dev/2019/11/06/migrating-to-vuepress/</link><guid isPermaLink="true">https://rikumi.dev/2019/11/06/migrating-to-vuepress/</guid><pubDate>Wed, 06 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[利用 TypeScript 装饰器实现 Electron JSBridge]]></title><description><![CDATA[<h2>背景</h2>
 <p>最近参与的某 PC 端项目中，团队决定使用 Electron 作为新增业务的 Native 支持层，同时与老业务的 Win32 应用程序无缝共存。熟悉 Electron 的同学可能知道这意味着什么。</p>
 <p>Electron 作为 NW.js 的继任者，最大的改动就是将 NW.js 的融合环境（以 HTML 为入口，同时支持前端和 Node 技术的环境）一分为二，变成了一个<strong>纯 Node.js 的主进程（Main process）<strong>加上</strong>一系列默认关闭 Node 支持的前端渲染进程（Renderer process）</strong>。</p>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8l3aj6x7qj30yq0agmxs.jpg" alt=""></p>
@@ -1319,7 +1319,7 @@ export default new JSBridge();
 </ol>
 <p>对于第二个问题，折中的方法是在主进程利用动态的 <code>require()</code>。主进程 import 到的依赖主要是外部的原生模块，并不会被 Webpack 打包，且在运行时会被转换成顶层的 <code>require()</code>，我们尽可能将这些主进程用到的 import 改为写在函数体内部的 <code>require()</code>，即可避免被渲染进程误加载。</p>
 <p>更深层次地讲，这个问题最终极的解决办法仍然需要将声明和实现分离，用一个文件去写声明，用另一个文件写实现，或者允许业务逻辑中给函数动态挂载实现。</p>
-]]></description><link>https://blog.rikumi.dev/2019/11/03/electron-static-js-bridge/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/11/03/electron-static-js-bridge/</guid><pubDate>Sun, 03 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[小米手环 4 NFC 版一周体验报告]]></title><description><![CDATA[<blockquote>
+]]></description><link>https://rikumi.dev/2019/11/03/electron-static-js-bridge/</link><guid isPermaLink="true">https://rikumi.dev/2019/11/03/electron-static-js-bridge/</guid><pubDate>Sun, 03 Nov 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[小米手环 4 NFC 版一周体验报告]]></title><description><![CDATA[<blockquote>
 <p>本期 BGM 来自 Rewrite，是神户小鸟的专属曲，名字 ニリンソウ = 二轮草，鹅掌草，花语是「ずっと離れない」。</p>
 <p>丛林的夜晚里，有着不知道延伸到何处的古树，睡着的精灵，有售货机不断吐出硬币的小鸟的幸福之梦，梦里还藏着小鸟永远无法向瑚太朗说出口的话。</p>
 </blockquote>
@@ -1391,7 +1391,7 @@ export default new JSBridge();
 <h2>赞赏的部分 &amp; 总结</h2>
 <p>尽管吐槽了这么多问题，rkm 的直觉认为小米手环 4 NFC 版可能会比之前的其他手环会坚持用的更久，主要的亮点在于比较强的续航、OLED 屏与可下载表盘、应急时也许会用到的公交卡、以及可以控制米家设备的小爱同学。值得一提的是续航方面，对续航影响最大的心率测量有很多种选项，在调整时都会显示影响续航的警告信息，但即使开启了最可能影响续航的选项：每 1 分钟测量心率，续航依然在可以接受的范围内，一天下来并没有看到特别显著的电量消耗。而在 OLED 屏和可下载表盘方面，二进制格式的表盘文件虽然难以解读和修改，但至少为定制提供了一个切入点，等到表盘看腻了，写个自定义表盘也说不定。</p>
 <p>rkm 对于腕上可穿戴设备的需求比较简单，表盘能看、能满足日常计步、简易的心率跟踪、恰到好处的通知提醒、可以戴着洗澡的基本防水能力、以及可以在洗澡时切歌的播放控制，同时续航又不太尿崩，就已经可以胜任大多数日常需求了；至于在这些基本需求之上的吐槽点，都只是希望它更完美、更像一个属于我自己的东西。</p>
-]]></description><link>https://blog.rikumi.dev/2019/10/13/mi-bind-4-one-week-report/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/10/13/mi-bind-4-one-week-report/</guid><pubDate>Sun, 13 Oct 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[小记 OnePlus 6T 折腾史（上）]]></title><description><![CDATA[<blockquote>
+]]></description><link>https://rikumi.dev/2019/10/13/mi-bind-4-one-week-report/</link><guid isPermaLink="true">https://rikumi.dev/2019/10/13/mi-bind-4-one-week-report/</guid><pubDate>Sun, 13 Oct 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[小记 OnePlus 6T 折腾史（上）]]></title><description><![CDATA[<blockquote>
 <p>题图使用黑莓史上最垃圾手机——渣 CPU、软趴趴键盘、万年 6.0、APK 装一天的 BlackBerry Priv 拍摄。</p>
 <p>当初贪图 Android 没买 Passport 的我真的是蠢哭了。</p>
 </blockquote>
@@ -1430,7 +1430,7 @@ export default new JSBridge();
 <p>为了完整的 Google 体验，我通常会删除氧 OS 的绝大多数内置应用，装上了或原版或移植版的 Google Stock Apps，包括电话、信息、通讯录、时钟、日历、相机、相册、云端硬盘、Gmail、Gboard。唯一不能改的是「设置」，但 OnePlus 自带的「设置」在设计上也算说得过去，只是跟其它应用不那么搭配罢了；至于系统体验，我更期待 Android 10，至少手势交互上，OnePlus 不用再把自己那一套「拙劣的仿制品」搬到台上表演了。</p>
 <p>不过令我没想到的是，Android 10 并没能在 OnePlus 6T 的氢氧 OS 中如期而至。这一次，我刷上了 LineageOS 17。</p>
 <p>「未完待续」</p>
-]]></description><link>https://blog.rikumi.dev/2019/09/18/history-of-my-oneplus-6t-1/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/09/18/history-of-my-oneplus-6t-1/</guid><pubDate>Wed, 18 Sep 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[重置：Reset]]></title><description><![CDATA[<p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/KQHgcSt44fw?controls=0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;max-width: 100%; margin-bottom: 15px&quot;&gt;&lt;/iframe&gt;</p>
+]]></description><link>https://rikumi.dev/2019/09/18/history-of-my-oneplus-6t-1/</link><guid isPermaLink="true">https://rikumi.dev/2019/09/18/history-of-my-oneplus-6t-1/</guid><pubDate>Wed, 18 Sep 2019 08:00:00 GMT</pubDate></item><item><title><![CDATA[重置：Reset]]></title><description><![CDATA[<p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/KQHgcSt44fw?controls=0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;max-width: 100%; margin-bottom: 15px&quot;&gt;&lt;/iframe&gt;</p>
 <p>你现在所看到的 [ RKM ] 原名 [ rikumi ]，建立于 2018 年初。</p>
 <p>当时，rkm 曾在回家过年的不愉快中，每天躲在卧室里写下一些自述，试图寻找属于自己的一片净土；后来，这个年最终也没能正常过完，rkm 提早回到学校，在大门紧锁的宿舍之外找到了临时的住所，在春节仍然营业的老爷爷宅急送和昼夜交替的游戏与直播中度过了后半个假期。再后来，rkm 从某新兴短视频公司的失败面试中得到经验，受同校的学长推荐，进入了一直向往（唯一是人待的地方）的鹅厂；这个兼用做个人自述的小站也逐渐失去它本来的价值。</p>
 <p>今天，[ RKM ] 系统重置，底层换成了 <s>hso</s> hexo，使用推特网红咖啡 <a href="https://mak1t0.cc">Makito</a> 制作的 <a href="https://github.com/SumiMakito/hexo-theme-journal/">Journal 主题</a>。</p>
@@ -1443,4 +1443,4 @@ export default new JSBridge();
 <p>不過在回去之前 ⋯⋯ 有件事我得先做。</p>
 <p>—— Ivy@Main_Log_699_12_23</p>
 </blockquote>
-]]></description><link>https://blog.rikumi.dev/2019/09/17/reset/</link><guid isPermaLink="true">https://blog.rikumi.dev/2019/09/17/reset/</guid><pubDate>Tue, 17 Sep 2019 08:00:00 GMT</pubDate></item></channel></rss>
+]]></description><link>https://rikumi.dev/2019/09/17/reset/</link><guid isPermaLink="true">https://rikumi.dev/2019/09/17/reset/</guid><pubDate>Tue, 17 Sep 2019 08:00:00 GMT</pubDate></item></channel></rss>
