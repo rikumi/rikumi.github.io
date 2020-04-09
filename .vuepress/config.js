@@ -19,7 +19,7 @@ module.exports = {
   ],
   plugins: {
     'rss-support': {
-      site_url: 'https://blog.rikumi.dev',
+      site_url: 'https://rikumi.dev',
       copyright: `${new Date().getFullYear()} Rikumi`,
       filter: (page) => {
         page._content = (page._content || '').replace(/^---[\s\S]+\n---\s*/, '');
@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         text: 'RSS',
-        link: 'https://blog.rikumi.dev/rss.xml'
+        link: 'https://rikumi.dev/rss.xml'
       }
     ],
     modifyBlogPluginOptions(opts) {
