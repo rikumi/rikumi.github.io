@@ -4,20 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>iOS 键盘难题与可见视口（VisualViewport）API - /rkm/</title>
-    <meta name="description" content="Can you hear me?">
-    <meta name="generator" content="VuePress 1.4.0">
+    <meta name="generator" content="VuePress 1.4.1">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="/rkm/">
-  <link rel="icon" href="/favicon.png" type="image/x-icon">
-  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-148373443-1"></script>
-  <script>
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-148373443-1"></script>
+    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'UA-148373443-1');
     </script>
-    
-    <link rel="preload" href="/assets/css/0.styles.c56285f4.css" as="style"><link rel="preload" href="/assets/js/app.6901989e.js" as="script"><link rel="preload" href="/assets/js/3.09cb332d.js" as="script"><link rel="preload" href="/assets/js/19.d47784aa.js" as="script"><link rel="prefetch" href="/assets/js/10.b2c0f57d.js"><link rel="prefetch" href="/assets/js/11.2cdc7726.js"><link rel="prefetch" href="/assets/js/12.60397655.js"><link rel="prefetch" href="/assets/js/13.db5c5283.js"><link rel="prefetch" href="/assets/js/14.8cd2736e.js"><link rel="prefetch" href="/assets/js/15.c7b0a9fa.js"><link rel="prefetch" href="/assets/js/16.e540be6d.js"><link rel="prefetch" href="/assets/js/17.24466f2a.js"><link rel="prefetch" href="/assets/js/18.ce01ac31.js"><link rel="prefetch" href="/assets/js/20.58327fa6.js"><link rel="prefetch" href="/assets/js/21.1c01cffb.js"><link rel="prefetch" href="/assets/js/22.fc3417f1.js"><link rel="prefetch" href="/assets/js/23.4bd78edf.js"><link rel="prefetch" href="/assets/js/24.66e92eea.js"><link rel="prefetch" href="/assets/js/25.042ebd06.js"><link rel="prefetch" href="/assets/js/4.ee991346.js"><link rel="prefetch" href="/assets/js/5.71708484.js"><link rel="prefetch" href="/assets/js/6.3276f532.js"><link rel="prefetch" href="/assets/js/7.5be99e77.js"><link rel="prefetch" href="/assets/js/8.4dc5b9d0.js"><link rel="prefetch" href="/assets/js/9.65408bf0.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.b6f1aac0.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.c56285f4.css">
+    <meta name="description" content="Can you hear me?">
+    <link rel="preload" href="/assets/css/0.styles.a1a1369d.css" as="style"><link rel="preload" href="/assets/js/app.725a85cd.js" as="script"><link rel="preload" href="/assets/js/3.7aa3aae2.js" as="script"><link rel="preload" href="/assets/js/19.e8d05b5c.js" as="script"><link rel="prefetch" href="/assets/js/10.819ee957.js"><link rel="prefetch" href="/assets/js/11.0886b087.js"><link rel="prefetch" href="/assets/js/12.827eeb02.js"><link rel="prefetch" href="/assets/js/13.fb2c509e.js"><link rel="prefetch" href="/assets/js/14.a905b884.js"><link rel="prefetch" href="/assets/js/15.407a9dde.js"><link rel="prefetch" href="/assets/js/16.08e9ff43.js"><link rel="prefetch" href="/assets/js/17.b2706fda.js"><link rel="prefetch" href="/assets/js/18.f06e0034.js"><link rel="prefetch" href="/assets/js/20.fe94db59.js"><link rel="prefetch" href="/assets/js/21.f1686f16.js"><link rel="prefetch" href="/assets/js/22.3438cc32.js"><link rel="prefetch" href="/assets/js/23.78e972d5.js"><link rel="prefetch" href="/assets/js/24.e456b9f7.js"><link rel="prefetch" href="/assets/js/25.cdc4fe15.js"><link rel="prefetch" href="/assets/js/4.6907a73e.js"><link rel="prefetch" href="/assets/js/5.f443807c.js"><link rel="prefetch" href="/assets/js/6.d33c88d1.js"><link rel="prefetch" href="/assets/js/7.e5a78efd.js"><link rel="prefetch" href="/assets/js/8.7320f2e8.js"><link rel="prefetch" href="/assets/js/9.2912d91b.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.4907fcdf.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a1a1369d.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div id="global-layout"><section class="side-container"><header><a href="/" class="a-block nav-head"><div class="nav-title">/rkm/</div> <div class="nav-subtitle">Can you hear me?</div></a> <ul class="nav-link-list"><a href="https://github.com/rikumi" target="_blank" rel="noopener noreferrer" class="nav-link external a-block nav-link-item">GitHub</a><a href="/friends/" class="a-block nav-link-item">朋友们</a><a href="/works/" class="a-block nav-link-item">作品</a><a href="https://rikumi.dev/rss.xml" target="_blank" rel="noopener noreferrer" class="nav-link external a-block nav-link-item">RSS</a></ul></header> <footer class="nav-footer">
@@ -163,6 +162,6 @@
         <span class="token keyword">return</span> styles<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre></div><h3 id="效果和总结"><a href="#效果和总结" class="header-anchor">#</a> 效果和总结</h3> <p><img src="https://user-images.githubusercontent.com/5051300/75015193-fdffa680-54c2-11ea-8a93-f5204ad5d7c7.png" alt="image"></p> <p>经过这样的实现，我们的组件可以在支持的浏览器中正确定位到当前可见视口的位置（上图中的靛蓝色区域），并将内部的元素以可见视口为基准进行定位。对于移动端 Web 应用来说，这样的组件有很多用途，例如吸附键盘的工具栏或自动完成列表、需要避开键盘居中的对话框等等。值得一提的是，在 PC 浏览器上，这个 API 也同样适用（可以响应页面的放大）。</p> <p>在 iOS 下，这样的实现还存在一些迟钝和小 bug（例如，键盘展开后的强制滚动状态下向上滑动，可以露出不论是 Viewport 还是 VisualViewport 都无法到达的白色衬底区域）。</p> <p><strong>但至少，在 iOS 8.2 发布四年后，iOS 13 对 VisualViewport 的支持，让获取键盘高度、避开键盘、吸附键盘这三件事终于有了相对优雅的办法。</strong></p></div></div></div> <div class="post-comment-wrapper"><!----></div></div></div></div> <div class="extra-container"><!----></div></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.6901989e.js" defer></script><script src="/assets/js/3.09cb332d.js" defer></script><script src="/assets/js/19.d47784aa.js" defer></script>
+    <script src="/assets/js/app.725a85cd.js" defer></script><script src="/assets/js/3.7aa3aae2.js" defer></script><script src="/assets/js/19.e8d05b5c.js" defer></script>
   </body>
 </html>
