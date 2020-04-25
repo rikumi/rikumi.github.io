@@ -7,6 +7,12 @@ permalink: friends
 
 ---
 
+## [❄️ 初雪](https://yuki.yuki233.com/)
+
+某初雪的无名Blog
+
+---
+
 ## [😈 Desvl](https://desvl.xyz/)
 
 Interests come from thinking.
