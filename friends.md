@@ -49,6 +49,12 @@ Thoughts, stories and ideas.
 
 ---
 
+## [🐦 Steven](https://blog.hly0928.com/)
+
+大学萌新的普通 Blog
+
+---
+
 ## [🍭 早千狐 LuckyWind](https://twitter.com/luckywind_sck)
 
 早千狐の読み方はサチコ。
