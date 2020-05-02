@@ -7,6 +7,12 @@ permalink: friends
 
 ---
 
+## [❄️ 初雪](https://yuki.yuki233.com/)
+
+某初雪的无名Blog
+
+---
+
 ## [😈 Desvl](https://desvl.xyz/)
 
 Interests come from thinking.
@@ -40,6 +46,12 @@ Thoughts, stories and ideas.
 ## [🎶 Rex Zeng](https://rexskz.info/)
 
 音游狗、安全狗、攻城狮、业余设计师、段子手、苦学日语的少年。
+
+---
+
+## [🐦 Steven](https://blog.hly0928.com/)
+
+大学萌新的普通 Blog
 
 ---
 
