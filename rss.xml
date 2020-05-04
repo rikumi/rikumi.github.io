@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[/rkm/]]></title><description><![CDATA[Can you hear me?]]></description><link>https://rikumi.dev</link><generator>RSS for Node</generator><lastBuildDate>Sat, 02 May 2020 09:49:51 GMT</lastBuildDate><atom:link href="https://rikumi.dev/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2020 Rikumi]]></copyright><language><![CDATA[zh-CN]]></language><item><title><![CDATA[IMouse：iPad Pro 的鼠标指针，用了又用]]></title><description><![CDATA[<p>项目主页：<a href="https://github.com/rikumi/imouse">https://github.com/rikumi/imouse</a></p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[/rkm/]]></title><description><![CDATA[Can you hear me?]]></description><link>https://rikumi.dev</link><generator>RSS for Node</generator><lastBuildDate>Mon, 04 May 2020 10:32:22 GMT</lastBuildDate><atom:link href="https://rikumi.dev/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2020 Rikumi]]></copyright><language><![CDATA[zh-CN]]></language><item><title><![CDATA[IMouse：iPad Pro 的鼠标指针，用了又用]]></title><description><![CDATA[<p>项目主页：<a href="https://github.com/rikumi/imouse">https://github.com/rikumi/imouse</a></p>
 <p><img src="https://img.shields.io/npm/v/imouse" alt=""> <img src="https://img.shields.io/github/last-commit/rikumi/imouse" alt=""></p>
 <h2>介绍</h2>
 <p>PC（含 Mac）GUI 的世界中，几十年没有改变的设计有两个：一个是窗口，另一个是鼠标指针。传统的鼠标指针设计固然高效，但它经常引起我们的无端思考：为什么是一个箭头？为什么链接的指针是一个手？为什么箭头往左歪？</p>
@@ -252,7 +252,7 @@ config.prompt = (status = 0) =&gt; {
 ]]></description><link>https://rikumi.dev/2020/03/06/fresh-shell-3/</link><guid isPermaLink="true">https://rikumi.dev/2020/03/06/fresh-shell-3/</guid><pubDate>Fri, 06 Mar 2020 08:00:00 GMT</pubDate></item><item><title><![CDATA[回到 Apple 阵营：我们存在的意义]]></title><description><![CDATA[<blockquote>
 <p><strong>本期 BGM「花蕾（からい）」来自原作走心、动画要命的 Key 社作品「Rewrite」。</strong></p>
 </blockquote>
-<p>&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=320 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=26131690&amp;height=66&amp;loop=1&quot;&gt;&lt;/iframe&gt;</p>
+<p>&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=320 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=26131690&amp;height=66&amp;loop=1&quot; style=&quot;background: #fff&quot;&gt;&lt;/iframe&gt;</p>
 <blockquote>
 <p>注：本篇作为《<a href="/2019/09/18/history-of-my-oneplus-6t-1">小记 OnePlus 6T 折腾史（上）</a>》的续篇。之后的折腾大同小异，从 Lineage OS 换到了非常好用的 Evolution X，又换回了氧，后来在试图回收未遂之后又回了氢，暂且作为一个不带出门的备用机吧。</p>
 </blockquote>
