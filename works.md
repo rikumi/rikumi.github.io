@@ -7,6 +7,22 @@ permalink: works
 
 ---
 
+## [Icon Sur](https://github.com/rikumi/iconsur) - Big Sur is watching you!
+
+![](https://img.shields.io/npm/v/iconsur) ![](https://img.shields.io/github/last-commit/rikumi/iconsur)
+
+![image](https://user-images.githubusercontent.com/5051300/85926574-ebfb9d80-b8d2-11ea-836b-28e38d1f3447.png)
+
+早在 macOS Big Sur 推出之前，我一直在不断更换 macOS 的系统图标和第三方图标，设法让他们看起来一致，至少是形状一致——这样的事情往往费时费力，把工作的时间都占满了，而且用久了也觉得系统很花哨。同时，由于当时经常用的是 Linux 和 Android 图标包，我也曾想过做一款一键脚本，根据 macOS 中需要更换的图标，自动在 Linux 或 Android 图标包中匹配合适的图标，但因为系统之间千差万别，始终没有想到合适的方案，也就一直没有动手去做。
+
+Big Sur 推出之后，macOS 自带的图标放弃了不规则设计，变成了与 iOS 和 iPadOS 一致的自然圆角，这给我们带来了一种新的美化思路：让第三方应用也适配这样的风格，或者直接从 iOS 拿来相同风格的图标。对于极简主义者来说，这是一种绝佳的办法，因为随着时间的推移，需要我们手动处理的图标会越来越少，这些应用会自然而然的往这个方向迭代。
+
+Icon Sur 是一个用于 macOS Big Sur 的自适应图标生成器，具有**自动搜索 iOS App** 和**直接根据原图标生成**两种工作模式，均可以无需手动操作，一条指令更换应用图标。搜索 iOS App 时，可以指定搜索的关键词，也可以直接使用应用本身的名称；根据原图标生成时，可以设置原图标的缩放比例（默认为 0.9）和背景颜色（默认为白色）。
+
+想得到同样简洁优雅的 macOS 界面，让图标们在 Dock 中规范排列，你可以参考 [Icon Sur 的 GitHub 仓库和文档](https://github.com/rikumi/iconsur)，也可以[直接看我自用的配置脚本](https://gist.github.com/rikumi/e2ac39882a7dcd29642f29343da5a54a)。如果项目能达到一定的 Star 数，我还会考虑制作免安装的 GUI 版本。
+
+---
+
 ## [IMouse](https://github.com/rikumi/imouse/) - iPad Pro 的鼠标指针，用了又用
 
 ![](https://img.shields.io/npm/v/imouse) ![](https://img.shields.io/github/last-commit/rikumi/imouse)
