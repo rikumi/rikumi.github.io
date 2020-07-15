@@ -5,7 +5,7 @@ featured_image: https://user-images.githubusercontent.com/5051300/80952144-c5b60
 summary: 房产商试图用长租公寓拉拢年轻人的心，而年轻人们，正在从公寓的品质窥知房产商们各自的诚意。
 ---
 
-<p style="text-align: center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1439410558&height=66&loop=1" style="background: #fff"></iframe></p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1439410558&height=66&loop=1" style="background: #fff"></iframe>
 
 > **本期 BGM「内緒（ないしょ）」来自「[辉夜大小姐想让我告白～天才们的恋爱头脑战～](https://zh.wikipedia.org/wiki/%E8%BC%9D%E5%A4%9C%E5%A7%AC%E6%83%B3%E8%AE%93%E4%BA%BA%E5%91%8A%E7%99%BD%EF%BD%9E%E5%A4%A9%E6%89%8D%E5%80%91%E7%9A%84%E6%88%80%E6%84%9B%E9%A0%AD%E8%85%A6%E6%88%B0%EF%BD%9E)」。**
 
