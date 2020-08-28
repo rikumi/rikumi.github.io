@@ -65,6 +65,12 @@ Thoughts, stories and ideas.
 
 ---
 
+## [![](https://blog.rin.moe/img/avatar.jpg) Rin](https://blog.rin.moe/)
+
+壞耶
+
+---
+
 ## [![](https://blog.hly0928.com/images/avatar.png) Steven](https://blog.hly0928.com/)
 
 大学萌新的普通 Blog
