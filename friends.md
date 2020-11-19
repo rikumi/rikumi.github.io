@@ -53,7 +53,7 @@ Thoughts, stories and ideas.
 
 ---
 
-## [![](https://pbs.twimg.com/profile_images/1237619084608462849/kPdAJ82H_reasonably_small.png) QPomelo 咕咕咕](https://twitter.com/realQPomelo)
+## [![](https://pbs.twimg.com/profile_images/1309889334728773635/6Rzl1st3_400x400.jpg) QPomelo 咕咕咕](https://twitter.com/realQPomelo)
 
 不愧是我，App 还没开发完，开发者账号先到期了
 
