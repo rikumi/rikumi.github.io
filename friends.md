@@ -11,6 +11,8 @@ permalink: friends
 
 [Kouga](https://twitter.com/kouga_)
 
+[Makito's Notebook](http://blog.keep.moe/)
+
 [QPomelo](https://twitter.com/realQPomelo)
 
 [Rex Zeng](https://rexskz.info/)
