@@ -32,3 +32,5 @@ permalink: friends
 [狼剩子的主页](https://wolf-tungsten.com/)
 
 [楓々](https://twitter.com/froseiun/)
+
+[静かな森](https://innei.ren/)
