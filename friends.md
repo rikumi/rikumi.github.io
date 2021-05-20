@@ -5,6 +5,8 @@ permalink: friends
 
 以下友人按 zh-HK 标准排序，链接失效的会被替换成 Twitter 主页。
 
+[Alendia](https://alendia.github.io/)
+
 [ChrAlpha's Neverland](https://blog.ichr.me/)
 
 [Desvl's blog](https://desvl.xyz/)
@@ -12,6 +14,8 @@ permalink: friends
 [Kouga](https://twitter.com/kouga_)
 
 [Makito's Notebook](http://blog.keep.moe/)
+
+[Milkice](https://milkice.me/)
 
 [QPomelo](https://twitter.com/realQPomelo)
 
