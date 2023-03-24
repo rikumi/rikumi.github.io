@@ -11,39 +11,39 @@
   <div id="root"></div>
   <script type="importmap">
     {
-    	"imports": {
+      "imports": {
         "react": "https://unpkg.com/@esm-bundle/react@17/esm/react.production.min.js",
         "react-dom": "https://unpkg.com/@esm-bundle/react-dom@17/esm/react-dom.production.min.js"
       }
     }
   </script>
   <script type="module">
-  	import { Differ, Viewer } from 'https://www.unpkg.com/json-diff-kit@1.0.12/dist/index.js';
+    import { Differ, Viewer } from 'https://www.unpkg.com/json-diff-kit@1.0.12/dist/index.js';
     import * as React from 'react';
     import * as ReactDOM from 'react-dom';
 
     const DEFAULT_LEFT = JSON.stringify({});
 
     const DEFAULT_RIGHT = JSON.stringify({
-    	usage: {
-      	urlParams: {
-        	left: {
-          	aliases: ['l', 'a'],
+      usage: {
+        urlParams: {
+          left: {
+            aliases: ['l', 'a'],
             description: 'JSON text to be displayed on the left side.',
           },
-        	right: {
-          	aliases: ['r', 'b'],
-            description: 'JSON text to be displayed on the right side.',
+          right: {
+            aliases: ['r', 'b'],
+            description: 'JSON text to be displayed on the left side.',
           },
-        	differOptions: {
+          differOptions: {
             description: 'Options for the Differ constructor.',
           },
-        	viewerOptions: {
+          viewerOptions: {
             description: 'Options for the Viewer component.',
           },
         },
         about: {
-        	projectSite: 'https://json-diff-kit.js.org/',
+          projectSite: 'https://json-diff-kit.js.org/',
           github: 'https://github.com/rexskz/json-diff-kit',
         },
       }
