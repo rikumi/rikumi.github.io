@@ -26,7 +26,7 @@
 
     const DEFAULT_RIGHT = JSON.stringify({
       usage: {
-        urlParams: {
+        urlHashParams: {
           left: {
             aliases: ['l', 'a'],
             description: 'JSON text to be displayed on the left side.',
@@ -36,25 +36,32 @@
             description: 'JSON text to be displayed on the right side.',
           },
           differOptions: {
+            aliases: ['d'],
             description: 'Options for the Differ constructor.',
           },
           viewerOptions: {
+            aliases: ['v'],
             description: 'Options for the Viewer component.',
           },
         },
-        about: {
-          projectSite: 'https://json-diff-kit.js.org/',
-          github: 'https://github.com/rexskz/json-diff-kit',
-        },
-      }
+        example: location.href.split('#')[0] + '#left={"foo":"bar"}&right={"foo":"baz"}',
+      },
+      about: {
+        projectSite: 'https://json-diff-kit.js.org/',
+        github: 'https://github.com/rexskz/json-diff-kit',
+      },
     });
 
     try {
-      const url = new URL(location.href);
-      const left = JSON.parse(url.searchParams.get('left') || url.searchParams.get('l') || url.searchParams.get('a') || DEFAULT_LEFT);
-      const right = JSON.parse(url.searchParams.get('right') || url.searchParams.get('r') || url.searchParams.get('b') || DEFAULT_RIGHT);
-      const differOptions = JSON.parse(url.searchParams.get('d') || '{}');
-      const viewerOptions = JSON.parse(url.searchParams.get('v') || '{}');
+      const hashParams = location.hash.slice(1).split('&')
+        .map(k => k.split('=').map(decodeURIComponent))
+        .map(([key, value]) => ({ [key]: value }))
+        .reduce((a, b) => ({ ...a, ...b }));
+
+      const left = JSON.parse(hashParams.left || hashParams.l || hashParams.a || DEFAULT_LEFT);
+      const right = JSON.parse(hashParams.right || hashParams.r || hashParams.b || DEFAULT_RIGHT);
+      const differOptions = JSON.parse(hashParams.differOptions || hashParams.d || '{}');
+      const viewerOptions = JSON.parse(hashParams.viewerOptions || hashParams.v || '{}');
       const diff = new Differ(differOptions).diff(left, right);
 
       ReactDOM.render(React.createElement(Viewer, { diff, ...viewerOptions }), document.getElementById('root'));
